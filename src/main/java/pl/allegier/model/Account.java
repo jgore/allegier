@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 03.04.17.
@@ -26,6 +27,10 @@ public class Account implements Serializable  {
     private Date created;
     private Date updated;
 
+    public Account(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue
@@ -75,5 +80,19 @@ public class Account implements Serializable  {
         this.updated = updated;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(getId(), account.getId()) &&
+                Objects.equals(getLogin(), account.getLogin()) &&
+                Objects.equals(getPassword(), account.getPassword() );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getLogin(), getPassword(), getCreated(), getUpdated());
+    }
 
 }
