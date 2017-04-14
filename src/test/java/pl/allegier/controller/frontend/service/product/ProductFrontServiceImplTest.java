@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNull;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
-@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
+@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=false)
 @Transactional
 public class ProductFrontServiceImplTest {
 
@@ -35,17 +35,17 @@ public class ProductFrontServiceImplTest {
 
 
     @Autowired
-    private ProductFrontService ProductDtoFrontService;
+    private ProductFrontService productDtoFrontService;
 
     @Before
     public void testSetup() {
-        ProductDtoFrontService.deleteAll();
+        productDtoFrontService.deleteAll();
     }
 
     @Test
     public void testGetOne() {
-        ProductDto saved = ProductDtoFrontService.save(createTestDto() );
-        ProductDto one = ProductDtoFrontService.findOne(saved.getId());
+        ProductDto saved = productDtoFrontService.save(createTestDto() );
+        ProductDto one = productDtoFrontService.findOne(saved.getId());
 
         assertThat( one.getTitle() ,equalTo(TEST_TITLE));
         assertThat( one.getDescription() ,equalTo(TEST_DESC));
@@ -54,10 +54,10 @@ public class ProductFrontServiceImplTest {
 
     @Test
     public void testGetAll() throws InterruptedException {
-        ProductDtoFrontService.save( createTestDto() );
-        ProductDtoFrontService.save( createTestDto() );
+        productDtoFrontService.save( createTestDto() );
+        productDtoFrontService.save( createTestDto() );
 
-        Iterable<ProductDto> all = ProductDtoFrontService.findAll();
+        Iterable<ProductDto> all = productDtoFrontService.findAll();
         List<ProductDto> ProductDtos = Lists.newArrayList(all);
 
         //TODO FIX
@@ -67,28 +67,28 @@ public class ProductFrontServiceImplTest {
 
     @Test
     public void testSave() {
-        ProductDto save = ProductDtoFrontService.save( createTestDto() );
-        assertThat(save.getId(), equalTo(1));
+        ProductDto save = productDtoFrontService.save( createTestDto() );
+        assertThat(save.getTitle(), equalTo(TEST_TITLE));
     }
 
     @Test
     public void testUpdate() {
-        ProductDto save = ProductDtoFrontService.save( createTestDto() );
+        ProductDto save = productDtoFrontService.save( createTestDto() );
         assertThat(save.getTitle(), equalTo(TEST_TITLE));
 
         save.setTitle(TEST_TITLE_2);
-        ProductDto updated = ProductDtoFrontService.save(save);
+        ProductDto updated = productDtoFrontService.save(save);
 
         assertThat(updated.getTitle(), equalTo(TEST_TITLE_2));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDelete() {
-        ProductDto save = ProductDtoFrontService.save( createTestDto() );
+        ProductDto save = productDtoFrontService.save( createTestDto() );
 
-        ProductDtoFrontService.delete(save.getId());
+        productDtoFrontService.delete(save.getId());
 
-        ProductDto one = ProductDtoFrontService.findOne(save.getId());
+        ProductDto one = productDtoFrontService.findOne(save.getId());
         assertNull(one);
     }
 

@@ -12,57 +12,58 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.allegier.controller.frontend.dto.AccountDto;
+import pl.allegier.controller.frontend.dto.ProductDto;
 import pl.allegier.controller.frontend.rest.RestResponse;
-import pl.allegier.controller.frontend.service.account.AccountFrontService;
+import pl.allegier.controller.frontend.service.product.ProductFrontService;
+import pl.allegier.model.Product;
 
 import java.util.List;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 13.04.17.
+ * Created by Pawel Szczepkowski | Satlan on 14.04.17.
  */
 @RestController
-@RequestMapping("accounts")
-public class AccountRestController {
+@RequestMapping("products")
+public class ProductRestController {
 
-
-    private final AccountFrontService accountFrontService;
+    private final ProductFrontService productFrontService;
 
     @Autowired
-    public AccountRestController(AccountFrontService accountFrontService) {
-        this.accountFrontService = accountFrontService;
+    public ProductRestController(ProductFrontService productFrontService) {
+        this.productFrontService = productFrontService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<RestResponse> getAll() {
 
-        List<AccountDto> accountDtos = Lists.newArrayList(accountFrontService.findAll());
+        List<ProductDto> ProductDtos = Lists.newArrayList(productFrontService.findAll());
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "all accounts", accountDtos), HttpStatus.OK);
+        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "all Products", ProductDtos), HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<RestResponse> getOne(@PathVariable("id") String id) {
 
-        AccountDto accountDto = accountFrontService.findOne(Integer.valueOf(id));
+        ProductDto ProductDto = productFrontService.findOne(Integer.valueOf(id));
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "one account", accountDto), HttpStatus.OK);
+        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "one Product", ProductDto), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<RestResponse> createPost(@RequestBody AccountDto dto) {
+    public ResponseEntity<RestResponse> createPost(@RequestBody ProductDto dto) {
 
-        AccountDto saved = accountFrontService.save(dto);
+        ProductDto saved = productFrontService.save(dto);
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "Account is saved", saved), HttpStatus.OK);
+        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "Product is saved", saved), HttpStatus.OK);
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<RestResponse> updatePut(@RequestBody AccountDto dto, @PathVariable("id") String id) {
+    public ResponseEntity<RestResponse> updatePut(@RequestBody ProductDto dto, @PathVariable("id") String id) {
 
-        AccountDto saved = accountFrontService.save(dto);
+        ProductDto saved = productFrontService.save(dto);
 
         return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "Account is update", saved), HttpStatus.OK);
 
@@ -71,9 +72,9 @@ public class AccountRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<RestResponse> delete(@RequestBody AccountDto dto, @PathVariable("id") String id) {
+    public ResponseEntity<RestResponse> delete(@RequestBody ProductDto dto, @PathVariable("id") String id) {
 
-        accountFrontService.delete(dto.getId());
+        productFrontService.delete(dto.getId());
 
         return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "Account is deleted", true), HttpStatus.OK);
 

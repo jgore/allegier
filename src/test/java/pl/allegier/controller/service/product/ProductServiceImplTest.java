@@ -1,5 +1,6 @@
 package pl.allegier.controller.service.product;
 
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import pl.allegier.TestConfiguration;
 import pl.allegier.model.Product;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -42,7 +44,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void testGetOne() {
-        Product saved = createNew(new Product(TEST_TITLE, TEST_DESC, TEST_PRICE));
+        Product saved = productService.save(createTestEntity());
         Product one = productService.findOne(saved.getId());
 
         assertThat( one.getTitle() ,equalTo(TEST_TITLE));
@@ -52,22 +54,25 @@ public class ProductServiceImplTest {
 
     @Test
     public void testGetAll() throws InterruptedException {
-        Product saved = createNew(new Product(TEST_TITLE, TEST_DESC, TEST_PRICE));
-        Product next = productService.findAll().iterator().next();
+        Product saved1 = productService.save( createTestEntity() );
+        Product saved2 = productService.save( createTestEntity() );
 
-        assertThat(saved,equalTo(next));
+        Product next1 = productService.findOne(saved1.getId());
+        Product next2 = productService.findOne(saved2.getId());
+
+        productService.findAll(Arrays.asList(next1.getId(), next2.getId()));
 
     }
 
     @Test
     public void testSave() {
-        Product saved = createNew(new Product(TEST_TITLE, TEST_DESC, TEST_PRICE));
+        Product saved = productService.save( createTestEntity() );
         assertThat(saved.getTitle(), equalTo(TEST_TITLE));
     }
 
     @Test
     public void testUpdate() {
-        Product saved = createNew(new Product(TEST_TITLE, TEST_DESC, TEST_PRICE));
+        Product saved = productService.save( createTestEntity() );
         assertThat(saved.getTitle(), equalTo(TEST_TITLE));
 
         saved.setTitle(TEST_TITLE_2);
@@ -78,7 +83,7 @@ public class ProductServiceImplTest {
 
     @Test
     public void testDelete() {
-        Product saved = createNew(new Product(TEST_TITLE, TEST_DESC, TEST_PRICE));
+        Product saved = productService.save( createTestEntity() );
 
         productService.delete( saved.getId() );
 
@@ -86,8 +91,9 @@ public class ProductServiceImplTest {
         assertNull( one);
     }
 
-    private Product createNew(Product var1) {
-        return productService.save(var1);
+    private Product createTestEntity() {
+        return new Product(TEST_TITLE, TEST_DESC, TEST_PRICE);
     }
+
 
 }

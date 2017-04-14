@@ -1,9 +1,11 @@
 package pl.allegier.controller.frontend.service;
 
 import com.google.common.collect.Lists;
+import com.sun.java.swing.plaf.windows.WindowsTreeUI;
 import pl.allegier.controller.frontend.mapper.Mapper;
 import pl.allegier.controller.service.CrudService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,7 +67,11 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
 
     @Override
     public Iterable<DTO> findAll(Iterable<ID> idIterables) {
-        return null;
+        List<DAO> daos = Lists.newArrayList(crudService.findAll(idIterables));
+
+        return daos.stream().
+                map(mapper::fromDao).
+                collect(Collectors.toList());
     }
 
     @Override
@@ -86,6 +92,6 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
 
     @Override
     public void deleteAll() {
-
+        crudService.deleteAll();
     }
 }

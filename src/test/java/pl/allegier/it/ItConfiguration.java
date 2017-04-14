@@ -1,4 +1,4 @@
-package pl.allegier;
+package pl.allegier.it;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -25,16 +25,19 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
 /**
- * Created by Pawel Szczepkowski | Satlan on 03.04.17.
+ * Created by Pawel Szczepkowski | Satlan on 14.04.17.
  */
+
+
 @Configuration
 @ComponentScan( basePackages = {"pl.allegier"},
         excludeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class) })
 
 @EnableJpaRepositories(basePackages = {"pl.allegier.controller.repository"})
 @EnableTransactionManagement
-public class TestConfiguration {
+public class ItConfiguration {
 
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -49,7 +52,7 @@ public class TestConfiguration {
     public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/allegier_test");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/allegier");
         dataSource.setUsername("admin");
         dataSource.setPassword("admin");
 
@@ -66,7 +69,7 @@ public class TestConfiguration {
         sessionBuilder.setProperty("hibernate.show_sql", "true");
         sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         sessionBuilder.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        //sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 
         return sessionBuilder.buildSessionFactory();
     }
@@ -119,7 +122,7 @@ public class TestConfiguration {
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         properties.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+       // properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 
         return properties;
     }

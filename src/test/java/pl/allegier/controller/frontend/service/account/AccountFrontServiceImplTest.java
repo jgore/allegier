@@ -67,7 +67,7 @@ public class AccountFrontServiceImplTest {
     @Test
     public void testSave() {
         AccountDto save = accountDtoFrontService.save(new AccountDto(TEST_LOGIN_1,TEST_PASSWORD));
-        assertThat(save.getId(), equalTo(1));
+        assertThat(save.getLogin(), equalTo(TEST_LOGIN_1));
     }
 
     @Test
