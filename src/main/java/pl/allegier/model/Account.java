@@ -1,5 +1,7 @@
 package pl.allegier.model;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ public class Account implements Serializable  {
 
     private static final long serialVersionUID = 1538176138199455942L;
 
+
     private Integer id;
 
     private String login;
@@ -28,33 +31,39 @@ public class Account implements Serializable  {
     private Date updated;
 
     public Account(String login, String password) {
+        super();
         this.login = login;
         this.password = password;
     }
 
+    public Account() {
+        this.created = new Date();
+        this.updated = new Date();
+    }
+
     @Id
     @GeneratedValue
-    @Column(name = "ID")
+    @Column
     public Integer getId() {
         return id;
     }
 
-    @Column(name = "login")
+    @Column
     public String getLogin() {
         return login;
     }
 
-    @Column(name = "password")
+    @Column
     public String getPassword() {
         return password;
     }
 
-    @Column( name = "CREATED")
+    @Column
     public Date getCreated() {
         return created;
     }
 
-    @Column(name =  "UPDATED")
+    @Column
     public Date getUpdated() {
         return updated;
     }
@@ -95,4 +104,9 @@ public class Account implements Serializable  {
         return Objects.hash(getId(), getLogin(), getPassword(), getCreated(), getUpdated());
     }
 
+    @Override
+    public String toString()
+    {
+        return ReflectionToStringBuilder.toString(this);
+    }
 }
