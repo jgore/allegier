@@ -6,7 +6,6 @@ import pl.allegier.controller.frontend.dto.AccountDto;
 import pl.allegier.model.Account;
 
 import javax.transaction.Transactional;
-import java.util.Objects;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 14.04.17.
@@ -15,7 +14,7 @@ import java.util.Objects;
 @Component
 public class AccountMapper implements Mapper<AccountDto,Account>{
 
-    public static final ModelMapper mapper = new ModelMapper();
+    private static final ModelMapper mapper = new ModelMapper();
 
     @Transactional
     public Account fromDto(AccountDto dto) {

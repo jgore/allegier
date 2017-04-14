@@ -1,5 +1,7 @@
 package pl.allegier.controller.frontend.dto;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -81,5 +83,11 @@ public class AccountDto implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getLogin(), getPassword());
+    }
+
+    @Override
+    public String toString()
+    {
+        return ReflectionToStringBuilder.toString(this);
     }
 }
