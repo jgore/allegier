@@ -21,7 +21,6 @@ public class Account implements Serializable  {
 
     private static final long serialVersionUID = 1538176138199455942L;
 
-
     private Integer id;
 
     private String login;

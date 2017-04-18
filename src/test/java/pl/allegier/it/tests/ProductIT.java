@@ -1,4 +1,4 @@
-package pl.allegier.it;
+package pl.allegier.it.tests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.allegier.MvcConfig;
 import pl.allegier.controller.frontend.dto.ProductDto;
 import pl.allegier.controller.frontend.service.product.ProductFrontService;
+import pl.allegier.it.ItConfiguration;
 
 import java.math.BigDecimal;
 

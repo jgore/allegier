@@ -1,4 +1,4 @@
-package pl.allegier.it;
+package pl.allegier.it.tests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +9,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import pl.allegier.controller.frontend.dto.AccountDto;
 import pl.allegier.controller.frontend.service.account.AccountFrontService;
+import pl.allegier.it.ItConfiguration;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 14.04.17.
@@ -26,12 +27,13 @@ public class AccountIT {
     private AccountFrontService accountFrontService;
 
     @Test
-    public void createManyProductsTest()
+    public void createManyAccountTest()
     {
         for( int i=0;i<1000;i++)
         {
             accountFrontService.save( new AccountDto(TEST_LOGIN +i, TEST_PASSWORD+i ));
         }
     }
+
 }
 
