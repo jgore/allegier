@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.allegier.controller.frontend.dto.AccountDto;
 import pl.allegier.controller.frontend.dto.ProductDto;
 import pl.allegier.controller.frontend.rest.RestResponse;
 import pl.allegier.controller.frontend.service.product.ProductFrontService;
-import pl.allegier.model.Product;
 
 import java.util.List;
 

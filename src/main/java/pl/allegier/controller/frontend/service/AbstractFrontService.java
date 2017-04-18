@@ -1,11 +1,9 @@
 package pl.allegier.controller.frontend.service;
 
 import com.google.common.collect.Lists;
-import com.sun.java.swing.plaf.windows.WindowsTreeUI;
 import pl.allegier.controller.frontend.mapper.Mapper;
 import pl.allegier.controller.service.CrudService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

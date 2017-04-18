@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.allegier.TestConfiguration;
 import pl.allegier.controller.frontend.dto.AccountDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;

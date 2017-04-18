@@ -35,6 +35,10 @@ public class Order implements Serializable {
     private Date created;
     private Date updated;
 
+    public Order() {
+        this.setCreated( new Date() );
+        this.setUpdated( new Date() );
+    }
 
     @Id
     @GeneratedValue
