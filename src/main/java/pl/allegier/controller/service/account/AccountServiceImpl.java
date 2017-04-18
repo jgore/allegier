@@ -25,8 +25,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public <S extends Account> Iterable<S> save(Iterable<S> Accounts) {
-        return null;
+    public <S extends Account> Iterable<S> save(Iterable<S> accounts) {
+        return accountRepository.save(accounts);
     }
 
     @Override

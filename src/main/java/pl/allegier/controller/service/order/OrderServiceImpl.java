@@ -25,8 +25,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public <S extends Order> Iterable<S> save(Iterable<S> Orders) {
-        return null;
+    public <S extends Order> Iterable<S> save(Iterable<S> orders) {
+        return orderRepository.save(orders);
     }
 
     @Override

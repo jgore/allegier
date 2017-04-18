@@ -2,7 +2,6 @@ package pl.allegier.controller.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pl.allegier.model.Account;
 import pl.allegier.model.Order;
 
 /**
