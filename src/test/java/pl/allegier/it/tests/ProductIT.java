@@ -29,7 +29,7 @@ public class ProductIT {
     private ProductFrontService productDtoFrontService;
 
     @Test
-    public void createManyProductsTest()
+    public void createManyProductsIT()
     {
         for( int i=0;i<1000;i++)
         {

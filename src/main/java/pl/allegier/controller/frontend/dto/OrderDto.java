@@ -21,7 +21,7 @@ public class OrderDto implements Serializable {
     private Integer id;
 
     private Account account;
-    private Set<Product> products;
+    private Set<Integer> products;
 
     private Date created;
     private Date updated;
@@ -42,11 +42,11 @@ public class OrderDto implements Serializable {
         this.account = account;
     }
 
-    public Set<Product> getProducts() {
+    public Set<Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(Set<Integer> products) {
         this.products = products;
     }
 

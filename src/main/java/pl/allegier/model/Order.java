@@ -40,6 +40,11 @@ public class Order implements Serializable {
         this.setUpdated( new Date() );
     }
 
+    public Order(Account account, Set<Product> products) {
+        this.account = account;
+        this.products = products;
+    }
+
     @Id
     @GeneratedValue
     @Column

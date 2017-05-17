@@ -1,6 +1,7 @@
 package pl.allegier.controller.frontend.mapper;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.ProductDto;
 import pl.allegier.model.Product;
@@ -33,4 +34,6 @@ public class ProductMapper implements Mapper<ProductDto,Product>
         }
         return mapper.map(dao, ProductDto.class);
     }
+
 }
+
