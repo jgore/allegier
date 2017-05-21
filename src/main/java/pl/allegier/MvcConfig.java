@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -33,23 +33,51 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {"pl.allegier"})
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"pl.allegier.controller.repository"})
+@EnableJpaRepositories(basePackages = {"pl.allegier.controller.dao"})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("resources/**")
-                .addResourceLocations("/WEB-INF/views/resources/");
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager() throws IOException {
+
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(getSessionFactory(getDataSource()));
+
+        return transactionManager;
+    }
+
+    @Bean(name = "sessionFactory")
+    public SessionFactory getSessionFactory(DataSource dataSource) throws IOException {
+
+        LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
+
+        sessionBuilder.scanPackages("pl.model");
+        sessionBuilder.setProperty("hibernate.show_sql", "true");
+        sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        sessionBuilder.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
+        // sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create");
+        sessionBuilder.setProperty("hibernate.hbm2ddl.import_files", "initial_data.sql");
+        return sessionBuilder.buildSessionFactory();
     }
 
     @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(getDataSource());
+        em.setPackagesToScan("pl.allegier");
+
+        em.setJpaVendorAdapter(getJpaVendorAdapter());
+        em.setJpaProperties(additionalProperties());
+
+        return em;
+    }
+
+    @Bean
+    public JpaVendorAdapter getJpaVendorAdapter() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        hibernateJpaVendorAdapter.setShowSql(true);
+        hibernateJpaVendorAdapter.setGenerateDdl(true);
+        hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
+        return hibernateJpaVendorAdapter;
     }
 
     @Bean(name = "dataSource")
@@ -63,50 +91,20 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return dataSource;
     }
 
-    @Bean(name = "sessionFactory")
-    public SessionFactory getSessionFactory(DataSource dataSource) throws IOException {
-
-        LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
-
-        sessionBuilder.scanPackages("pl.model");
-        sessionBuilder.setProperty("hibernate.show_sql", "true");
-        sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        sessionBuilder.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create");
-        sessionBuilder.setProperty("hibernate.hbm2ddl.import_files", "initial_data.sql");
-        return sessionBuilder.buildSessionFactory();
-    }
-
-
-    @Bean(name = "transactionManager")
-    public PlatformTransactionManager transactionManager() throws IOException {
-
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-
-        return transactionManager;
-    }
-
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(getDataSource());
-        em.setPackagesToScan("pl.allegier");
-
-        em.setJpaVendorAdapter(jpaVendorAdapter());
-        em.setJpaProperties(additionalProperties());
-
-        return em;
+    public InternalResourceViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
     }
 
-
-    @Bean
-    public JpaVendorAdapter jpaVendorAdapter() {
-        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-        hibernateJpaVendorAdapter.setShowSql(true);
-        hibernateJpaVendorAdapter.setGenerateDdl(true);
-        hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
-        return hibernateJpaVendorAdapter;
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("resources/**")
+                .addResourceLocations("/WEB-INF/views/resources/");
     }
 
     @Bean
@@ -119,7 +117,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         properties.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+      //  properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
         return properties;
     }

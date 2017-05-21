@@ -32,7 +32,7 @@ import java.util.Properties;
 @ComponentScan( basePackages = {"pl.allegier"},
         excludeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class) })
 
-@EnableJpaRepositories(basePackages = {"pl.allegier.controller.repository"})
+@EnableJpaRepositories(basePackages = {"pl.allegier.controller.dao"})
 @EnableTransactionManagement
 public class TestConfiguration {
 

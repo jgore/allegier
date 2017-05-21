@@ -1,8 +1,11 @@
 package pl.allegier.controller.service.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import pl.allegier.controller.repository.AccountRepository;
+import pl.allegier.controller.dao.Dao;
+import pl.allegier.controller.dao.JpaDao;
+import pl.allegier.controller.service.AbstractService;
 import pl.allegier.model.Account;
 
 /**
@@ -10,62 +13,11 @@ import pl.allegier.model.Account;
  */
 
 @Service
-public class AccountServiceImpl implements AccountService {
-
-    private final AccountRepository accountRepository;
+public class AccountServiceImpl extends AbstractService<Account,Integer>{
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public AccountServiceImpl(@Qualifier("accountDao") Dao<Account, Integer> jpaDao) {
+        super(jpaDao);
     }
 
-    @Override
-    public <S extends Account> S save(S Account ) {
-        return accountRepository.save( Account );
-    }
-
-    @Override
-    public <S extends Account> Iterable<S> save(Iterable<S> accounts) {
-        return accountRepository.save(accounts);
-    }
-
-    @Override
-    public Account findOne(Integer id) {
-        return accountRepository.findOne( id );
-    }
-
-    @Override
-    public boolean exists(Integer id) {
-        return accountRepository.exists( id );
-    }
-
-    @Override
-    public Iterable<Account> findAll() {
-        return accountRepository.findAll();
-    }
-
-    @Override
-    public Iterable<Account> findAll(Iterable<Integer> ids) {
-        return accountRepository.findAll( ids );
-    }
-
-    @Override
-    public long count() {
-        return accountRepository.count();
-    }
-
-    @Override
-    public void delete(Integer id) {
-        accountRepository.delete( id );
-    }
-
-    @Override
-    public void delete(Iterable<? extends Account> Accounts) {
-        accountRepository.delete( Accounts );
-    }
-
-    @Override
-    public void deleteAll() {
-        accountRepository.deleteAll();
-    }
 }

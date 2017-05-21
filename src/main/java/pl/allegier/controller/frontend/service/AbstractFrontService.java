@@ -2,7 +2,7 @@ package pl.allegier.controller.frontend.service;
 
 import com.google.common.collect.Lists;
 import pl.allegier.controller.frontend.mapper.Mapper;
-import pl.allegier.controller.service.CrudService;
+import pl.allegier.controller.service.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,18 +15,18 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
 
     private final Mapper<DTO,DAO> mapper;
 
-    private final CrudService<DAO,ID> crudService;
+    private final Service<DAO,ID> service;
 
-    public AbstractFrontService(Mapper<DTO, DAO> mapper, CrudService<DAO, ID> crudService) {
+    public AbstractFrontService(Mapper<DTO, DAO> mapper, Service<DAO, ID> crudService) {
         this.mapper = mapper;
-        this.crudService = crudService;
+        this.service = crudService;
     }
 
 
     @Override
     public DTO save(DTO dto) {
         DAO dao = mapper.fromDto(dto);
-        DAO saved = crudService.save(dao);
+        DAO saved = service.save(dao);
 
         return mapper.fromDao(saved);
     }
@@ -42,19 +42,19 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
 
     @Override
     public DTO findOne(ID id) {
-        DAO dao = crudService.findOne(id);
+        DAO dao = service.findOne(id);
 
         return mapper.fromDao(dao);
     }
 
     @Override
     public boolean exists(ID id) {
-        return crudService.exists( id);
+        return service.exists( id);
     }
 
     @Override
     public Iterable<DTO> findAll() {
-        Iterable<DAO> all = crudService.findAll();
+        Iterable<DAO> all = service.findAll();
         List<DAO> daos = Lists.newArrayList(all);
 
         return daos.
@@ -63,23 +63,15 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Iterable<DTO> findAll(Iterable<ID> idIterables) {
-        List<DAO> daos = Lists.newArrayList(crudService.findAll(idIterables));
-
-        return daos.stream().
-                map(mapper::fromDao).
-                collect(Collectors.toList());
-    }
 
     @Override
     public long count() {
-        return crudService.count();
+        return service.count();
     }
 
     @Override
     public void delete(ID id) {
-        crudService.delete( id );
+        service.delete( id );
     }
 
     @Override
@@ -90,6 +82,6 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
 
     @Override
     public void deleteAll() {
-        crudService.deleteAll();
+        service.deleteAll();
     }
 }

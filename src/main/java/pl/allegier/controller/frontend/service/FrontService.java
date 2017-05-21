@@ -15,8 +15,6 @@ public interface FrontService<DTO,ID> {
 
     Iterable<DTO> findAll();
 
-    Iterable<DTO> findAll(Iterable<ID> var1);
-
     long count();
 
     void delete(ID var1);

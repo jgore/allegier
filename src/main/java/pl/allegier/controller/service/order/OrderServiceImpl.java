@@ -1,8 +1,12 @@
 package pl.allegier.controller.service.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import pl.allegier.controller.repository.OrderRepository;
+import pl.allegier.controller.dao.Dao;
+import pl.allegier.controller.dao.JpaDao;
+import pl.allegier.controller.dao.order.OrderDao;
+import pl.allegier.controller.service.AbstractService;
 import pl.allegier.model.Order;
 
 /**
@@ -10,62 +14,10 @@ import pl.allegier.model.Order;
  */
 
 @Service
-public class OrderServiceImpl implements OrderService {
-
-    private final OrderRepository orderRepository;
+public class OrderServiceImpl  extends AbstractService<Order,Integer> implements OrderService {
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
-
-    @Override
-    public <S extends Order> S save(S order ) {
-        return orderRepository.save( order);
-    }
-
-    @Override
-    public <S extends Order> Iterable<S> save(Iterable<S> orders) {
-        return orderRepository.save(orders);
-    }
-
-    @Override
-    public Order findOne(Integer id) {
-        return orderRepository.findOne( id );
-    }
-
-    @Override
-    public boolean exists(Integer id) {
-        return orderRepository.exists( id );
-    }
-
-    @Override
-    public Iterable<Order> findAll() {
-        return orderRepository.findAll();
-    }
-
-    @Override
-    public Iterable<Order> findAll(Iterable<Integer> ids) {
-        return orderRepository.findAll( ids );
-    }
-
-    @Override
-    public long count() {
-        return orderRepository.count();
-    }
-
-    @Override
-    public void delete(Integer id) {
-        orderRepository.delete( id );
-    }
-
-    @Override
-    public void delete(Iterable<? extends Order> orders) {
-        orderRepository.delete( orders );
-    }
-
-    @Override
-    public void deleteAll() {
-        orderRepository.deleteAll();
+    public OrderServiceImpl(@Qualifier("orderDao") Dao<Order,Integer> jpaDao) {
+        super(jpaDao);
     }
 }
