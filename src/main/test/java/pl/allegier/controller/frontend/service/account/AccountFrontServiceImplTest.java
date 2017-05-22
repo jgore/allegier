@@ -75,7 +75,7 @@ public class AccountFrontServiceImplTest {
         assertThat(save.getLogin(), equalTo(TEST_LOGIN_1));
 
         save.setLogin(TEST_LOGIN_2);
-        AccountDto updated = accountDtoFrontService.save(save);
+        AccountDto updated = accountDtoFrontService.update(save);
 
         assertThat(updated.getLogin(), equalTo(TEST_LOGIN_2));
     }

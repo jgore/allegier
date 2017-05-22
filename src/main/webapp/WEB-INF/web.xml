@@ -1,12 +1,12 @@
 <web-app xmlns="
        http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+		 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="
        http://java.sun.com/xml/ns/javaee
        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="rest" version="3.0">
-	<display-name>Allegier</display-name>
+		 id="rest" version="3.0">
+	<display-name>MMP</display-name>
 	<import resource="app-resource.xml" />
 
 </web-app>

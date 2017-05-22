@@ -33,7 +33,6 @@ public class ProductFrontServiceImplTest {
     private static final String TEST_DESC = "gore1234";
     private static final BigDecimal TEST_PRICE = BigDecimal.ONE;
 
-
     @Autowired
     private ProductFrontService productDtoFrontService;
 
@@ -77,7 +76,7 @@ public class ProductFrontServiceImplTest {
         assertThat(save.getTitle(), equalTo(TEST_TITLE));
 
         save.setTitle(TEST_TITLE_2);
-        ProductDto updated = productDtoFrontService.save(save);
+        ProductDto updated = productDtoFrontService.update(save);
 
         assertThat(updated.getTitle(), equalTo(TEST_TITLE_2));
     }

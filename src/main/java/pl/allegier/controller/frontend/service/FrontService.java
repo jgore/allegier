@@ -7,7 +7,7 @@ public interface FrontService<DTO,ID> {
 
     DTO save(DTO var1);
 
-    Iterable<DTO> save(Iterable<DTO> var1);
+    DTO update(DTO var1);
 
     DTO findOne(ID var1);
 
@@ -18,8 +18,6 @@ public interface FrontService<DTO,ID> {
     long count();
 
     void delete(ID var1);
-
-    void delete(Iterable<ID> ids);
 
     void deleteAll();
 }

@@ -32,12 +32,9 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
     }
 
     @Override
-    public Iterable<DTO> save(Iterable<DTO> dtoIterable) {
-        List<DTO> dtos= Lists.newArrayList(dtoIterable);
-
-        return dtos.stream().
-                map(this::save).
-                collect(Collectors.toList());
+    public DTO update(DTO dto) {
+        DAO update = service.update(mapper.fromDto(dto));
+        return mapper.fromDao( update);
     }
 
     @Override
@@ -72,12 +69,6 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
     @Override
     public void delete(ID id) {
         service.delete( id );
-    }
-
-    @Override
-    public void delete(Iterable<ID> dtoIterables) {
-        dtoIterables.forEach(this::delete);
-
     }
 
     @Override

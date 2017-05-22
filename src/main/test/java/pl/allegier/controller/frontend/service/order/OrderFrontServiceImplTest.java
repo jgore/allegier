@@ -71,7 +71,7 @@ public class OrderFrontServiceImplTest {
     //    assertThat(save.getLogin(), equalTo(TEST_LOGIN_1));
 
 //
-        OrderDto updated = orderFrontService.save(save);
+        OrderDto updated = orderFrontService.update(save);
 
       //  assertThat(updated.getLogin(), equalTo(TEST_LOGIN_2));
     }

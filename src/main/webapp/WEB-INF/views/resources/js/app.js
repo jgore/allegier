@@ -12,10 +12,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'resources/templates/index.html',
             controller: 'indexController'
         })
-        .when('/post', {
-            templateUrl: 'resources/templates/post.html',
-            controller: 'postController'
-        })
         .otherwise({
             redirectTo: '/index'
         });

@@ -7,19 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import pl.allegier.controller.frontend.dto.AccountDto;
 import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.controller.frontend.dto.ProductDto;
-import pl.allegier.controller.frontend.service.account.AccountFrontService;
 import pl.allegier.controller.frontend.service.order.OrderFrontService;
 import pl.allegier.controller.frontend.service.product.ProductFrontService;
 import pl.allegier.it.ItConfiguration;
-import pl.allegier.model.Order;
-import pl.allegier.model.Product;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;

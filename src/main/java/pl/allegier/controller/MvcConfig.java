@@ -1,4 +1,4 @@
-package pl.allegier;
+package pl.allegier.controller;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -33,7 +33,6 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {"pl.allegier"})
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"pl.allegier.controller.dao"})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "transactionManager")

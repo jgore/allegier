@@ -1,6 +1,6 @@
 <html ng-app="app">
 <head>
-    <title>BeMaster.pl - How to become a Master !</title>
+    <title>Allegier.pl - Auction Site !</title>
     <script src="resources/lib/angular.min.js"></script>
     <script src="resources/lib/jquery.min.js"></script>
     <script src="resources/lib/ui-bootstrap.min.js"></script>
@@ -25,7 +25,6 @@
 
 <script type="application/javascript" src="resources/js/app.js"></script>
 <script type="application/javascript" src="resources/js/index.js"></script>
-<script type="application/javascript" src="resources/js/post.js"></script>
 
 
 </html>

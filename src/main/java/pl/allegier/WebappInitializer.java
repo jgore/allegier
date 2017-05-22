@@ -1,6 +1,7 @@
 package pl.allegier;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import pl.allegier.controller.MvcConfig;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 03.04.17.
