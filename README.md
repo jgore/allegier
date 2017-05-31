@@ -15,7 +15,7 @@ SQL
 
 INIT :
 
-create db on postgresql :
+create 2 db on postgresql :
 allegier
 allegier_test
 
