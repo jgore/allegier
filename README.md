@@ -7,9 +7,7 @@ AngularJS
 
 Spring, 
 Spring MVC
-Spring Data
 JPA
-JTA
 
 Hibernate
 PostgreSQL
