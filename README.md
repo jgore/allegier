@@ -22,3 +22,5 @@ allegier_test
 grant all right to 
 user : admin
 pw : admin
+
+build : mvn clean install 
