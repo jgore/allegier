@@ -2,14 +2,20 @@ package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 03.04.17.
@@ -21,12 +27,25 @@ public class Account implements Serializable  {
 
     private static final long serialVersionUID = 1538176138199455942L;
 
+    @Id
+    @GeneratedValue
+    @Column
     private Integer id;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "account_orders", joinColumns = {
+            @JoinColumn(name = "account_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "order_id", nullable = false, updatable = false) })
+    private Set<Order> orders;
+
+    @Column
     private String login;
+    @Column
     private String password;
 
+    @Column
     private Date created;
+    @Column
     private Date updated;
 
     public Account(String login, String password) {
@@ -40,36 +59,36 @@ public class Account implements Serializable  {
         this.updated = new Date();
     }
 
-    @Id
-    @GeneratedValue
-    @Column
     public Integer getId() {
         return id;
     }
 
-    @Column
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
     public String getLogin() {
         return login;
     }
 
-    @Column
     public String getPassword() {
         return password;
     }
 
-    @Column
     public Date getCreated() {
         return created;
     }
 
-    @Column
     public Date getUpdated() {
         return updated;
     }
 
-
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     public void setLogin(String login) {
