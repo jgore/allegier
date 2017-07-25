@@ -1,16 +1,14 @@
 package pl.allegier.controller.dao.account;
 
-import org.junit.Before;
+import com.google.common.collect.Sets;
+import org.junit.After;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import pl.allegier.TestConfiguration;
 import pl.allegier.controller.dao.AbstractDaoTest;
 import pl.allegier.controller.dao.DaoTest;
+import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.model.Account;
+import pl.allegier.model.Order;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,32 +19,51 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by Pawel Szczepkowski | Java4you.pl  on 21.05.17.
  */
+public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements DaoTest<Account, Integer> {
 
-public class AccountDaoTest extends AbstractDaoTest<Account,Integer> implements DaoTest<Account,Integer> {
-
-    public static final String TEST_ACCOUNT_LOGIN= " TEST _ PROD _ TITLE 1";
+    public static final String TEST_ACCOUNT_LOGIN = " TEST _ PROD _ TITLE 1";
     public static final String TEST_ACCOUNT_LOGIN_2 = " TEST _ PROD _ TITLE 2";
     public static final String TEST_DESCRIPTION = " TEST _ PROD _ DESC ";
     public static final BigDecimal TEST_PRICE = BigDecimal.valueOf(123);
 
     @Autowired
-    private AccountDao AccountDao;
+    private OrderDaoTest orderDaoTest;
 
-    @Before
-    public  void setup()
-    {
-        AccountDao.removeAll();
+    @Autowired
+    private OrderDao orderDao;
+
+    @Autowired
+    private AccountDao accountDao;
+
+    @After
+    public void cleanUp() {
+        orderDaoTest.cleanUp();
+        accountDao.removeAll();
+    }
+
+    @Test
+    public void shouldSaveAccountWithOrders() {
+        Account account = createAccount();
+        Order order = orderDaoTest.createOrderWithProducts();
+
+        account.setOrders(Sets.newHashSet(order));
+
+        Account save = accountDao.save(account);
+
+        account = accountDao.findById(save.getId());
+
+        assertThat(account.getOrders().size(), equalTo(1));
     }
 
     @Override
     @Test
     public void saveOneTest() {
         Account Account = createAccount();
-        Account saved = AccountDao.save(Account);
+        Account saved = accountDao.save(Account);
 
-        Account byId = AccountDao.findById(saved.getId());
+        Account byId = accountDao.findById(saved.getId());
 
-        assertThat( byId.getId(), equalTo( saved.getId()));
+        assertThat(byId.getId(), equalTo(saved.getId()));
     }
 
     @Override
@@ -55,7 +72,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account,Integer> implements 
         Account saved = createAccount();
         saved.setLogin(TEST_ACCOUNT_LOGIN_2);
 
-        Account update = AccountDao.update(saved);
+        Account update = accountDao.update(saved);
 
         assertThat(update.getLogin(), equalTo(TEST_ACCOUNT_LOGIN_2));
 
@@ -65,21 +82,21 @@ public class AccountDaoTest extends AbstractDaoTest<Account,Integer> implements 
     @Test
     public void removeOneTest() {
         Account Account = createAccount();
-        Account saved = AccountDao.save(Account);
+        Account saved = accountDao.save(Account);
 
-        Account removed = AccountDao.remove(saved);
+        Account removed = accountDao.remove(saved);
 
-         assertThat( AccountDao.findById( removed.getId() ),equalTo(  null ));
+        assertThat(accountDao.findById(removed.getId()), equalTo(null));
     }
 
     @Override
     @Test
     public void findByIdTest() {
         Account Account = createAccount();
-        Account save = AccountDao.save(Account);
-        Account byId = AccountDao.findById(save.getId());
+        Account save = accountDao.save(Account);
+        Account byId = accountDao.findById(save.getId());
 
-        assertThat( save.getId(), equalTo( byId.getId()));
+        assertThat(save.getId(), equalTo(byId.getId()));
     }
 
     @Override
@@ -87,12 +104,12 @@ public class AccountDaoTest extends AbstractDaoTest<Account,Integer> implements 
     public void findAllTest() {
         Account Account1 = createAccount();
         Account Account2 = createAccount();
-        AccountDao.save(Account1);
-        AccountDao.save(Account2);
+        accountDao.save(Account1);
+        accountDao.save(Account2);
 
-        List<Account> all = AccountDao.findAll();
+        List<Account> all = accountDao.findAll();
 
-        assertThat( all.size() , equalTo( 2));
+        assertThat(all.size(), equalTo(2));
 
     }
 
@@ -102,12 +119,12 @@ public class AccountDaoTest extends AbstractDaoTest<Account,Integer> implements 
         Account Account1 = createAccount();
         Account Account2 = createAccount();
 
-        AccountDao.save(Account1);
-        AccountDao.save(Account2);
+        accountDao.save(Account1);
+        accountDao.save(Account2);
 
-        Long count = AccountDao.count();
+        Long count = accountDao.count();
 
-        assertThat( count , equalTo( 2L));
+        assertThat(count, equalTo(2L));
 
     }
 
@@ -116,15 +133,15 @@ public class AccountDaoTest extends AbstractDaoTest<Account,Integer> implements 
     public void removeAllTest() {
         Account Account1 = createAccount();
         Account Account2 = createAccount();
-        AccountDao.save(Account1);
-        AccountDao.save(Account2);
+        accountDao.save(Account1);
+        accountDao.save(Account2);
 
-        AccountDao.removeAll();
+        accountDao.removeAll();
 
-        assertThat( AccountDao.findAll().size() ,equalTo( 0));
+        assertThat(accountDao.findAll().size(), equalTo(0));
     }
 
     private Account createAccount() {
-        return new Account(TEST_ACCOUNT_LOGIN,TEST_DESCRIPTION);
+        return new Account(TEST_ACCOUNT_LOGIN, TEST_DESCRIPTION);
     }
 }

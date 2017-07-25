@@ -1,5 +1,6 @@
 package pl.allegier.controller.dao.account;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,8 +37,8 @@ public class ProductDaoTest extends AbstractDaoTest<Product,Integer> implements 
     @Autowired
     private ProductDao productDao;
 
-    @Before
-    public void setup() {
+    @After
+    public void cleanUp() {
         productDao.removeAll();
     }
 
