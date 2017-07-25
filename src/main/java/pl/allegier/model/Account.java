@@ -46,7 +46,7 @@ public class Account implements Serializable  {
     private String password;
 
     @Embedded
-    private Address address;
+    private Address address = new Address();
 
     @Column
     private Date created;
