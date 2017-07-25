@@ -1,310 +1,183 @@
 <div ng-controller="indexController">
 
     <div>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">BeMaster.pl</a>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Allegier.pl</a>
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">News</a></li>
+                        <li><a href="#post">Blog</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="container theme-showcase" role="main">
+
+            <!-- Main jumbotron for a primary marketing message or call to action -->
+            <div class="jumbotron">
+                <h1>Allegier.pl</h1>
+                <p>Prosty Sklepik. </p>
             </div>
 
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">News</a></li>
-                    <li><a href="#post">Blog</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
+            <h3 class="bg-success">Aukcje Wyroznione</h3>
 
-    <div class="container theme-showcase" role="main">
+            <div class="row">
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <h1>Allegier.pl</h1>
-            <p>Prosty Sklepik. </p>
-        </div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th><span class="label label-info">Zdjęcie</span></th>
+                            <th><span class="label label-success">Tytuł</span></th>
+                            <th><span class="label label-danger">Oferty</span></th>
+                            <th><span class="label label-warning">Kasa</span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-        <h3 class="bg-success">Najwieksza sprzedaz mieli</h3>
+                        <tr>
+                            <td bgcolor="#ffd700">1</td>
+                            <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
+                            <td>3</td>
+                            <td>150 000 PLN</td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="silver">2</td>
+                            <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
+                            <td>2</td>
+                            <td>100 000 PLN</td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#a52a2a">3</td>
+                            <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
+                            <td>123</td>
+                            <td>50 000 PLN</td>
+                        </tr>
 
-        <div class="row">
+                        <tr>
+                            <td bgcolor="#ffd700">1</td>
+                            <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
+                            <td>3</td>
+                            <td>150 000 PLN</td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="silver">2</td>
+                            <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
+                            <td>2</td>
+                            <td>100 000 PLN</td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#a52a2a">3</td>
+                            <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
+                            <td>123</td>
+                            <td>50 000 PLN</td>
+                        </tr>
 
-            <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th><span class="label label-info">Nr</span></th>
-                        <th><span class="label label-success">Konto</span></th>
-                        <th><span class="label label-danger">Kasa</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr>
-                        <td bgcolor="#ffd700">1</td>
-                        <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                        <td>150 000 PLN </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="silver">2</td>
-                        <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                        <td>100 000 PLN </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#a52a2a">3</td>
-                        <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                        <td>50 000 PLN </td>
-                    </tr>
-
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th><span class="label label-info">Nr</span></th>
-                        <th><span class="label label-success">Login</span></th>
-                        <th><span class="label label-danger">Dystans</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
 
-                    <tr>
-                        <td bgcolor="#ffd700">1</td>
-                        <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                        <td>180 km</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="silver">2</td>
-                        <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                        <td>155 km</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#a52a2a">3</td>
-                        <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                        <td>130 km</td>
-                    </tr>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                <hr/>
 
-        <hr />
+                <h3 class="bg-primary"> Aukcje</h3>
 
-        <h3 class="bg-primary"> Najwieksze gory  zdobyli: [ dzien / miesiac ]:</h3>
+                <div class="row">
 
-        <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><span class="label label-info">Zdjęcie</span></th>
+                                <th><span class="label label-success">Tytuł</span></th>
+                                <th><span class="label label-danger">Oferty</span></th>
+                                <th><span class="label label-warning">Kasa</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td bgcolor="#ffd700">1</td>
+                                <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
+                                <td>3</td>
+                                <td>150 000 PLN</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="silver">2</td>
+                                <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
+                                <td>2</td>
+                                <td>100 000 PLN</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#a52a2a">3</td>
+                                <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
+                                <td>123</td>
+                                <td>50 000 PLN</td>
+                            </tr>
 
-            <div class="col-md-6">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th><span class="label label-info">Nr</span></th>
-                        <th><span class="label label-success">Login</span></th>
-                        <th><span class="label label-danger">Pokonana Wysokosc</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td bgcolor="#ffd700">1</td>
-                        <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                        <td>3000 m </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="silver">1</td>
-                        <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                        <td>2800 m</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#a52a2a">1</td>
-                        <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                        <td>1400 m</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                            <tr>
+                                <td bgcolor="#ffd700">1</td>
+                                <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
+                                <td>3</td>
+                                <td>150 000 PLN</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="silver">2</td>
+                                <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
+                                <td>2</td>
+                                <td>100 000 PLN</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#a52a2a">3</td>
+                                <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
+                                <td>123</td>
+                                <td>50 000 PLN</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th><span class="label label-info">Nr</span></th>
-                        <th><span class="label label-success">Login</span></th>
-                        <th><span class="label label-danger">Pokonana Wysokosc</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                </div>
 
-                    <tr>
-                        <td bgcolor="#ffd700">1</td>
-                        <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                        <td>50000 m</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="silver">2</td>
-                        <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                        <td>45000 m</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#a52a2a">3</td>
-                        <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                        <td>37660 m</td>
-                    </tr>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <hr />
-
-        <h3 class="bg-danger"> Najwieksza predkosc osiagneli: [ dzien / miesiac ]</h3>
-
-        <div class="row">
-
-            <div class="col-md-6">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th><span class="label label-info">Nr</span></th>
-                        <th><span class="label label-success">Login</span></th>
-                        <th><span class="label label-danger">Pokonana Wysokosc</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td bgcolor="#ffd700">1</td>
-                        <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                        <td>34 km /h</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="silver">1</td>
-                        <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                        <td>32.89 km /h</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#a52a2a">1</td>
-                        <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                        <td>29.8 km/h</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-md-6">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th><span class="label label-info">Nr</span></th>
-                        <th><span class="label label-success">Login</span></th>
-                        <th><span class="label label-danger">Predkosc</span></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td bgcolor="#ffd700">1</td>
-                        <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                        <td>34 km /h</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="silver">1</td>
-                        <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                        <td>32.89 km /h</td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#a52a2a">1</td>
-                        <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                        <td>29.8 km/h</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+                <hr/>
 
 
 
-        <br />
-        <br />
+                <br/>
+                <br/>
 
-        <div>
-            <div style="border: 1px solid; padding: 5px">
-                <h2 class="bg-success"> 22.04 :  II Obornicki Supermaraton Szosowy “Kraina Trzech Rzek ” </h2>
-            </div>
-            <div style="border: 1px solid; padding: 5px">
-                <br />
-                <p>
-                    Na zawodach generalnie bylo bardzo przyjemnie. Bylo sloneczna pogoda i mila atmosfera. </p>
-                <p>  Drogi byly w bardzo dobrym stanie, znacznie lepiej niz na pozostalych maratonach,a szczegolnie gorskich. </p>
-
-                <p>Dalo sie poczuc ducha rywalizacji </p>
-
-                <p> Wyniki mozna pobrac na stronie tim2you.pl</p>
-
-                <p> Gratulacje dla zwyciezcow : </p>
-
-                MINI :
-
-                <ul>
-                    <li>1. Pawel Szczepkowski [ Rawex Energy Saving ] </li>
-                    <li>2. Ryszard Rawski [ Rawex Energy Saving ]</li>
-                    <li>3. Krzysztof Mazurkiewicz [Rawex Energy Saving ] </li>
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation"><a href="#">Sponsorzy</a></li>
+                    <li role="presentation"><a href="#">Reklama</a></li>
+                    <li role="presentation"><a href="#">Wspolpraca</a></li>
+                    <li role="presentation"><a href="#">Mapa</a></li>
+                    <li role="presentation"><a href="#">Linki</a></li>
                 </ul>
 
-                MEGA :
+            </div> <!-- /container -->
 
-                <ul>
-                    <li>1. Pawel Szczepkowski [ Rawex Energy Saving ] </li>
-                    <li>2. Ryszard Rawski [ Rawex Energy Saving ]</li>
-                    <li>3. Krzysztof Mazurkiewicz [Rawex Energy Saving ] </li>
-                </ul>
 
-                GIGA :
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 
-                <ul>
-                    <li>1. Pawel Szczepkowski [ Rawex Energy Saving ] </li>
-                    <li>2. Ryszard Rawski [ Rawex Energy Saving ]</li>
-                    <li>3. Krzysztof Mazurkiewicz [Rawex Energy Saving ] </li>
-                </ul>
-
-                Pozdrawiamy
-
-                <p>
-                    <button type="button" class="btn btn-success">SUCCESS</button> Gore , 21.10.2016
-                </p>
-
-            </div>
         </div>
-
-        <br />
-        <br />
-
-        <ul class="nav nav-pills"   role="tablist">
-            <li role="presentation"><a href="#">Sponsorzy</a></li>
-            <li role="presentation"><a href="#">Reklama</a></li>
-            <li role="presentation"><a href="#">Wspolpraca</a></li>
-            <li role="presentation"><a href="#">Mapa</a></li>
-            <li role="presentation"><a href="#">Linki</a></li>
-        </ul>
-
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 
     </div>
-
-</div>

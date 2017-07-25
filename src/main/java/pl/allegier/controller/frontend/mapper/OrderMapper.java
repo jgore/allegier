@@ -49,18 +49,18 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
 
     @Override
     protected  void configure() {
-        if( source.getProducts()!= null) {
+        if( source.getOrderProducts()!= null) {
 
             Set<Integer> idsProduct = new HashSet<>();
-            for (Product product : source.getProducts()) {
+            for (Product product : source.getOrderProducts()) {
                idsProduct.add( product.getId( ) );
             }
 
-            Set<Integer> idsProduct = source.getProducts().
+            Set<Integer> idsProduct = source.getOrderProducts().
                     stream().
                     map(Product::getId).
                     collect(Collectors.toSet());
-            map().setProducts( idsProduct );
+            map().setOrderProducts( idsProduct );
         }
     }
 

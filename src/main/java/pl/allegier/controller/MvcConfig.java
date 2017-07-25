@@ -53,7 +53,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         sessionBuilder.setProperty("hibernate.show_sql", "true");
         sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         sessionBuilder.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        // sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create");
+         sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         sessionBuilder.setProperty("hibernate.hbm2ddl.import_files", "initial_data.sql");
         return sessionBuilder.buildSessionFactory();
     }

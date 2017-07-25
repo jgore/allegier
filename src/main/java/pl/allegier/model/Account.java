@@ -42,7 +42,6 @@ public class Account implements Serializable  {
 
     @Id
     @GeneratedValue
-    @Column
     public Integer getId() {
         return id;
     }

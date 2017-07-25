@@ -40,6 +40,7 @@ public class OrderIT {
     private ProductFrontService productFrontService;
 
     @Test
+
     public void createManyAccountIT()
     {
         for( int i=0;i<1000;i++)
@@ -47,12 +48,13 @@ public class OrderIT {
             ProductDto product = productFrontService.save(new ProductDto(TEST_PRODUCT, TEST_TITLE, TEST_PRICE));
 
             OrderDto order = orderFrontService.save(new OrderDto());
+
             Set<Integer> ids = Sets.newHashSet(product.getId());
-            order.setProducts(ids);
+            order.setOrderProducts(ids);
 
             OrderDto saved = orderFrontService.save(order);
 
-            assertThat(saved.getProducts(),equalTo(ids) );
+            assertThat(saved.getOrderProducts(),equalTo(ids) );
         }
     }
 

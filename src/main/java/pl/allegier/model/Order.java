@@ -2,16 +2,7 @@ package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -30,7 +21,7 @@ public class Order implements Serializable {
     private Integer id;
 
     private Account account;
-    private Set<Product> products;
+    private Set<OrderProduct> orderProducts;
 
     private Date created;
     private Date updated;
@@ -40,14 +31,13 @@ public class Order implements Serializable {
         this.setUpdated( new Date() );
     }
 
-    public Order(Account account, Set<Product> products) {
+    public Order(Account account, Set<OrderProduct> orderProducts) {
         this.account = account;
-        this.products = products;
+        this.orderProducts = orderProducts;
     }
 
     @Id
     @GeneratedValue
-    @Column
     public Integer getId() {
         return id;
     }
@@ -56,12 +46,9 @@ public class Order implements Serializable {
         return account;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "orders_products", joinColumns = {
-            @JoinColumn(name = "order_id", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "product_id", nullable = false, updatable = false) })
-    public Set<Product> getProducts() {
-        return products;
+    @OneToMany(mappedBy = "order")
+    public Set<OrderProduct> getOrderProducts() {
+        return orderProducts;
     }
 
     @Column
@@ -82,8 +69,8 @@ public class Order implements Serializable {
         this.account = account;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setOrderProducts(Set<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
     public void setCreated(Date created) {
@@ -101,12 +88,12 @@ public class Order implements Serializable {
         Order order = (Order) o;
         return Objects.equals(getId(), order.getId()) &&
                 Objects.equals(getAccount(), order.getAccount()) &&
-                Objects.equals(getProducts(), order.getProducts()) ;
+                Objects.equals(getOrderProducts(), order.getOrderProducts()) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getAccount(), getProducts());
+        return Objects.hash(getId(), getAccount(), getOrderProducts());
     }
 
     @Override

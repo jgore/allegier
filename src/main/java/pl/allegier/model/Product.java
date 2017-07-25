@@ -2,18 +2,11 @@ package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 14.04.17.
@@ -31,8 +24,6 @@ public class Product implements Serializable {
     private String description;
 
     private BigDecimal price;
-
-    private Set<Order> orders;
 
     private Date created;
     private Date updated;
@@ -68,10 +59,6 @@ public class Product implements Serializable {
         return price;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "products")
-    public Set<Order> getOrders() {
-        return orders;
-    }
 
     @Column
     public Date getCreated() {
@@ -97,10 +84,6 @@ public class Product implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
     }
 
     public void setCreated(Date created) {
