@@ -3,6 +3,8 @@ package pl.allegier.model;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,6 +27,9 @@ public class Account implements Serializable  {
 
     private String login;
     private String password;
+
+    @Embedded
+    private Address address = new Address();
 
     private Date created;
     private Date updated;
@@ -57,6 +62,10 @@ public class Account implements Serializable  {
     }
 
     @Column
+    public Address getAddress() {
+        return address;
+    }
+
     public Date getCreated() {
         return created;
     }
@@ -77,6 +86,10 @@ public class Account implements Serializable  {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setCreated(Date created) {

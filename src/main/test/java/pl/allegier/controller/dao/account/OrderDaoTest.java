@@ -1,15 +1,21 @@
 package pl.allegier.controller.dao.account;
 
+import com.google.common.collect.Sets;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.allegier.controller.dao.AbstractDaoTest;
 import pl.allegier.controller.dao.DaoTest;
 import pl.allegier.controller.dao.order.OrderDao;
+import pl.allegier.controller.dao.product.ProductDao;
 import pl.allegier.model.Order;
+import pl.allegier.model.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
@@ -17,21 +23,33 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by Pawel Szczepkowski | Satlan on 15.06.17.
  */
+
+@Component
 public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoTest<Order,Integer> {
 
 
-    public static final String TEST_Order_LOGIN= " TEST _ PROD _ TITLE 1";
-    public static final String TEST_Order_LOGIN_2 = " TEST _ PROD _ TITLE 2";
-    public static final String TEST_DESCRIPTION = " TEST _ PROD _ DESC ";
-    public static final BigDecimal TEST_PRICE = BigDecimal.valueOf(123);
+    public static final String TEST_PROD_TITLE= " TEST _ PROD _ TITLE 1";
+    public static final BigDecimal TEST_PROD_PRICE= BigDecimal.valueOf(99.99);
 
     @Autowired
     private OrderDao orderDao;
 
-    @Before
-    public  void setup()
+    @Autowired
+    private ProductDao productDao;
+
+    @After
+    public  void cleanUp()
     {
         orderDao.removeAll();
+        productDao.removeAll();
+    }
+
+    @Test
+    public void shouldSaveOrderWithRelationToProducts()
+    {
+        Order order = createOrderWithProducts();
+
+        assertThat( order.getProducts().size(), equalTo(2 ));
     }
 
     @Override
@@ -119,7 +137,31 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
         assertThat( orderDao.findAll().size() ,equalTo( 0));
     }
 
-    private Order createOrder() {
+    public Order createOrderWithProducts()
+    {
+        Product product1 = createProduct();
+        Product product2 = createProduct();
+
+        product1 = productDao.findById(product1.getId());
+        product2 = productDao.findById(product2.getId());
+
+        Order order = new Order();
+        Set<Product> products = Sets.newHashSet(product1, product2);
+        order.setProducts(products);
+
+        Order save = orderDao.save(order);
+
+        return orderDao.findById( save.getId() );
+    }
+
+    public Order createOrder() {
         return new Order();
+    }
+
+    public Product createProduct() {
+        Product product = new Product();
+        product.setTitle(TEST_PROD_TITLE);
+        product.setPrice( TEST_PROD_PRICE);
+        return productDao.save(product);
     }
 }
