@@ -4,14 +4,20 @@ import com.google.common.collect.Sets;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import pl.allegier.controller.dao.order.OrderDao;
+import pl.allegier.controller.dao.product.ProductDao;
 import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.controller.frontend.dto.ProductDto;
 import pl.allegier.controller.frontend.service.order.OrderFrontService;
 import pl.allegier.controller.frontend.service.product.ProductFrontService;
 import pl.allegier.it.ItConfiguration;
+import pl.allegier.model.Order;
+import pl.allegier.model.OrderProduct;
+import pl.allegier.model.Product;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -34,27 +40,36 @@ public class OrderIT {
     private static final BigDecimal TEST_PRICE = BigDecimal.ONE;
 
     @Autowired
-    private OrderFrontService orderFrontService;
+    private OrderDao orderDao;
 
     @Autowired
-    private ProductFrontService productFrontService;
+    private ProductDao productDao;
 
     @Test
+    @Rollback(false)
+    public void createManyAccountIT() {
+        for (int i = 0; i < 100; i++) {
+            Product product = new Product();
 
-    public void createManyAccountIT()
-    {
-        for( int i=0;i<1000;i++)
-        {
-            ProductDto product = productFrontService.save(new ProductDto(TEST_PRODUCT, TEST_TITLE, TEST_PRICE));
+            product.setDescription(TEST_PRODUCT);
+            product.setTitle(TEST_TITLE);
+            product.setPrice(TEST_PRICE);
 
-            OrderDto order = orderFrontService.save(new OrderDto());
+            product = productDao.save(product);
 
-            Set<Integer> ids = Sets.newHashSet(product.getId());
-            order.setOrderProducts(ids);
+            Order order = new Order();
 
-            OrderDto saved = orderFrontService.save(order);
+            OrderProduct orderProduct = new OrderProduct();
+            orderProduct.setAmount(1);
+            orderProduct.setProduct(product);
+            orderProduct.setOrder(order);
 
-            assertThat(saved.getOrderProducts(),equalTo(ids) );
+            order.setOrderProducts(Sets.newHashSet(orderProduct));
+
+            Order saved = orderDao.save(order);
+
+
+            assertThat(saved.getOrderProducts().size(), equalTo(1));
         }
     }
 
