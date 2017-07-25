@@ -11,11 +11,13 @@ import pl.allegier.controller.dao.DaoTest;
 import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.controller.dao.product.ProductDao;
 import pl.allegier.model.Order;
+import pl.allegier.model.OrderProduct;
 import pl.allegier.model.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
@@ -49,7 +51,7 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
     {
         Order order = createOrderWithProducts();
 
-        assertThat( order.getProducts().size(), equalTo(2 ));
+        assertThat( order.getOrderProducts().size(), equalTo(2 ));
     }
 
     @Override
@@ -145,9 +147,15 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
         product1 = productDao.findById(product1.getId());
         product2 = productDao.findById(product2.getId());
 
+        OrderProduct orderProduct1 = createOrderProduct(product1);
+        OrderProduct orderProduct2 = createOrderProduct(product2);
+
         Order order = new Order();
-        Set<Product> products = Sets.newHashSet(product1, product2);
-        order.setProducts(products);
+        Set<OrderProduct> products = Sets.newHashSet(orderProduct1, orderProduct2);
+        order.setOrderProducts(products);
+
+        orderProduct1.setOrder(order);
+        orderProduct2.setOrder(order);
 
         Order save = orderDao.save(order);
 
@@ -163,5 +171,14 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
         product.setTitle(TEST_PROD_TITLE);
         product.setPrice( TEST_PROD_PRICE);
         return productDao.save(product);
+    }
+
+    public OrderProduct createOrderProduct(Product product )
+    {
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setAmount(1);
+        orderProduct.setProduct(product);
+
+        return orderProduct;
     }
 }

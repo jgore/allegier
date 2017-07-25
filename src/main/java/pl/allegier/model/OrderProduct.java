@@ -1,8 +1,16 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -33,6 +41,7 @@ public class OrderProduct implements Serializable {
     }
 
     @ManyToOne(targetEntity = Order.class)
+    @JoinColumn(name="order_id",nullable = false)
     public Order getOrder() {
         return order;
     }
@@ -80,21 +89,6 @@ public class OrderProduct implements Serializable {
         this.updated = updated;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OrderProduct)) return false;
-        OrderProduct that = (OrderProduct) o;
-        return getAmount() == that.getAmount() &&
-                Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getOrder(), that.getOrder()) &&
-                Objects.equals(getProduct(), that.getProduct());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getOrder(), getProduct(), getAmount());
-    }
 
     @Override
     public String toString()

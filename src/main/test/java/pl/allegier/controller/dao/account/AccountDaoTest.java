@@ -1,6 +1,5 @@
 package pl.allegier.controller.dao.account;
 
-import com.google.common.collect.Sets;
 import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import pl.allegier.controller.dao.AbstractDaoTest;
 import pl.allegier.controller.dao.DaoTest;
 import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.model.Account;
-import pl.allegier.model.Order;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,20 +37,6 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     public void cleanUp() {
         orderDaoTest.cleanUp();
         accountDao.removeAll();
-    }
-
-    @Test
-    public void shouldSaveAccountWithOrders() {
-        Account account = createAccount();
-        Order order = orderDaoTest.createOrderWithProducts();
-
-        account.setOrders(Sets.newHashSet(order));
-
-        Account save = accountDao.save(account);
-
-        account = accountDao.findById(save.getId());
-
-        assertThat(account.getOrders().size(), equalTo(1));
     }
 
     @Override

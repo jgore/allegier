@@ -69,8 +69,7 @@ public abstract class JpaDao<E, ID> implements Dao<E, ID> {
     @Override
     @Transactional
     public void removeAll() {
-        String hql = "delete from " + entityClass.getSimpleName();
-        em.createQuery(hql).executeUpdate();
+        findAll().forEach( entity-> em.remove(entity));
     }
 
 }

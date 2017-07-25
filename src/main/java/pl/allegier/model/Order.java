@@ -2,7 +2,14 @@ package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -46,7 +53,12 @@ public class Order implements Serializable {
         return account;
     }
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REMOVE },
+            mappedBy = "order",fetch = FetchType.EAGER,
+    orphanRemoval = true)
     public Set<OrderProduct> getOrderProducts() {
         return orderProducts;
     }
