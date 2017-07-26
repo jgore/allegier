@@ -48,42 +48,11 @@
                         </thead>
                         <tbody>
 
-                        <tr>
-                            <td bgcolor="#ffd700">1</td>
-                            <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                            <td>3</td>
-                            <td>150 000 PLN</td>
-                        </tr>
-                        <tr>
-                            <td bgcolor="silver">2</td>
-                            <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                            <td>2</td>
-                            <td>100 000 PLN</td>
-                        </tr>
-                        <tr>
-                            <td bgcolor="#a52a2a">3</td>
-                            <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                            <td>123</td>
-                            <td>50 000 PLN</td>
-                        </tr>
-
-                        <tr>
-                            <td bgcolor="#ffd700">1</td>
-                            <td>Pawel Szczepkowski [ Rawex Energy Saving ]</td>
-                            <td>3</td>
-                            <td>150 000 PLN</td>
-                        </tr>
-                        <tr>
-                            <td bgcolor="silver">2</td>
-                            <td>Ryszard Rawski [ Rawex Energy Saving ]</td>
-                            <td>2</td>
-                            <td>100 000 PLN</td>
-                        </tr>
-                        <tr>
-                            <td bgcolor="#a52a2a">3</td>
-                            <td>Krzysztof Mazurkiewicz[ Rawex Energy Saving ]</td>
-                            <td>123</td>
-                            <td>50 000 PLN</td>
+                        <tr ng-repeat="product in products">
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.description }}</td>
+                            <td> 0 </td>
+                            <td>{{ product.price }}</td>
                         </tr>
 
                         </tbody>
