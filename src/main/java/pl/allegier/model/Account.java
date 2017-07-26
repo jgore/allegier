@@ -1,17 +1,22 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 03.04.17.
@@ -28,7 +33,7 @@ public class Account implements Serializable  {
     private String login;
     private String password;
 
-    @Embedded
+    private Set<Order> orders;
     private Address address = new Address();
 
     private Date created;
@@ -40,10 +45,7 @@ public class Account implements Serializable  {
         this.password = password;
     }
 
-    public Account() {
-        this.created = new Date();
-        this.updated = new Date();
-    }
+    public Account() { }
 
     @Id
     @GeneratedValue
@@ -61,16 +63,22 @@ public class Account implements Serializable  {
         return password;
     }
 
-    @Column
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    @Embedded
     public Address getAddress() {
         return address;
     }
 
+    @UpdateTimestamp
     public Date getCreated() {
         return created;
     }
 
-    @Column
+    @CreationTimestamp
     public Date getUpdated() {
         return updated;
     }
@@ -90,6 +98,10 @@ public class Account implements Serializable  {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     public void setCreated(Date created) {

@@ -16,6 +16,8 @@ public class AccountDto implements Serializable {
 
     private Integer id;
 
+    private Integer accountId;
+
     private String login;
     private String password;
 
@@ -36,6 +38,14 @@ public class AccountDto implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public String getLogin() {
@@ -70,20 +80,6 @@ public class AccountDto implements Serializable {
         this.updated = updated;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AccountDto that = (AccountDto) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getLogin(), that.getLogin()) &&
-                Objects.equals(getPassword(), that.getPassword());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getLogin(), getPassword());
-    }
 
     @Override
     public String toString()

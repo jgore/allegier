@@ -1,6 +1,8 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -60,12 +62,12 @@ public class Product implements Serializable {
     }
 
 
-    @Column
+    @CreationTimestamp
     public Date getCreated() {
         return created;
     }
 
-    @Column
+    @UpdateTimestamp
     public Date getUpdated() {
         return updated;
     }

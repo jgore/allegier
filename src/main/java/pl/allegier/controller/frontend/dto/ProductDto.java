@@ -82,24 +82,6 @@ public class ProductDto implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductDto that = (ProductDto) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getTitle(), that.getTitle()) &&
-                Objects.equals(getDescription(), that.getDescription()) &&
-                Objects.equals(getPrice(), that.getPrice()) &&
-                Objects.equals(getCreated(), that.getCreated()) &&
-                Objects.equals(getUpdated(), that.getUpdated());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getPrice(), getCreated(), getUpdated());
-    }
-
-    @Override
     public String toString()
     {
         return ReflectionToStringBuilder.toString(this);

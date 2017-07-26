@@ -1,6 +1,8 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -49,6 +52,7 @@ public class Order implements Serializable {
         return id;
     }
 
+    @ManyToOne(targetEntity = Account.class)
     public Account getAccount() {
         return account;
     }
@@ -63,12 +67,12 @@ public class Order implements Serializable {
         return orderProducts;
     }
 
-    @Column
+    @CreationTimestamp
     public Date getCreated() {
         return created;
     }
 
-    @Column
+    @UpdateTimestamp
     public Date getUpdated() {
         return updated;
     }

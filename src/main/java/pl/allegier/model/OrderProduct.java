@@ -3,6 +3,8 @@ package pl.allegier.model;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,12 +57,12 @@ public class OrderProduct implements Serializable {
         return amount;
     }
 
-    @Column
+    @CreationTimestamp
     public Date getCreated() {
         return created;
     }
 
-    @Column
+    @UpdateTimestamp
     public Date getUpdated() {
         return updated;
     }

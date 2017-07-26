@@ -8,6 +8,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import pl.allegier.controller.dao.account.AccountDao;
 import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.controller.dao.product.ProductDao;
 import pl.allegier.controller.frontend.dto.OrderDto;
@@ -15,6 +16,7 @@ import pl.allegier.controller.frontend.dto.ProductDto;
 import pl.allegier.controller.frontend.service.order.OrderFrontService;
 import pl.allegier.controller.frontend.service.product.ProductFrontService;
 import pl.allegier.it.ItConfiguration;
+import pl.allegier.model.Account;
 import pl.allegier.model.Order;
 import pl.allegier.model.OrderProduct;
 import pl.allegier.model.Product;
@@ -45,32 +47,54 @@ public class OrderIT {
     @Autowired
     private ProductDao productDao;
 
+    @Autowired
+    private AccountDao accountDao;
+
     @Test
     @Rollback(false)
     public void createManyAccountIT() {
         for (int i = 0; i < 100; i++) {
-            Product product = new Product();
+            Account account = createAccount(i);
 
-            product.setDescription(TEST_PRODUCT);
-            product.setTitle(TEST_TITLE);
-            product.setPrice(TEST_PRICE);
+            Product product = createProduct();
 
-            product = productDao.save(product);
-
-            Order order = new Order();
-
-            OrderProduct orderProduct = new OrderProduct();
-            orderProduct.setAmount(1);
-            orderProduct.setProduct(product);
-            orderProduct.setOrder(order);
-
-            order.setOrderProducts(Sets.newHashSet(orderProduct));
-
-            Order saved = orderDao.save(order);
+            Order saved = createOrder(product,account);
 
 
             assertThat(saved.getOrderProducts().size(), equalTo(1));
         }
     }
 
+    private Order createOrder(Product product, Account account) {
+        Order order = new Order();
+
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setAmount(1);
+        orderProduct.setProduct(product);
+        orderProduct.setOrder(order);
+
+        order.setOrderProducts(Sets.newHashSet(orderProduct));
+        order.setAccount(account);
+
+        return orderDao.save(order);
+    }
+
+    private Product createProduct() {
+        Product product = new Product();
+
+        product.setDescription(TEST_PRODUCT);
+        product.setTitle(TEST_TITLE);
+        product.setPrice(TEST_PRICE);
+
+        product = productDao.save(product);
+        return product;
+    }
+
+    private Account createAccount(int i) {
+        Account account = new Account();
+        account.setLogin("1234"+i);
+        account.setPassword("9876"+i);
+
+        return accountDao.save(account);
+    }
 }

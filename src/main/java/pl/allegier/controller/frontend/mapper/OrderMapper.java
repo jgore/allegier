@@ -7,12 +7,9 @@ import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.model.Order;
 import pl.allegier.model.OrderProduct;
-import pl.allegier.model.Product;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -50,7 +47,17 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
         OrderDto orderDto = mapper.map(dao, OrderDto.class);
 
 
-        return setOrderProductIds(dao,orderDto);
+         orderDto = setOrderProductIds(dao, orderDto);
+
+        return setAccount(dao, orderDto);
+    }
+
+    private OrderDto setAccount(Order dao, OrderDto orderDto) {
+        if( orderDto.getAccountId()!= null )
+        {
+            orderDto.setAccountId(dao.getAccount().getId());
+        }
+        return orderDto;
     }
 
     private OrderDto setOrderProductIds(Order dao, OrderDto orderDto) {

@@ -17,7 +17,7 @@ public class OrderDto implements Serializable {
 
     private Integer id;
 
-    private Account account;
+    private Integer accountId;
     private Set<Integer> orderProducts;
 
     private Date created;
@@ -31,12 +31,12 @@ public class OrderDto implements Serializable {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public Set<Integer> getOrderProducts() {
@@ -61,24 +61,6 @@ public class OrderDto implements Serializable {
 
     public void setUpdated(Date updated) {
         this.updated = updated;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderDto orderDto = (OrderDto) o;
-        return Objects.equals(getId(), orderDto.getId()) &&
-                Objects.equals(getAccount(), orderDto.getAccount()) &&
-                Objects.equals(getOrderProducts(), orderDto.getOrderProducts()) &&
-                Objects.equals(getCreated(), orderDto.getCreated()) &&
-                Objects.equals(getUpdated(), orderDto.getUpdated());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getAccount(), getOrderProducts(), getCreated(), getUpdated());
     }
 
 
