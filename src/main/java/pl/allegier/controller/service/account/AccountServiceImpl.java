@@ -13,7 +13,7 @@ import pl.allegier.model.Account;
  */
 
 @Service
-public class AccountServiceImpl extends AbstractService<Account,Integer>{
+public class AccountServiceImpl extends AbstractService<Account,Integer> implements AccountService{
 
     @Autowired
     public AccountServiceImpl(@Qualifier("accountDao") Dao<Account, Integer> jpaDao) {
