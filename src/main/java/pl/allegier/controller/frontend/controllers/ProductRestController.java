@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Pawel Szczepkowski | Satlan on 14.04.17.
  */
 @RestController
-@RequestMapping("products")
+@RequestMapping("rest/products")
 public class ProductRestController {
 
     private final ProductFrontService productFrontService;

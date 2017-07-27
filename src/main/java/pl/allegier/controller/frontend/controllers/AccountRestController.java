@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Pawel Szczepkowski | Satlan on 13.04.17.
  */
 @RestController
-@RequestMapping("accounts")
+@RequestMapping("rest/accounts")
 public class AccountRestController {
 
 

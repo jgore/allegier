@@ -1,6 +1,7 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -68,11 +69,13 @@ public class Order implements Serializable {
     }
 
     @CreationTimestamp
+    @Column
     public Date getCreated() {
         return created;
     }
 
     @UpdateTimestamp
+    @Column
     public Date getUpdated() {
         return updated;
     }

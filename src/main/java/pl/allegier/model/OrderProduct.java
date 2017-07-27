@@ -58,11 +58,13 @@ public class OrderProduct implements Serializable {
     }
 
     @CreationTimestamp
+    @Column(updatable = false)
     public Date getCreated() {
         return created;
     }
 
     @UpdateTimestamp
+    @Column
     public Date getUpdated() {
         return updated;
     }

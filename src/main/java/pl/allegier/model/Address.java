@@ -2,6 +2,7 @@ package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -17,40 +18,45 @@ public class Address {
     private String zipCode;
     private String city;
 
+    @Column
     public String getStreetName() {
         return streetName;
+    }
+
+    @Column
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    @Column
+    public int getLocaleNumber() {
+        return localeNumber;
+    }
+
+    @Column
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    @Column
+    public String getCity() {
+        return city;
     }
 
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
 
-    public int getStreetNumber() {
-        return streetNumber;
-    }
-
     public void setStreetNumber(int streetNumber) {
         this.streetNumber = streetNumber;
-    }
-
-    public int getLocaleNumber() {
-        return localeNumber;
     }
 
     public void setLocaleNumber(int localeNumber) {
         this.localeNumber = localeNumber;
     }
 
-    public String getZipCode() {
-        return zipCode;
-    }
-
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public void setCity(String city) {

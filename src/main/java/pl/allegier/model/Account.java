@@ -74,11 +74,13 @@ public class Account implements Serializable  {
     }
 
     @UpdateTimestamp
+    @Column(updatable = false)
     public Date getCreated() {
         return created;
     }
 
     @CreationTimestamp
+    @Column
     public Date getUpdated() {
         return updated;
     }
