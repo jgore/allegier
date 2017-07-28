@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('app', ['ngRoute', 'ui.bootstrap','ngResource']);
 console.log("start");
 
 app.config(['$httpProvider', function ($httpProvider) {
@@ -21,7 +21,15 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
+app.factory('Product', ['$resource', function ($resource) {
+    return $resource('http://localhost:8080/allegier8/rest/products/:id', {id: '@id'},
+        {
+            'get':    {method:'GET'},
+            'save':   {method:'POST'},
+            'query':  {method:'GET', isArray:true},
+            'delete': {method:'DELETE'},
+            'update': {method: 'PUT'}
+        }
+    );
+}]);
 
-angular.element(function() {
-    angular.bootstrap(document, ['app']);
-});

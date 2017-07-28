@@ -1,16 +1,17 @@
-app.controller("productController", function($scope, $http, $routeParams,$location){
+app.controller("productController", function($scope, $http, $routeParams,$location,Product){
     console.log("productController Controller started");
 
-    $scope.container = {};
-    $scope.error_message_rest = "cannot load data from server";
+    this.product = null;
+    var id = $routeParams.id;
 
-    var path = "rest"+ $location.url();
+    this.get = function (id) {
+        Product.get({ id: id}).$promise.then(function (data) {
+            $scope.product = data;
+        });
+    };
 
-    $http.get(path).then(function success(response) {
-        console.log("get "+path);
-        $scope.product = response.data['data'];
-    }, function error(response) {
-        $scope.product = [];
-    });
+    this.get(id);
+
+
 
 });
