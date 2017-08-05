@@ -24,7 +24,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ACCOUNTS")
-public class Account implements Serializable  {
+public class Account implements Identifable<Integer>, Serializable  {
 
     private static final long serialVersionUID = 1538176138199455942L;
 
@@ -119,8 +119,7 @@ public class Account implements Serializable  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(getId(), account.getId()) &&
-                Objects.equals(getLogin(), account.getLogin()) &&
+        return Objects.equals(getLogin(), account.getLogin()) &&
                 Objects.equals(getPassword(), account.getPassword() );
     }
 

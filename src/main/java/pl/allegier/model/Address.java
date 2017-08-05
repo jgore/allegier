@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 25.07.17.
@@ -61,6 +62,23 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+        Address address = (Address) o;
+        return getStreetNumber() == address.getStreetNumber() &&
+                getLocaleNumber() == address.getLocaleNumber() &&
+                Objects.equals(getStreetName(), address.getStreetName()) &&
+                Objects.equals(getZipCode(), address.getZipCode()) &&
+                Objects.equals(getCity(), address.getCity());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStreetName(), getStreetNumber(), getLocaleNumber(), getZipCode(), getCity());
     }
 
     @Override

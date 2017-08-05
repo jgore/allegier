@@ -25,7 +25,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order implements Serializable {
+public class Order implements Identifable<Integer>, Serializable {
 
     private static final long serialVersionUID = -4955525052994793695L;
 
@@ -105,8 +105,7 @@ public class Order implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(getId(), order.getId()) &&
-                Objects.equals(getAccount(), order.getAccount()) &&
+        return Objects.equals(getAccount(), order.getAccount()) &&
                 Objects.equals(getOrderProducts(), order.getOrderProducts()) ;
     }
 

@@ -4,8 +4,10 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.allegier.controller.dao.AbstractDaoTest;
+import pl.allegier.controller.dao.Dao;
 import pl.allegier.controller.dao.DaoTest;
 import pl.allegier.controller.dao.order.OrderDao;
+import pl.allegier.controller.dao.order.OrderDaoTest;
 import pl.allegier.model.Account;
 
 import java.math.BigDecimal;
@@ -33,6 +35,11 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Autowired
     private AccountDao accountDao;
 
+    @Override
+    public Dao<Account, Integer> getRepository() {
+        return accountDao;
+    }
+
     @After
     public void cleanUp() {
         orderDaoTest.cleanUp();
@@ -42,7 +49,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Override
     @Test
     public void saveOneTest() {
-        Account Account = createAccount();
+        Account Account = createEntity();
         Account saved = accountDao.save(Account);
 
         Account byId = accountDao.findById(saved.getId());
@@ -53,7 +60,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Override
     @Test
     public void updateOneTest() {
-        Account saved = createAccount();
+        Account saved = createEntity();
         saved.setLogin(TEST_ACCOUNT_LOGIN_2);
 
         Account update = accountDao.update(saved);
@@ -65,7 +72,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Override
     @Test
     public void removeOneTest() {
-        Account Account = createAccount();
+        Account Account = createEntity();
         Account saved = accountDao.save(Account);
 
         Account removed = accountDao.remove(saved);
@@ -76,7 +83,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Override
     @Test
     public void findByIdTest() {
-        Account Account = createAccount();
+        Account Account = createEntity();
         Account save = accountDao.save(Account);
         Account byId = accountDao.findById(save.getId());
 
@@ -86,8 +93,8 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Override
     @Test
     public void findAllTest() {
-        Account Account1 = createAccount();
-        Account Account2 = createAccount();
+        Account Account1 = createEntity();
+        Account Account2 = createEntity();
         accountDao.save(Account1);
         accountDao.save(Account2);
 
@@ -100,8 +107,8 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Override
     @Test
     public void countTest() {
-        Account Account1 = createAccount();
-        Account Account2 = createAccount();
+        Account Account1 = createEntity();
+        Account Account2 = createEntity();
 
         accountDao.save(Account1);
         accountDao.save(Account2);
@@ -115,8 +122,8 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Override
     @Test
     public void removeAllTest() {
-        Account Account1 = createAccount();
-        Account Account2 = createAccount();
+        Account Account1 = createEntity();
+        Account Account2 = createEntity();
         accountDao.save(Account1);
         accountDao.save(Account2);
 
@@ -125,7 +132,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
         assertThat(accountDao.findAll().size(), equalTo(0));
     }
 
-    private Account createAccount() {
+    public Account createEntity() {
         return new Account(TEST_ACCOUNT_LOGIN, TEST_DESCRIPTION);
     }
 }

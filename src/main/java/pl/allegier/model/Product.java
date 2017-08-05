@@ -15,12 +15,12 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "PRODUCTS")
-public class Product implements Serializable {
+public class Product implements Serializable,Identifable<Integer> {
 
     private static final long serialVersionUID = 187171862135038178L;
 
-
     private Integer id;
+    private Category category;
 
     private String title;
     private String description;
@@ -44,6 +44,12 @@ public class Product implements Serializable {
     @Column
     public Integer getId() {
         return id;
+    }
+
+    @ManyToOne(targetEntity = Category.class)
+    @JoinColumn(name="category_id",nullable = false)
+    public Category getCategory() {
+        return category;
     }
 
     @Column
@@ -78,6 +84,10 @@ public class Product implements Serializable {
         this.id = id;
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -98,21 +108,6 @@ public class Product implements Serializable {
         this.updated = updated;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(title, product.title) &&
-                Objects.equals(description, product.description) &&
-                Objects.equals(price, product.price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, price);
-    }
 
     @Override
     public String toString()
