@@ -48,6 +48,8 @@ public class OrderProduct implements Serializable {
         return order;
     }
 
+    @ManyToOne(targetEntity = Product.class)
+    @JoinColumn(name="product_id",nullable = false)
     public Product getProduct() {
         return product;
     }

@@ -9,21 +9,20 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import pl.allegier.controller.dao.account.AccountDao;
+import pl.allegier.controller.dao.category.CategoryDao;
 import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.controller.dao.product.ProductDao;
-import pl.allegier.controller.frontend.dto.OrderDto;
-import pl.allegier.controller.frontend.dto.ProductDto;
-import pl.allegier.controller.frontend.service.order.OrderFrontService;
-import pl.allegier.controller.frontend.service.product.ProductFrontService;
 import pl.allegier.it.ItConfiguration;
 import pl.allegier.model.Account;
+import pl.allegier.model.Category;
 import pl.allegier.model.Order;
 import pl.allegier.model.OrderProduct;
 import pl.allegier.model.Product;
+import pl.allegier.model.enums.MainCategoryName;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -45,6 +44,9 @@ public class OrderIT {
     private OrderDao orderDao;
 
     @Autowired
+    private CategoryDao categoryDao;
+
+    @Autowired
     private ProductDao productDao;
 
     @Autowired
@@ -52,20 +54,20 @@ public class OrderIT {
 
     @Test
     @Rollback(false)
-    public void createManyAccountIT() {
+    public void createManyOrders() {
         for (int i = 0; i < 100; i++) {
-            Account account = createAccount(i);
+            Account account = saveAccount(i);
 
-            Product product = createProduct();
+            Product product = saveProduct();
 
-            Order saved = createOrder(product,account);
+            Order saved = saveOrder(product,account);
 
 
             assertThat(saved.getOrderProducts().size(), equalTo(1));
         }
     }
 
-    private Order createOrder(Product product, Account account) {
+    private Order saveOrder(Product product, Account account) {
         Order order = new Order();
 
         OrderProduct orderProduct = new OrderProduct();
@@ -79,9 +81,12 @@ public class OrderIT {
         return orderDao.save(order);
     }
 
-    private Product createProduct() {
+    private Product saveProduct() {
         Product product = new Product();
-
+        Random random = new Random();
+        int length = MainCategoryName.values().length;
+        Category category = categoryDao.findById(MainCategoryName.values()[random.nextInt(length)].name());
+        product.setCategory( category );
         product.setDescription(TEST_PRODUCT);
         product.setTitle(TEST_TITLE);
         product.setPrice(TEST_PRICE);
@@ -90,7 +95,7 @@ public class OrderIT {
         return product;
     }
 
-    private Account createAccount(int i) {
+    private Account saveAccount(int i) {
         Account account = new Account();
         account.setLogin("1234"+i);
         account.setPassword("9876"+i);

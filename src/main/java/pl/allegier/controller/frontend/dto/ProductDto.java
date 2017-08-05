@@ -15,6 +15,7 @@ public class ProductDto implements Serializable {
     private static final long serialVersionUID = 7410956460083426518L;
 
     private Integer id;
+    private String categoryId;
 
     private String title;
     private String description;
@@ -39,6 +40,14 @@ public class ProductDto implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {

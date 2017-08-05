@@ -16,8 +16,6 @@ public class AccountDto implements Serializable {
 
     private Integer id;
 
-    private Integer accountId;
-
     private String login;
     private String password;
 
@@ -40,13 +38,6 @@ public class AccountDto implements Serializable {
         this.id = id;
     }
 
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
-    }
 
     public String getLogin() {
         return login;

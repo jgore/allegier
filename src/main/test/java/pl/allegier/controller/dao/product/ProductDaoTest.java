@@ -52,7 +52,7 @@ public class ProductDaoTest extends AbstractDaoTest<Product,Integer> implements 
     public Category createCategory()
     {
         Category category = new Category();
-        category.setName("1234");
+        category.setId("1234");
 
         return category;
     }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.allegier.controller.frontend.dto.OrderDto;
-import pl.allegier.controller.frontend.rest.RestResponse;
 import pl.allegier.controller.frontend.service.order.OrderFrontService;
 
 import java.util.List;
@@ -34,49 +33,49 @@ public class OrderRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<RestResponse> getAll() {
+    public ResponseEntity<List<OrderDto>> getAll() {
 
         List<OrderDto> orderDtos = Lists.newArrayList(orderFrontService.findAll());
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "all orders", orderDtos), HttpStatus.OK);
+        return new ResponseEntity<>(orderDtos, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResponseEntity<RestResponse> getOne(@PathVariable("id") String id) {
+    public ResponseEntity<OrderDto> getOne(@PathVariable("id") String id) {
 
         OrderDto orderDto = orderFrontService.findOne(Integer.valueOf(id));
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "one order", orderDto), HttpStatus.OK);
+        return new ResponseEntity<>(orderDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<RestResponse> createPost(@RequestBody OrderDto dto) {
+    public ResponseEntity<OrderDto> createPost(@RequestBody OrderDto dto) {
 
         OrderDto saved = orderFrontService.save(dto);
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "order is saved", saved), HttpStatus.OK);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<RestResponse> updatePut(@RequestBody OrderDto dto, @PathVariable("id") String id) {
+    public ResponseEntity<OrderDto> updatePut(@RequestBody OrderDto dto, @PathVariable("id") String id) {
 
         OrderDto saved = orderFrontService.save(dto);
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "order is update", saved), HttpStatus.OK);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<RestResponse> delete(@RequestBody OrderDto dto, @PathVariable("id") String id) {
+    public ResponseEntity delete(@RequestBody OrderDto dto, @PathVariable("id") String id) {
 
         orderFrontService.delete(dto.getId());
 
-        return new ResponseEntity<>(new RestResponse(HttpStatus.OK.value(), "order is deleted", true), HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.OK);
 
     }
 

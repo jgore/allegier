@@ -8,20 +8,20 @@ import pl.allegier.controller.dao.DaoTest;
 import pl.allegier.model.Category;
 
 @Component
-public class CategoryDaoTest  extends AbstractDaoTest<Category,Integer> implements DaoTest<Category,Integer>{
+public class CategoryDaoTest  extends AbstractDaoTest<Category,String> implements DaoTest<Category,String>{
 
     @Autowired
     private CategoryDao categoryDao;
 
     @Override
-    public Dao<Category, Integer> getRepository() {
+    public Dao<Category, String> getRepository() {
         return categoryDao;
     }
 
     @Override
     public Category createEntity() {
         Category category = new Category();
-        category.setName("1234");
+        category.setId("1234");
 
         return category;
     }

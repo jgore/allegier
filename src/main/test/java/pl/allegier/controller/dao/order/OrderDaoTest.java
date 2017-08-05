@@ -28,7 +28,6 @@ import static org.junit.Assert.assertThat;
 @Component
 public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoTest<Order,Integer> {
 
-
     public static final String TEST_PROD_TITLE= " TEST _ PROD _ TITLE 1";
     public static final BigDecimal TEST_PROD_PRICE= BigDecimal.valueOf(99.99);
 
@@ -105,7 +104,7 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
     public Category createCategory()
     {
         Category category = new Category();
-        category.setName("1234");
+        category.setId("1234");
 
         return category;
     }

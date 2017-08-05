@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 public class OrderMapper implements Mapper<OrderDto,Order> {
 
     private static final ModelMapper mapper = new ModelMapper();
-    static
-    {
-        mapper.addMappings( new ProductMap() );
+
+    static {
+        mapper.addMappings(new ProductMap());
     }
 
 
@@ -31,8 +31,7 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
 
     @Transactional
     public Order fromDto(OrderDto dto) {
-        if( dto == null)
-        {
+        if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
         return mapper.map(dto, Order.class);
@@ -40,21 +39,19 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
 
     public OrderDto fromDao(Order dao) {
 
-        if( dao == null)
-        {
+        if (dao == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
         OrderDto orderDto = mapper.map(dao, OrderDto.class);
 
 
-         orderDto = setOrderProductIds(dao, orderDto);
+        orderDto = setOrderProductIds(dao, orderDto);
 
         return setAccount(dao, orderDto);
     }
 
     private OrderDto setAccount(Order dao, OrderDto orderDto) {
-        if( orderDto.getAccountId()!= null )
-        {
+        if (orderDto.getAccountId() != null) {
             orderDto.setAccountId(dao.getAccount().getId());
         }
         return orderDto;
@@ -62,22 +59,23 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
 
     private OrderDto setOrderProductIds(Order dao, OrderDto orderDto) {
 
-        if( dao.getOrderProducts() != null) {
+        if (dao.getOrderProducts() != null) {
             Set<Integer> ids = dao.getOrderProducts().stream().map(OrderProduct::getId).collect(Collectors.toSet());
             orderDto.setOrderProducts(ids);
         }
 
         return orderDto;
     }
-}
 
-class ProductMap extends PropertyMap<Order, OrderDto> {
 
-    @Override
-    protected  void configure() {
+    public static class ProductMap extends PropertyMap<Order, OrderDto> {
 
-      map().setOrderProducts(Sets.newHashSet() );
+        @Override
+        protected void configure() {
+
+            map().setOrderProducts(Sets.newHashSet());
+        }
+
     }
-
 }
 

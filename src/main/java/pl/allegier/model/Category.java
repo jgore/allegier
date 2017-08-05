@@ -6,37 +6,28 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class Category implements Identifable<Integer>, Serializable {
+public class Category implements Identifable<String>, Serializable {
 
     private static final long serialVersionUID = 7389463192547585546L;
 
-    private Integer id;
-
-    private String name;
+    private String id;
     private Set<Product> products;
 
     private Date created;
     private Date updated;
 
     @Id
-    @GeneratedValue
-    public Integer getId() {
+    public String getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     @OneToMany(mappedBy = "category")
@@ -56,15 +47,14 @@ public class Category implements Identifable<Integer>, Serializable {
         return updated;
     }
 
-    public void setId(Integer id) {
+    @Override
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setProducts(Set<Product> products)
 
-    public void setProducts(Set<Product> products) {
+    {
         this.products = products;
     }
 
