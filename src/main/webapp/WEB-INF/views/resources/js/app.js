@@ -16,13 +16,17 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'resources/templates/product.html',
         controller: 'productController'
     })
+        .when('/category', {
+            templateUrl: 'resources/templates/category.html',
+            controller: 'categoryController'
+        })
         .otherwise({
             redirectTo: '/index'
         });
 }]);
 
 app.factory('Product', ['$resource', function ($resource) {
-    return $resource('http://localhost:8080/allegier8/rest/products/:id', {id: '@id'},
+    return $resource('rest/products/:id', {id: '@id'},
         {
             'get':    {method:'GET'},
             'save':   {method:'POST'},
