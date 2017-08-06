@@ -28,6 +28,7 @@
 <script type="application/javascript" src="resources/js/index.js"></script>
 <script type="application/javascript" src="resources/js/category.js"></script>
 <script type="application/javascript" src="resources/js/product.js"></script>
+<script type="application/javascript" src="resources/js/order.js"></script>
 
 </html>
 

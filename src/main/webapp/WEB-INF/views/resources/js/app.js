@@ -12,13 +12,17 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'resources/templates/index.html',
             controller: 'indexController'
         })
-        .when('/products/:id', {
-        templateUrl: 'resources/templates/product.html',
-        controller: 'productController'
-    })
         .when('/category', {
             templateUrl: 'resources/templates/category.html',
             controller: 'categoryController'
+        })
+        .when('/products/:id', {
+            templateUrl: 'resources/templates/product.html',
+            controller: 'productController'
+        })
+        .when('/orders/:accountId', {
+            templateUrl: 'resources/templates/order.html',
+            controller: 'orderController'
         })
         .otherwise({
             redirectTo: '/index'
@@ -37,3 +41,14 @@ app.factory('Product', ['$resource', function ($resource) {
     );
 }]);
 
+app.factory('Order', ['$resource', function ($resource) {
+    return $resource('rest/orders/:id', {id: '@id'},
+        {
+            'get':    {method:'GET'},
+            'save':   {method:'POST'},
+            'query':  {method:'GET', isArray:true},
+            'delete': {method:'DELETE'},
+            'update': {method: 'PUT'}
+        }
+    );
+}]);

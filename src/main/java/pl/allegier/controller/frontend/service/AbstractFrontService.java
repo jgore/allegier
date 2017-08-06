@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<DTO,ID> {
 
-    private final Mapper<DTO,DAO> mapper;
+    protected final Mapper<DTO,DAO> mapper;
 
-    private final Service<DAO,ID> service;
+    protected final Service<DAO,ID> service;
 
     public AbstractFrontService(Mapper<DTO, DAO> mapper, Service<DAO, ID> crudService) {
         this.mapper = mapper;

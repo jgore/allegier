@@ -9,6 +9,8 @@ import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.controller.service.AbstractService;
 import pl.allegier.model.Order;
 
+import java.util.List;
+
 /**
  * Created by Pawel Szczepkowski | Satlan on 18.04.17.
  */
@@ -16,8 +18,16 @@ import pl.allegier.model.Order;
 @Service
 public class OrderServiceImpl  extends AbstractService<Order,Integer> implements OrderService {
 
+    private final OrderDao orderDao;
+
     @Autowired
-    public OrderServiceImpl(@Qualifier("orderDao") Dao<Order,Integer> jpaDao) {
+    public OrderServiceImpl(@Qualifier("orderDao") OrderDao jpaDao) {
         super(jpaDao);
+        this.orderDao = jpaDao;
+    }
+
+    @Override
+    public List<Order> getByAccount(Integer accountId) {
+        return orderDao.getByAccount( accountId) ;
     }
 }

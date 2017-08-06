@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -48,7 +49,7 @@ public class OrderProduct implements Serializable {
         return order;
     }
 
-    @ManyToOne(targetEntity = Product.class)
+    @ManyToOne(targetEntity = Product.class, fetch = FetchType.EAGER)
     @JoinColumn(name="product_id",nullable = false)
     public Product getProduct() {
         return product;

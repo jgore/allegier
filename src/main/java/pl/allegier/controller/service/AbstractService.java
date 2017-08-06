@@ -8,7 +8,7 @@ import pl.allegier.controller.dao.Dao;
 
 public abstract class AbstractService<E,ID> implements Service<E,ID> {
 
-    private final Dao<E,ID> dao;
+    protected final Dao<E,ID> dao;
 
     public AbstractService(Dao<E,ID> dao) {
         this.dao = dao;

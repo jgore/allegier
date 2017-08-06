@@ -5,7 +5,11 @@ import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.controller.frontend.mapper.Mapper;
 import pl.allegier.controller.frontend.service.AbstractFrontService;
 import pl.allegier.controller.service.Service;
+import pl.allegier.controller.service.order.OrderService;
 import pl.allegier.model.Order;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Pawel Szczepkowski | Satlan on 18.04.17.
@@ -14,8 +18,21 @@ import pl.allegier.model.Order;
 @org.springframework.stereotype.Service
 public class OrderFrontServiceImpl extends AbstractFrontService<OrderDto,Order,Integer> implements OrderFrontService {
 
+    private final OrderService orderService;
+
     @Autowired
-    public OrderFrontServiceImpl(Mapper<OrderDto, Order> mapper, Service<Order, Integer> crudService) {
+    public OrderFrontServiceImpl(Mapper<OrderDto, Order> mapper, OrderService crudService) {
         super(mapper, crudService);
+        this.orderService = crudService;
+    }
+
+    @Override
+    public List<OrderDto> getByAccount(Integer accountId) {
+
+        List<Order> daoByAccount = orderService.getByAccount(accountId);
+
+        return daoByAccount.stream().
+                map(mapper::fromDao)
+                .collect(Collectors.toList());
     }
 }

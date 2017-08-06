@@ -8,14 +8,17 @@ import org.springframework.stereotype.Component;
 import pl.allegier.controller.dao.AbstractDaoTest;
 import pl.allegier.controller.dao.Dao;
 import pl.allegier.controller.dao.DaoTest;
+import pl.allegier.controller.dao.account.AccountDao;
 import pl.allegier.controller.dao.category.CategoryDao;
 import pl.allegier.controller.dao.product.ProductDao;
+import pl.allegier.model.Account;
 import pl.allegier.model.Category;
 import pl.allegier.model.Order;
 import pl.allegier.model.OrderProduct;
 import pl.allegier.model.Product;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -40,6 +43,9 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
     @Autowired
     private CategoryDao categoryDao;
 
+    @Autowired
+    private AccountDao accountDao;
+
     @Override
     public Dao<Order, Integer> getRepository() {
         return orderDao;
@@ -51,6 +57,22 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
     {
         orderDao.removeAll();
         productDao.removeAll();
+        accountDao.removeAll();
+    }
+
+    @Test
+    public void shouldReturnGetByAccount()
+    {
+        Order order = createEntity();
+        Account account = new Account();
+        account.setLogin("1234");
+        Account saved = accountDao.save(account);
+        order.setAccount(saved);
+        orderDao.save(order);
+
+        List<Order> byAccount = orderDao.getByAccount(order.getAccount().getId());
+
+        assertThat( byAccount.size(), equalTo(1));
     }
 
     @Test

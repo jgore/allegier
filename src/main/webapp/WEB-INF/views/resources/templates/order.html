@@ -1,0 +1,36 @@
+<div ng-controller="orderController">
+
+
+    <h3 class="bg-success">Zamowienia </h3>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><span class="label label-info">Tytul</span></th>
+                    <th><span class="label label-success">Opis</span></th>
+                    <th><span class="label label-danger">Ilosc</span></th>
+                    <th><span class="label label-warning">Cena</span></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="order in orders">
+                    <th>order : {{ order.id}} </th>
+                    <th> account : {{order.accountId}}</th>
+                    <th ng-repeat="orderProduct in order.orderProducts">
+                    <th>{{ orderProduct.id}} </th>
+                    <th>
+                </tr>
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
