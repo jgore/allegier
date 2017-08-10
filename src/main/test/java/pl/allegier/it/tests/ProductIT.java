@@ -40,7 +40,7 @@ public class ProductIT {
         int length = MainCategoryName.values().length;
         Random random = new Random();
 
-        for( int i=0;i<1000;i++)
+        for( int i=0;i<100;i++)
         {
             ProductDto productDto = new ProductDto(TEST_TITLE + i, TEST_DESC + i, new BigDecimal(i));
             productDto.setCategoryId( MainCategoryName.values()[random.nextInt(length)].name() );

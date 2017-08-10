@@ -13,6 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,14 +22,14 @@ import java.util.Date;
  * Created by Pawel Szczepkowski | Satlan on 10.08.17.
  */
 
+@Entity
+@Table(name = "ALL_PRODUCTS")
 @Inheritance(strategy  = InheritanceType.JOINED)
-@MappedSuperclass
 public abstract class AbstractProduct implements Serializable ,Identifable<Integer>{
 
     private static final long serialVersionUID = 8879554901850384465L;
 
     private Integer id;
-    private Category category;
 
     private String title;
     private String description;
@@ -52,12 +53,6 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
     @Column
     public Integer getId() {
         return id;
-    }
-
-    @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name="category_id",nullable = false)
-    public Category getCategory() {
-        return category;
     }
 
     @Column
@@ -90,10 +85,6 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public void setTitle(String title) {

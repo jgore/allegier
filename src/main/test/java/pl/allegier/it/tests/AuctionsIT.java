@@ -7,13 +7,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import pl.allegier.controller.dao.auction.AuctionDao;
 import pl.allegier.controller.frontend.dto.AuctionDto;
-import pl.allegier.controller.frontend.dto.ProductDto;
 import pl.allegier.controller.frontend.service.auction.AuctionFrontService;
-import pl.allegier.controller.frontend.service.product.ProductFrontService;
 import pl.allegier.it.ItConfiguration;
-import pl.allegier.model.Auction;
 import pl.allegier.model.enums.MainCategoryName;
 
 import java.math.BigDecimal;
