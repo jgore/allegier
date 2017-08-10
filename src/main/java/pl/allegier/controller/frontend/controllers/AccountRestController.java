@@ -23,7 +23,6 @@ import java.util.List;
 @RequestMapping("rest/accounts")
 public class AccountRestController {
 
-
     private final AccountFrontService accountFrontService;
 
     @Autowired
@@ -49,7 +48,7 @@ public class AccountRestController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<AccountDto> createPost(@RequestBody AccountDto dto) {
+    public ResponseEntity<AccountDto> create(@RequestBody AccountDto dto) {
 
         AccountDto saved = accountFrontService.save(dto);
 
@@ -59,7 +58,7 @@ public class AccountRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<AccountDto> updatePut(@RequestBody AccountDto dto, @PathVariable("id") String id) {
+    public ResponseEntity<AccountDto> update(@RequestBody AccountDto dto, @PathVariable("id") String id) {
 
         AccountDto saved = accountFrontService.save(dto);
 
