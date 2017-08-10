@@ -31,6 +31,8 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
 
     private Integer id;
 
+    private Category category;
+
     private String title;
     private String description;
 
@@ -53,6 +55,12 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
     @Column
     public Integer getId() {
         return id;
+    }
+
+    @ManyToOne(targetEntity = Category.class)
+    @JoinColumn(name="category_id",nullable = false)
+    public Category getCategory() {
+        return category;
     }
 
     @Column
@@ -85,6 +93,10 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setTitle(String title) {

@@ -59,9 +59,7 @@ public class OrderIT {
             Account account = saveAccount(i);
 
             Product product = saveProduct();
-
             Order saved = saveOrder(product,account);
-
 
             assertThat(saved.getOrderProducts().size(), equalTo(1));
         }

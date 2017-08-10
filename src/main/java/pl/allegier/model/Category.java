@@ -20,7 +20,7 @@ public class Category implements Identifable<String>, Serializable {
     private static final long serialVersionUID = 7389463192547585546L;
 
     private String id;
-    private Set<Product> products;
+    private Set<AbstractProduct> products;
 
     private Date created;
     private Date updated;
@@ -31,7 +31,7 @@ public class Category implements Identifable<String>, Serializable {
     }
 
     @OneToMany(mappedBy = "category")
-    public Set<Product> getProducts() {
+    public Set<AbstractProduct> getProducts() {
         return products;
     }
 
@@ -52,7 +52,7 @@ public class Category implements Identifable<String>, Serializable {
         this.id = id;
     }
 
-    public void setProducts(Set<Product> products)
+    public void setProducts(Set<AbstractProduct> products)
 
     {
         this.products = products;
