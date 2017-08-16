@@ -12,7 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -52,7 +51,6 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
 
     @Id
     @GeneratedValue
-    @Column
     public Integer getId() {
         return id;
     }
@@ -94,6 +92,8 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
     public void setId(Integer id) {
         this.id = id;
     }
+
+
 
     public void setCategory(Category category) {
         this.category = category;

@@ -101,20 +101,6 @@ public class Order implements Identifable<Integer>, Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(getAccount(), order.getAccount()) &&
-                Objects.equals(getOrderProducts(), order.getOrderProducts()) ;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getAccount(), getOrderProducts());
-    }
-
-    @Override
     public String toString()
     {
         return ReflectionToStringBuilder.toString(this);

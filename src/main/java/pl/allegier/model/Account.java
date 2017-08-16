@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -34,6 +35,7 @@ public class Account implements Identifable<Integer>, Serializable  {
     private String password;
 
     private Set<Order> orders;
+    private Set<Bid> bids;
     private Address address = new Address();
 
     private Date created;
@@ -51,6 +53,16 @@ public class Account implements Identifable<Integer>, Serializable  {
     @GeneratedValue
     public Integer getId() {
         return id;
+    }
+
+
+    @OneToMany(cascade = {
+            CascadeType.ALL,
+            CascadeType.MERGE,
+            CascadeType.REMOVE },
+            mappedBy = "account",fetch = FetchType.EAGER)
+    public Set<Bid> getBids() {
+        return bids;
     }
 
     @Column
@@ -90,6 +102,10 @@ public class Account implements Identifable<Integer>, Serializable  {
         this.id = id;
     }
 
+    public void setBids(Set<Bid> bids) {
+        this.bids = bids;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -117,15 +133,20 @@ public class Account implements Identifable<Integer>, Serializable  {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Account)) return false;
         Account account = (Account) o;
-        return Objects.equals(getLogin(), account.getLogin()) &&
-                Objects.equals(getPassword(), account.getPassword() );
+        return  Objects.equals(getLogin(), account.getLogin()) &&
+                Objects.equals(getPassword(), account.getPassword()) &&
+                Objects.equals(getOrders(), account.getOrders()) &&
+                Objects.equals(getBids(), account.getBids()) &&
+                Objects.equals(getAddress(), account.getAddress()) &&
+                Objects.equals(getCreated(), account.getCreated()) &&
+                Objects.equals(getUpdated(), account.getUpdated());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getLogin(), getPassword(), getCreated(), getUpdated());
+        return Objects.hash( getLogin(), getPassword(), getOrders(), getBids(), getAddress(), getCreated(), getUpdated());
     }
 
     @Override

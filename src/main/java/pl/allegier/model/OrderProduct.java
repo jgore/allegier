@@ -55,7 +55,7 @@ public class OrderProduct implements Serializable {
         return product;
     }
 
-    @Column(name = "amount")
+    @Column
     public int getAmount() {
         return amount;
     }
