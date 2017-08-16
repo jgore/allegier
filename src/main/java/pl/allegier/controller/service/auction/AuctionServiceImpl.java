@@ -21,9 +21,6 @@ import java.util.Set;
 public class AuctionServiceImpl extends AbstractService<Auction,Integer> implements AuctionService {
 
     @Autowired
-    private AccountService  accountService;
-
-    @Autowired
     public AuctionServiceImpl ( @Qualifier("auctionDao") Dao<Auction, Integer> dao) {
         super(dao);
     }
