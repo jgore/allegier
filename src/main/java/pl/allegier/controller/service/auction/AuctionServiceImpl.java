@@ -5,12 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pl.allegier.controller.dao.Dao;
 import pl.allegier.controller.service.AbstractService;
-import pl.allegier.controller.service.account.AccountService;
-import pl.allegier.model.Account;
 import pl.allegier.model.Auction;
 import pl.allegier.model.Bid;
 
-import javax.transaction.Transactional;
 import java.util.Set;
 
 /**
@@ -34,7 +31,6 @@ public class AuctionServiceImpl extends AbstractService<Auction,Integer> impleme
 
         bids.add( bid );
         auction.setBids( bids );
-
 
         save( auction);
     }

@@ -62,7 +62,7 @@ public abstract class AbstractRestController<DTO extends Identifable<ID>,ID> imp
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity delete(@RequestBody DTO dto, @PathVariable("id") String id) {
+    public ResponseEntity delete( @PathVariable("id") String id) {
 
         getFrontService().delete((ID) Integer.valueOf(id));
 

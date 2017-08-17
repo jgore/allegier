@@ -22,14 +22,13 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
     private static final ModelMapper mapper = new ModelMapper();
 
     static {
-        mapper.addMappings(new ProductMap());
+        mapper.addMappings(new OrderMap());
     }
 
 
     public OrderMapper() {
     }
 
-    @Transactional
     public Order fromDto(OrderDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
@@ -43,7 +42,6 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
             throw new IllegalArgumentException("order cannot be null");
         }
         OrderDto orderDto = mapper.map(dao, OrderDto.class);
-
 
         orderDto = setOrderProductIds(dao, orderDto);
 
@@ -60,7 +58,11 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
     private OrderDto setOrderProductIds(Order dao, OrderDto orderDto) {
 
         if (dao.getOrderProducts() != null) {
-            Set<Integer> ids = dao.getOrderProducts().stream().map(OrderProduct::getId).collect(Collectors.toSet());
+            Set<Integer> ids = dao.getOrderProducts()
+                    .stream()
+                    .map(OrderProduct::getId)
+                    .collect(Collectors.toSet());
+
             orderDto.setOrderProducts(ids);
         }
 
@@ -68,11 +70,10 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
     }
 
 
-    public static class ProductMap extends PropertyMap<Order, OrderDto> {
+    public static class OrderMap extends PropertyMap<Order, OrderDto> {
 
         @Override
         protected void configure() {
-
             map().setOrderProducts(Sets.newHashSet());
         }
 

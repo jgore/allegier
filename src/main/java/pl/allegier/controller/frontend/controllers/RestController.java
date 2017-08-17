@@ -19,6 +19,6 @@ public interface RestController<DTO> {
 
     ResponseEntity<DTO> update(@RequestBody DTO dto, @PathVariable("id") String id) ;
 
-    ResponseEntity delete(@RequestBody DTO dto, @PathVariable("id") String id) ;
+    ResponseEntity delete( @PathVariable("id") String id) ;
 
 }
