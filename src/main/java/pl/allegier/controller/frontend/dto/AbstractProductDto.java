@@ -14,7 +14,7 @@ public class AbstractProductDto implements Serializable{
     private static final long serialVersionUID = 6534533311682850417L;
 
     private Integer id;
-    private String categoryId;
+    private String category;
 
     private String title;
     private String description;
@@ -41,14 +41,13 @@ public class AbstractProductDto implements Serializable{
         this.id = id;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(String category) {
+        this.category = category;
     }
-
 
     public String getTitle() {
         return title;

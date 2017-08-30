@@ -17,7 +17,7 @@ public class AccountMapper implements Mapper<AccountDto,Account>{
     private static final ModelMapper mapper = new ModelMapper();
 
     @Transactional
-    public Account fromDto(AccountDto dto) {
+    public Account toDao(AccountDto dto) {
         if( dto == null)
         {
             throw new IllegalArgumentException("Account cannot be null");
@@ -25,7 +25,7 @@ public class AccountMapper implements Mapper<AccountDto,Account>{
         return mapper.map(dto, Account.class);
     }
 
-    public AccountDto fromDao(Account dao) {
+    public AccountDto toDto(Account dao) {
         if( dao == null)
         {
             throw new IllegalArgumentException("Account cannot be null");

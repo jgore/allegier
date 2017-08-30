@@ -12,6 +12,8 @@ public class ProductDto extends AbstractProductDto implements Serializable {
         super(title, description, price);
     }
 
+    public ProductDto() {
+    }
 
     private static final long serialVersionUID = 7410956460083426518L;
 

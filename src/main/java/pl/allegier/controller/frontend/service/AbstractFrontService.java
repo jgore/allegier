@@ -25,23 +25,23 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
 
     @Override
     public DTO save(DTO dto) {
-        DAO dao = mapper.fromDto(dto);
+        DAO dao = mapper.toDao(dto);
         DAO saved = service.save(dao);
 
-        return mapper.fromDao(saved);
+        return mapper.toDto(saved);
     }
 
     @Override
     public DTO update(DTO dto) {
-        DAO update = service.update(mapper.fromDto(dto));
-        return mapper.fromDao( update);
+        DAO update = service.update(mapper.toDao(dto));
+        return mapper.toDto( update);
     }
 
     @Override
     public DTO findOne(ID id) {
         DAO dao = service.findOne(id);
 
-        return mapper.fromDao(dao);
+        return mapper.toDto(dao);
     }
 
     @Override
@@ -56,7 +56,7 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
 
         return daos.
                 stream().
-                map(mapper::fromDao)
+                map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 

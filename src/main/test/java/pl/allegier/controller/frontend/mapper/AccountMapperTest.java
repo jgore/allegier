@@ -31,7 +31,7 @@ public class AccountMapperTest {
     public void fromDto()
     {
         AccountDto dto = new AccountDto(TEST_LOGIN_1, TEST_PASSWORD);
-        Account dao = accountMapper.fromDto(dto);
+        Account dao = accountMapper.toDao(dto);
 
         assertThat( dto.getLogin(), equalTo( dao.getLogin()) );
         assertThat( dto.getPassword(), equalTo( dao.getPassword()) );
@@ -41,7 +41,7 @@ public class AccountMapperTest {
     public void fromDao()
     {
         AccountDto dto = new AccountDto(TEST_LOGIN_1, TEST_PASSWORD);
-        Account dao = accountMapper.fromDto(dto);
+        Account dao = accountMapper.toDao(dto);
 
         assertThat( dto.getLogin(), equalTo( dao.getLogin()) );
         assertThat( dto.getPassword(), equalTo( dao.getPassword()) );

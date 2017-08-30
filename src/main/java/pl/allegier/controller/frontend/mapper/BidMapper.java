@@ -28,7 +28,7 @@ public class BidMapper implements Mapper<BidDto,Bid> {
     private static final ModelMapper mapper = new ModelMapper();
 
     @Override
-    public Bid fromDto(BidDto bidDto) {
+    public Bid toDao(BidDto bidDto) {
         Bid bid = mapper.map(bidDto, Bid.class);
         bid.setAccount( accountService.findOne(bidDto.getAccountId()));
         bid.setAuction(auctionService.findOne( bidDto.getAuctionId()));
@@ -37,7 +37,7 @@ public class BidMapper implements Mapper<BidDto,Bid> {
     }
 
     @Override
-    public BidDto fromDao(Bid bid) {
+    public BidDto toDto(Bid bid) {
         return mapper.map(bid,BidDto.class);
     }
 }

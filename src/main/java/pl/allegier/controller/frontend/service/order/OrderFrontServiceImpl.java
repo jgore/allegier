@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.controller.frontend.mapper.Mapper;
 import pl.allegier.controller.frontend.service.AbstractFrontService;
-import pl.allegier.controller.service.Service;
 import pl.allegier.controller.service.order.OrderService;
 import pl.allegier.model.Order;
 
@@ -32,7 +31,7 @@ public class OrderFrontServiceImpl extends AbstractFrontService<OrderDto,Order,I
         List<Order> daoByAccount = orderService.getByAccount(accountId);
 
         return daoByAccount.stream().
-                map(mapper::fromDao)
+                map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 }

@@ -17,6 +17,9 @@ public class AuctionDto extends AbstractProductDto implements Serializable,Ident
         return bids;
     }
 
+    public AuctionDto() {
+    }
+
     public void setBids(Set<Integer> bids) {
         this.bids = bids;
     }

@@ -2,10 +2,11 @@ package pl.allegier.controller.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import pl.allegier.model.Identifable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by Pawel Szczepkowski | Java4you.pl  on 21.05.17.
  */
 @Repository
-public abstract class JpaDao<E, ID> implements Dao<E, ID> {
+public abstract class JpaDao<E extends Identifable<ID>, ID> implements Dao<E, ID> {
 
     protected Class<E> entityClass;
 
@@ -34,7 +35,7 @@ public abstract class JpaDao<E, ID> implements Dao<E, ID> {
 
     @Override
     public List<E> findAll() {
-        return em.createQuery("from " + entityClass.getSimpleName()).getResultList();
+        return em.createQuery("from " + entityClass.getSimpleName() +" order by created desc").getResultList();
     }
 
     @Override

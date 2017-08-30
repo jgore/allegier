@@ -48,7 +48,7 @@ public class AuctionsWithBidsIT {
             auctionDto.setTitle(TEST_TITLE);
             auctionDto.setDescription(TEST_DESC);
             auctionDto.setPrice(BigDecimal.ONE);
-            auctionDto.setCategoryId( MainCategoryName.values()[random.nextInt(length)].name() );
+            auctionDto.setCategory( MainCategoryName.values()[random.nextInt(length)].name() );
             auctionDto  = auctionFrontService.save(auctionDto);
 
             AccountDto accountDto = new AccountDto();

@@ -27,7 +27,7 @@ public class OrderMapperTest {
     public void fromDto()
     {
         OrderDto dto = new OrderDto();
-        Order dao = orderMapper.fromDto(dto);
+        Order dao = orderMapper.toDao(dto);
 
         assertThat( dto.getCreated(), equalTo( dao.getCreated()) );
         assertThat( dto.getUpdated(), equalTo( dao.getUpdated()) );
@@ -37,7 +37,7 @@ public class OrderMapperTest {
     public void fromDao()
     {
         OrderDto dto = new OrderDto();
-        Order dao = orderMapper.fromDto(dto);
+        Order dao = orderMapper.toDao(dto);
 
         assertThat( dto.getCreated(), equalTo( dao.getCreated()) );
         assertThat( dto.getUpdated(), equalTo( dao.getUpdated()) );

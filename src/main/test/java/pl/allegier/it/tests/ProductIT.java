@@ -43,7 +43,7 @@ public class ProductIT {
         for( int i=0;i<100;i++)
         {
             ProductDto productDto = new ProductDto(TEST_TITLE + i, TEST_DESC + i, new BigDecimal(i));
-            productDto.setCategoryId( MainCategoryName.values()[random.nextInt(length)].name() );
+            productDto.setCategory( MainCategoryName.values()[random.nextInt(length)].name() );
             productDtoFrontService.save( productDto );
         }
     }

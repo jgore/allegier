@@ -46,7 +46,7 @@ public class AccountRestController {
         return new ResponseEntity<>(accountDto, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, headers = "Content-Type=application/json")
     @ResponseBody
     public ResponseEntity<AccountDto> create(@RequestBody AccountDto dto) {
 
@@ -56,7 +56,7 @@ public class AccountRestController {
 
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Content-Type=application/json")
     @ResponseBody
     public ResponseEntity<AccountDto> update(@RequestBody AccountDto dto, @PathVariable("id") String id) {
 

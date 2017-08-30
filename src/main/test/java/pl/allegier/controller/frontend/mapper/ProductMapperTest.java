@@ -33,7 +33,7 @@ public class ProductMapperTest {
     @Test
     public void fromDto() {
         ProductDto dto = new ProductDto(TEST_TITLE, TEST_DESC, TEST_PRICE);
-        Product dao = productMapper.fromDto(dto);
+        Product dao = productMapper.toDao(dto);
 
         assertThat(dao.getTitle(), equalTo(dto.getTitle()));
         assertThat(dao.getDescription(), equalTo(dto.getDescription()));
@@ -43,7 +43,7 @@ public class ProductMapperTest {
     @Test
     public void fromDao() {
         Product dao = new Product(TEST_TITLE, TEST_DESC, TEST_PRICE);
-        ProductDto dto = productMapper.fromDao(dao);
+        ProductDto dto = productMapper.toDto(dao);
 
         assertThat(dao.getTitle(), equalTo(dto.getTitle()));
         assertThat(dao.getDescription(), equalTo(dto.getDescription()));

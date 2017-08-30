@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("rest/products")
+@CrossOrigin
 public class ProductRestController {
 
     private final ProductFrontService productFrontService;
@@ -47,7 +49,7 @@ public class ProductRestController {
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, headers = "Content-Type=application/json")
     @ResponseBody
     public ResponseEntity<ProductDto> createPost(@RequestBody ProductDto dto) {
 
@@ -57,7 +59,7 @@ public class ProductRestController {
 
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Content-Type=application/json")
     @ResponseBody
     public ResponseEntity<ProductDto> updatePut(@RequestBody ProductDto dto, @PathVariable("id") String id) {
 

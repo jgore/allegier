@@ -29,6 +29,6 @@ public class AuctionFrontServiceImpl extends AbstractFrontService<AuctionDto,Auc
 
     @Override
     public void addBid(Integer auctionId, BidDto bidDto) {
-        auctionService.addBid(auctionId,bidMapper.fromDto(bidDto));
+        auctionService.addBid(auctionId,bidMapper.toDao(bidDto));
     }
 }

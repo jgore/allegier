@@ -29,14 +29,14 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
     public OrderMapper() {
     }
 
-    public Order fromDto(OrderDto dto) {
+    public Order toDao(OrderDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
         return mapper.map(dto, Order.class);
     }
 
-    public OrderDto fromDao(Order dao) {
+    public OrderDto toDto(Order dao) {
 
         if (dao == null) {
             throw new IllegalArgumentException("order cannot be null");
