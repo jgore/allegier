@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,8 +23,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "ALL_PRODUCTS")
-@Inheritance(strategy  = InheritanceType.JOINED)
+@Inheritance(strategy  = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractProduct implements Serializable ,Identifable<Integer>{
 
     private static final long serialVersionUID = 8879554901850384465L;

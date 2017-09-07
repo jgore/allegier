@@ -1,13 +1,12 @@
 package pl.allegier.controller.frontend.mapper;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.AuctionDto;
 import pl.allegier.model.Auction;
 import pl.allegier.model.Bid;
+import pl.allegier.model.Category;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,16 +17,20 @@ import java.util.stream.Collectors;
 @Component
 public class AuctionMapper implements Mapper<AuctionDto, Auction> {
 
-    private static final ModelMapper mapper = new ModelMapper();
-    {
-      //  mapper.addMappings(new AuctionMap());
+    private  final ModelMapper mapper = new ModelMapper();
+
+    public AuctionMapper() {
     }
 
     public Auction toDao(AuctionDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("Auction cannot be null");
         }
-        return mapper.map(dto, Auction.class);
+        Auction map = mapper.map(dto, Auction.class);
+        setCategory(dto, map);
+        setBids(dto,map);
+
+        return map;
     }
 
     public AuctionDto toDto(Auction dao) {
@@ -35,7 +38,24 @@ public class AuctionMapper implements Mapper<AuctionDto, Auction> {
             throw new IllegalArgumentException("Auction cannot be null");
         }
         AuctionDto map = mapper.map(dao, AuctionDto.class);
+        map.setCategory(dao.getCategory().getId());
         return setBids(dao, map);
+    }
+
+    private Auction setBids(AuctionDto dto, Auction map) {
+        Category category = new Category();
+        category.setId( dto.getCategory());
+        map.setCategory( category );
+
+        return map;
+    }
+
+    private Auction setCategory(AuctionDto dto, Auction map) {
+        Category category = new Category();
+        category.setId( dto.getCategory() );
+        map.setCategory( category );
+
+        return map;
     }
 
     private AuctionDto setBids(Auction dao, AuctionDto map) {
@@ -45,12 +65,5 @@ public class AuctionMapper implements Mapper<AuctionDto, Auction> {
         return map;
     }
 
-    public  class AuctionMap extends PropertyMap<Auction, AuctionDto> {
-        @Override
-        protected void configure() {
-            map().setBids(new HashSet<>());
-            map().setCategory(null);
-        }
 
-    }
 }
