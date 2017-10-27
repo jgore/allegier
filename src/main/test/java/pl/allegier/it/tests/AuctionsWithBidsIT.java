@@ -56,8 +56,8 @@ public class AuctionsWithBidsIT {
             accountDto = accountFrontService.save(accountDto);
 
             BidDto bidDto= new BidDto();
-            bidDto.setAccountId(accountDto.getId());
-            bidDto.setAuctionId(auctionDto.getId());
+            bidDto.setAccount(accountDto.getId());
+            bidDto.setAuction(auctionDto.getId());
             bidDto.setPrice(BigDecimal.ONE);
 
             auctionFrontService.addBid(auctionDto.getId(), bidDto );

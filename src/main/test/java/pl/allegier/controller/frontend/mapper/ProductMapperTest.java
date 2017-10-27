@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
-public class ProductMapperTest {
+public class ProductMapperTest implements MapperTest<ProductDto,Product>{
 
     private static final String TEST_TITLE = "gore";
     private static final String TEST_TITLE_2 = "gore";
@@ -31,7 +31,7 @@ public class ProductMapperTest {
     private Mapper<ProductDto, Product> productMapper;
 
     @Test
-    public void fromDto() {
+    public void toEntityTest() {
         ProductDto dto = new ProductDto(TEST_TITLE, TEST_DESC, TEST_PRICE);
         Product dao = productMapper.toDao(dto);
 
@@ -41,7 +41,7 @@ public class ProductMapperTest {
     }
 
     @Test
-    public void fromDao() {
+    public void toDtoTest() {
         Product dao = new Product(TEST_TITLE, TEST_DESC, TEST_PRICE);
         ProductDto dto = productMapper.toDto(dao);
 

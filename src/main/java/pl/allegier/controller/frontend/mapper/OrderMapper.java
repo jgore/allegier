@@ -3,12 +3,13 @@ package pl.allegier.controller.frontend.mapper;
 import com.google.common.collect.Sets;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.OrderDto;
+import pl.allegier.controller.frontend.dto.OrderProductDto;
 import pl.allegier.model.Order;
 import pl.allegier.model.OrderProduct;
 
-import javax.transaction.Transactional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,14 +18,16 @@ import java.util.stream.Collectors;
  */
 
 @Component
-public class OrderMapper implements Mapper<OrderDto,Order> {
+public class OrderMapper implements Mapper<OrderDto, Order> {
 
     private static final ModelMapper mapper = new ModelMapper();
+
+    @Autowired
+    private OrderProductMapper orderProductMapper;
 
     static {
         mapper.addMappings(new OrderMap());
     }
-
 
     public OrderMapper() {
     }
@@ -33,6 +36,14 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
+
+        Set<OrderProduct> orderProducts = dto.getOrderProductDtos().stream().
+                map(orderProductDto -> orderProductMapper.toDao(orderProductDto))
+                .collect(Collectors.toSet());
+
+        Order map = mapper.map(dto, Order.class);
+        map.setOrderProducts(orderProducts);
+
         return mapper.map(dto, Order.class);
     }
 
@@ -43,29 +54,21 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
         }
         OrderDto orderDto = mapper.map(dao, OrderDto.class);
 
-        orderDto = setOrderProductIds(dao, orderDto);
+        if (dao.getOrderProducts() != null) {
+
+            Set<OrderProductDto> orderProductDtos = dao.getOrderProducts().stream().
+                    map(orderProduct -> orderProductMapper.toDto(orderProduct)).collect(Collectors.toSet());
+
+            orderDto.setOrderProductDtos(orderProductDtos);
+        }
 
         return setAccount(dao, orderDto);
     }
 
     private OrderDto setAccount(Order dao, OrderDto orderDto) {
-        if (orderDto.getAccountId() != null) {
-            orderDto.setAccountId(dao.getAccount().getId());
+        if (orderDto.getAccount() != null) {
+            orderDto.setAccount(dao.getAccount().getId());
         }
-        return orderDto;
-    }
-
-    private OrderDto setOrderProductIds(Order dao, OrderDto orderDto) {
-
-        if (dao.getOrderProducts() != null) {
-            Set<Integer> ids = dao.getOrderProducts()
-                    .stream()
-                    .map(OrderProduct::getId)
-                    .collect(Collectors.toSet());
-
-            orderDto.setOrderProducts(ids);
-        }
-
         return orderDto;
     }
 
@@ -74,7 +77,7 @@ public class OrderMapper implements Mapper<OrderDto,Order> {
 
         @Override
         protected void configure() {
-            map().setOrderProducts(Sets.newHashSet());
+            map().setOrderProductDtos(Sets.newHashSet());
         }
 
     }

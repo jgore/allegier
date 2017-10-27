@@ -15,8 +15,8 @@ public class BidDto implements Serializable,Identifable<Integer>{
     private Integer id;
     private BigDecimal price;
 
-    private Integer accountId;
-    private Integer auctionId;
+    private Integer account;
+    private Integer auction;
 
     @Override
     public Integer getId() {
@@ -36,19 +36,19 @@ public class BidDto implements Serializable,Identifable<Integer>{
         this.price = price;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getAccount() {
+        return account;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setAccount(Integer account) {
+        this.account = account;
     }
 
-    public Integer getAuctionId() {
-        return auctionId;
+    public Integer getAuction() {
+        return auction;
     }
 
-    public void setAuctionId(Integer auctionId) {
-        this.auctionId = auctionId;
+    public void setAuction(Integer auction) {
+        this.auction = auction;
     }
 }

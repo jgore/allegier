@@ -18,13 +18,13 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
-public class OrderMapperTest {
+public class OrderMapperTest implements  MapperTest<OrderDto,Order>{
 
     @Autowired
-    private Mapper<OrderDto,Order> orderMapper;
+    private OrderMapper orderMapper;
 
     @Test
-    public void fromDto()
+    public void toEntityTest()
     {
         OrderDto dto = new OrderDto();
         Order dao = orderMapper.toDao(dto);
@@ -34,7 +34,7 @@ public class OrderMapperTest {
     }
 
     @Test
-    public void fromDao()
+    public void toDtoTest()
     {
         OrderDto dto = new OrderDto();
         Order dao = orderMapper.toDao(dto);

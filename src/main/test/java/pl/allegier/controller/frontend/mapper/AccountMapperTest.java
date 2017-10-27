@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
-public class AccountMapperTest {
+public class AccountMapperTest implements MapperTest<AccountDto,Account>{
 
     private static final String TEST_LOGIN_1 = "gore";
     private static final String TEST_LOGIN_2 = "gore1234";
@@ -28,7 +28,7 @@ public class AccountMapperTest {
     private Mapper<AccountDto,Account> accountMapper;
 
     @Test
-    public void fromDto()
+    public void toEntityTest()
     {
         AccountDto dto = new AccountDto(TEST_LOGIN_1, TEST_PASSWORD);
         Account dao = accountMapper.toDao(dto);
@@ -38,7 +38,7 @@ public class AccountMapperTest {
     }
 
     @Test
-    public void fromDao()
+    public void toDtoTest()
     {
         AccountDto dto = new AccountDto(TEST_LOGIN_1, TEST_PASSWORD);
         Account dao = accountMapper.toDao(dto);

@@ -3,12 +3,7 @@ package pl.allegier.controller.frontend.mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.allegier.controller.dao.account.AccountDao;
-import pl.allegier.controller.dao.auction.AuctionDao;
-import pl.allegier.controller.frontend.dto.AccountDto;
 import pl.allegier.controller.frontend.dto.BidDto;
-import pl.allegier.controller.frontend.service.account.AccountFrontService;
-import pl.allegier.controller.frontend.service.auction.AuctionFrontService;
 import pl.allegier.controller.service.account.AccountService;
 import pl.allegier.controller.service.auction.AuctionService;
 import pl.allegier.model.Bid;
@@ -30,8 +25,8 @@ public class BidMapper implements Mapper<BidDto,Bid> {
     @Override
     public Bid toDao(BidDto bidDto) {
         Bid bid = mapper.map(bidDto, Bid.class);
-        bid.setAccount( accountService.findOne(bidDto.getAccountId()));
-        bid.setAuction(auctionService.findOne( bidDto.getAuctionId()));
+        bid.setAccount( accountService.findOne(bidDto.getAccount()));
+        bid.setAuction(auctionService.findOne( bidDto.getAuction()));
 
         return bid;
     }

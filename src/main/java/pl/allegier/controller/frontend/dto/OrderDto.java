@@ -1,11 +1,10 @@
 package pl.allegier.controller.frontend.dto;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import pl.allegier.model.Account;
+import pl.allegier.model.OrderProduct;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -17,8 +16,8 @@ public class OrderDto implements Serializable {
 
     private Integer id;
 
-    private Integer accountId;
-    private Set<Integer> orderProducts;
+    private Integer account;
+    private Set<OrderProductDto> orderProductDtos;
 
     private Date created;
     private Date updated;
@@ -31,20 +30,20 @@ public class OrderDto implements Serializable {
         this.id = id;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getAccount() {
+        return account;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setAccount(Integer account) {
+        this.account = account;
     }
 
-    public Set<Integer> getOrderProducts() {
-        return orderProducts;
+    public Set<OrderProductDto> getOrderProductDtos() {
+        return orderProductDtos;
     }
 
-    public void setOrderProducts(Set<Integer> orderProducts) {
-        this.orderProducts = orderProducts;
+    public void setOrderProductDtos(Set<OrderProductDto> orderProductDtos) {
+        this.orderProductDtos = orderProductDtos;
     }
 
     public Date getCreated() {
