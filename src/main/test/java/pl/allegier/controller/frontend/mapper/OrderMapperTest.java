@@ -24,6 +24,7 @@ public class OrderMapperTest implements  MapperTest<OrderDto,Order>{
     private OrderMapper orderMapper;
 
     @Test
+    @Override
     public void toEntityTest()
     {
         OrderDto dto = new OrderDto();
@@ -34,6 +35,7 @@ public class OrderMapperTest implements  MapperTest<OrderDto,Order>{
     }
 
     @Test
+    @Override
     public void toDtoTest()
     {
         OrderDto dto = new OrderDto();

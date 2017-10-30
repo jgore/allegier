@@ -36,13 +36,14 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
-
-        Set<OrderProduct> orderProducts = dto.getOrderProductDtos().stream().
-                map(orderProductDto -> orderProductMapper.toDao(orderProductDto))
-                .collect(Collectors.toSet());
-
         Order map = mapper.map(dto, Order.class);
-        map.setOrderProducts(orderProducts);
+        if( dto.getOrderProductDtos() != null) {
+            Set<OrderProduct> orderProducts = dto.getOrderProductDtos().stream().
+                    map(orderProductDto -> orderProductMapper.toDao(orderProductDto))
+                    .collect(Collectors.toSet());
+            map.setOrderProducts(orderProducts);
+        }
+
 
         return mapper.map(dto, Order.class);
     }
