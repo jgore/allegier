@@ -62,11 +62,16 @@ public class ProductMapper implements Mapper<ProductDto,Product>
     }
 
     private void setCategory(ProductDto dto, Product product) {
-        product.setCategory(categoryDao.findById( dto.getCategory() ));
+        if( product.getCategory() != null) {
+            product.setCategory(categoryDao.findById(dto.getCategory()));
+        }
     }
 
-    private void setCategory(Product dao, ProductDto dto) {
-        dto.setCategory( dao.getCategory().getId() );
+    private void setCategory(Product dao, ProductDto dto)
+    {
+        if( dao.getCategory() != null) {
+            dto.setCategory(dao.getCategory().getId()) ;
+        }
     }
 
 }
