@@ -10,7 +10,7 @@ import pl.allegier.controller.service.auction.AuctionService;
 import pl.allegier.model.Auction;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 10.08.17.
+ * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 @org.springframework.stereotype.Service
 public class AuctionFrontServiceImpl extends AbstractFrontService<AuctionDto,Auction,Integer> implements AuctionFrontService {

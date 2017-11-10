@@ -8,7 +8,7 @@ import pl.allegier.model.Account;
 import javax.transaction.Transactional;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 14.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 
 @Component

@@ -8,7 +8,7 @@ import pl.allegier.controller.service.AbstractService;
 import pl.allegier.model.Product;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 14.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 @Service
 public class ProductServiceImpl extends AbstractService<Product,Integer> implements ProductService{

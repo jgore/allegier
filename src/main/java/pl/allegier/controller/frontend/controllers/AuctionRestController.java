@@ -8,7 +8,7 @@ import pl.allegier.controller.frontend.service.FrontService;
 import pl.allegier.controller.frontend.service.auction.AuctionFrontService;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 10.08.17.
+ * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 
 @RestController

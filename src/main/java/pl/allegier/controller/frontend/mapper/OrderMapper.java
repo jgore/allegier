@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 18.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 18.04.17.
  */
 
 @Component

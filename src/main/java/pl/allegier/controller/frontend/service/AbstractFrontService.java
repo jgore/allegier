@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 14.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 
 public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<DTO,ID> {

@@ -9,7 +9,7 @@ import pl.allegier.controller.service.auction.AuctionService;
 import pl.allegier.model.Bid;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 10.08.17.
+ * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 @Component
 public class BidMapper implements Mapper<BidDto,Bid> {

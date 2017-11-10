@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 import java.util.Objects;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 25.07.17.
+ * Created by Pawel Szczepkowski | GoreIT on 25.07.17.
  */
 
 @Embeddable

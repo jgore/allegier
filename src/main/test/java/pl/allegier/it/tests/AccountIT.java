@@ -12,7 +12,7 @@ import pl.allegier.controller.frontend.service.account.AccountFrontService;
 import pl.allegier.it.ItConfiguration;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 14.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ItConfiguration.class)

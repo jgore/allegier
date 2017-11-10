@@ -8,7 +8,7 @@ import pl.allegier.controller.service.Service;
 import pl.allegier.model.Account;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 13.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 13.04.17.
  */
 @org.springframework.stereotype.Service
 public class AccountFrontServiceImpl extends AbstractFrontService<AccountDto,Account,Integer> implements AccountFrontService{

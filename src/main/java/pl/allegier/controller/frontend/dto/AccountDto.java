@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 13.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 13.04.17.
  */
 
 public class AccountDto implements Serializable {

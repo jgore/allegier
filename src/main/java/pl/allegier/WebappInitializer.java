@@ -4,7 +4,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import pl.allegier.controller.MvcConfig;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 03.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 03.04.17.
  */
 public class WebappInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 

@@ -16,7 +16,7 @@ import pl.allegier.model.Product;
 import java.math.BigDecimal;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 15.06.17.
+ * Created by Pawel Szczepkowski | GoreIT on 15.06.17.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

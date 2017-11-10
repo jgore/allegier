@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 10.08.17.
+ * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 
 @Entity

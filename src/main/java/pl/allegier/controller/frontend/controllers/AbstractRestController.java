@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 10.08.17.
+ * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 public abstract class AbstractRestController<DTO extends Identifable<ID>,ID> implements RestController<DTO> {
 

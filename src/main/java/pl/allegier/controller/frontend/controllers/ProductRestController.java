@@ -19,7 +19,7 @@ import pl.allegier.model.Product;
 import java.util.List;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 14.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 @RestController
 @RequestMapping("rest/products")

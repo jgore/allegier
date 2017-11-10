@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 10.08.17.
+ * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 public class AuctionDto extends AbstractProductDto implements Serializable,Identifable<Integer> {
     private static final long serialVersionUID = 1552366802875767338L;

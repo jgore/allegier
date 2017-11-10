@@ -12,7 +12,7 @@ import pl.allegier.model.OrderProduct;
 import pl.allegier.model.Product;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 27.10.17.
+ * Created by Pawel Szczepkowski | GoreIT on 27.10.17.
  */
 
 @Component

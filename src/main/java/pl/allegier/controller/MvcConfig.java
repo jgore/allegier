@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 03.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 03.04.17.
  */
 
 @EnableWebMvc

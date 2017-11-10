@@ -5,7 +5,7 @@ import pl.allegier.controller.dao.JpaDao;
 import pl.allegier.model.Auction;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 10.08.17.
+ * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 
 @Repository("auctionDao")

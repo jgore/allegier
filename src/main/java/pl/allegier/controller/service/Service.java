@@ -1,7 +1,7 @@
 package pl.allegier.controller.service;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 03.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 03.04.17.
  */
 public interface Service<E,ID> {
 

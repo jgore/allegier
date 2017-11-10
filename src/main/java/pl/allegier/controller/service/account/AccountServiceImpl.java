@@ -9,7 +9,7 @@ import pl.allegier.controller.service.AbstractService;
 import pl.allegier.model.Account;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 03.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 03.04.17.
  */
 
 @Service

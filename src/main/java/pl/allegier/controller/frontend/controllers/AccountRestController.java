@@ -17,7 +17,7 @@ import pl.allegier.controller.frontend.service.account.AccountFrontService;
 import java.util.List;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 13.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 13.04.17.
  */
 @RestController
 @RequestMapping("rest/accounts")

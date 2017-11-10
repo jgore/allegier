@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Created by Pawel Szczepkowski | Satlan on 18.04.17.
+ * Created by Pawel Szczepkowski | GoreIT on 18.04.17.
  */
 public class OrderDto implements Serializable {
 
