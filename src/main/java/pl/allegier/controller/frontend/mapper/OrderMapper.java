@@ -43,10 +43,9 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
                     .collect(Collectors.toSet());
             map.setOrderProducts(orderProducts);
         }
-
-
-        return mapper.map(dto, Order.class);
+        return map;
     }
+
 
     public OrderDto toDto(Order dao) {
 
@@ -67,7 +66,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
     }
 
     private OrderDto setAccount(Order dao, OrderDto orderDto) {
-        if (orderDto.getAccount() != null) {
+        if (dao.getAccount() != null) {
             orderDto.setAccount(dao.getAccount().getId());
         }
         return orderDto;
@@ -79,6 +78,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
         @Override
         protected void configure() {
             map().setOrderProductDtos(Sets.newHashSet());
+            map().setAccount( null);
         }
 
     }
