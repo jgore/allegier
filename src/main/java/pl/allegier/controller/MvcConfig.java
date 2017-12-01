@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -15,7 +14,6 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -53,7 +51,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         sessionBuilder.setProperty("hibernate.show_sql", "true");
         sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         sessionBuilder.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-      //  sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         sessionBuilder.setProperty("hibernate.hbm2ddl.import_files", "initial_data.sql");
         return sessionBuilder.buildSessionFactory();
     }

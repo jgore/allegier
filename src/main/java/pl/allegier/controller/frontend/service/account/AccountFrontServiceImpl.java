@@ -14,7 +14,7 @@ import pl.allegier.model.Account;
 public class AccountFrontServiceImpl extends AbstractFrontService<AccountDto,Account,Integer> implements AccountFrontService{
 
     @Autowired
-    public AccountFrontServiceImpl(Mapper<AccountDto, Account> mapper, Service<Account, Integer> crudService) {
-        super(mapper, crudService);
+    public AccountFrontServiceImpl(Mapper<AccountDto, Account> accountMapper, Service<Account, Integer> crudService) {
+        super(accountMapper, crudService);
     }
 }
