@@ -62,7 +62,7 @@ public class ProductFrontServiceImplTest {
         List<ProductDto> ProductDtos = Lists.newArrayList(all);
 
         //TODO FIX
-        //assertThat(ProductDtos.size(), equalTo( 2) );
+        assertThat(ProductDtos.size(), equalTo( 2) );
 
     }
 

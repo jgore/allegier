@@ -32,7 +32,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
     public OrderMapper() {
     }
 
-    public Order toDao(OrderDto dto) {
+    public Order toDao(final OrderDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
@@ -47,7 +47,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
     }
 
 
-    public OrderDto toDto(Order dao) {
+    public OrderDto toDto(final Order dao) {
 
         if (dao == null) {
             throw new IllegalArgumentException("order cannot be null");
@@ -65,7 +65,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
         return setAccount(dao, orderDto);
     }
 
-    private OrderDto setAccount(Order dao, OrderDto orderDto) {
+    private OrderDto setAccount(final Order dao, final OrderDto orderDto) {
         if (dao.getAccount() != null) {
             orderDto.setAccount(dao.getAccount().getId());
         }

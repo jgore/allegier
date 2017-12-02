@@ -24,7 +24,7 @@ import java.util.Date;
 
 @Entity
 @Inheritance(strategy  = InheritanceType.TABLE_PER_CLASS)
-public abstract class AbstractProduct implements Serializable ,Identifable<Integer>{
+public abstract class AbstractProduct extends Timestamp implements Serializable , Identifable<Integer>{
 
     private static final long serialVersionUID = 8879554901850384465L;
 
@@ -37,8 +37,6 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
 
     private BigDecimal price;
 
-    private Date created;
-    private Date updated;
 
     public AbstractProduct(String title, String description, BigDecimal price) {
         this.title = title;
@@ -77,23 +75,9 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
     }
 
 
-    @CreationTimestamp
-    @Column(updatable=false)
-    public Date getCreated() {
-        return created;
-    }
-
-    @UpdateTimestamp
-    @Column
-    public Date getUpdated() {
-        return updated;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
-
 
     public void setCategory(Category category) {
         this.category = category;
@@ -110,15 +94,6 @@ public abstract class AbstractProduct implements Serializable ,Identifable<Integ
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
 
     @Override
     public String toString()

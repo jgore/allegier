@@ -1,10 +1,6 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
 
 /**
  * Created by gore on 24.07.17.
@@ -34,8 +28,6 @@ public class OrderProduct implements Serializable {
     private Product product;
     private int amount;
 
-    private Date created;
-    private Date updated;
 
     @Id
     @GeneratedValue
@@ -60,17 +52,7 @@ public class OrderProduct implements Serializable {
         return amount;
     }
 
-    @CreationTimestamp
-    @Column(updatable = false)
-    public Date getCreated() {
-        return created;
-    }
 
-    @UpdateTimestamp
-    @Column
-    public Date getUpdated() {
-        return updated;
-    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -88,13 +70,7 @@ public class OrderProduct implements Serializable {
         this.amount = amount;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 
 
     @Override

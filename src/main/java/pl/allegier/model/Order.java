@@ -25,7 +25,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order implements Identifable<Integer>, Serializable {
+public class Order extends Timestamp implements Identifable<Integer>, Serializable {
 
     private static final long serialVersionUID = -4955525052994793695L;
 
@@ -33,9 +33,6 @@ public class Order implements Identifable<Integer>, Serializable {
 
     private Account account;
     private Set<OrderProduct> orderProducts;
-
-    private Date created;
-    private Date updated;
 
     public Order() {
         this.setCreated( new Date() );
@@ -68,18 +65,6 @@ public class Order implements Identifable<Integer>, Serializable {
         return orderProducts;
     }
 
-    @CreationTimestamp
-    @Column
-    public Date getCreated() {
-        return created;
-    }
-
-    @UpdateTimestamp
-    @Column
-    public Date getUpdated() {
-        return updated;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -90,14 +75,6 @@ public class Order implements Identifable<Integer>, Serializable {
 
     public void setOrderProducts(Set<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
     }
 
     @Override

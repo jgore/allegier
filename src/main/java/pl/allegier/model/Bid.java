@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Time;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "BIDS")
-public class Bid implements Serializable{
+public class Bid extends Timestamp implements Serializable{
     private static final long serialVersionUID = -6152290436485091589L;
 
     private Integer id;

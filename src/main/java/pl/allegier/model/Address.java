@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -11,7 +12,9 @@ import java.util.Objects;
  */
 
 @Embeddable
-public class Address {
+public class Address implements Serializable{
+
+    private static final long serialVersionUID = 2538176138199455942L;
 
     private String streetName;
     private int streetNumber;

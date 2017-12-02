@@ -31,7 +31,7 @@ public class ProductMapperTest implements MapperTest<ProductDto,Product>{
     private static final BigDecimal TEST_PRICE = BigDecimal.ONE;
 
     @Autowired
-    private ProductMapper productMapper;
+    private Mapper<ProductDto,Product> productMapper;
 
     @Autowired
     private CategoryDao categoryDao;

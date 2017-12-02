@@ -16,15 +16,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class Category implements Identifable<String>, Serializable {
+public class Category extends Timestamp implements Identifable<String>, Serializable {
 
     private static final long serialVersionUID = 7389463192547585546L;
 
     private String id;
     private Set<AbstractProduct> products;
-
-    private Date created;
-    private Date updated;
 
     @Id
     public String getId() {
@@ -36,44 +33,23 @@ public class Category implements Identifable<String>, Serializable {
         return products;
     }
 
-    @CreationTimestamp
-    @Column
-    public Date getCreated() {
-        return created;
-    }
-
-    @UpdateTimestamp
-    @Column
-    public Date getUpdated() {
-        return updated;
-    }
-
     @Override
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setProducts(Set<AbstractProduct> products)
-
-    {
+    public void setProducts(Set<AbstractProduct> products) {
         this.products = products;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Category)) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof Category))
+            return false;
         Category category = (Category) o;
-        return Objects.equals(getId(), category.getId()) &&
-                Objects.equals(getProducts(), category.getProducts());
+        return Objects.equals(getId(), category.getId()) && Objects.equals(getProducts(), category.getProducts());
     }
 
     @Override

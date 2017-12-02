@@ -56,7 +56,7 @@ public class AccountFrontServiceImplTest {
         accountDtoFrontService.save(new AccountDto(TEST_LOGIN_1, TEST_PASSWORD));
 
         Iterable<AccountDto> all = accountDtoFrontService.findAll();
-        List<AccountDto> accountDtos = Lists.newArrayList(all);
+        //List<AccountDto> accountDtos = Lists.newArrayList(all);
 
         //TODO FIX
         //assertThat(accountDtos.size(), equalTo( 2) );
