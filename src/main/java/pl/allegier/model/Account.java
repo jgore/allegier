@@ -1,12 +1,11 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import pl.allegier.model.id.IIdentifable;
+import pl.allegier.model.timestamp.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +23,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ACCOUNTS")
-public class Account extends Timestamp implements Identifable<Integer>, Serializable  {
+public class Account extends Timestamp implements IIdentifable<Integer>, Serializable  {
 
     private static final long serialVersionUID = 1538176138199455942L;
 
@@ -38,7 +36,7 @@ public class Account extends Timestamp implements Identifable<Integer>, Serializ
     private Set<Bid> bids;
     private Address address = new Address();
 
-    public Account(String login, String password) {
+    public Account(final String login, final String password) {
         super();
         this.login = login;
         this.password = password;
@@ -48,7 +46,8 @@ public class Account extends Timestamp implements Identifable<Integer>, Serializ
 
     @Id
     @GeneratedValue
-    public Integer getId() {
+    @Override
+    public final Integer getId() {
         return id;
     }
 
@@ -63,47 +62,47 @@ public class Account extends Timestamp implements Identifable<Integer>, Serializ
     }
 
     @Column
-    public String getLogin() {
+    public final String getLogin() {
         return login;
     }
 
     @Column
-    public String getPassword() {
+    public final String getPassword() {
         return password;
     }
 
     @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
-    public Set<Order> getOrders() {
+    public final Set<Order> getOrders() {
         return orders;
     }
 
     @Embedded
-    public Address getAddress() {
+    public final Address getAddress() {
         return address;
     }
 
 
-    public void setId(Integer id) {
+    public final void setId(Integer id) {
         this.id = id;
     }
 
-    public void setBids(Set<Bid> bids) {
+    public final void setBids(Set<Bid> bids) {
         this.bids = bids;
     }
 
-    public void setLogin(String login) {
+    public final void setLogin(String login) {
         this.login = login;
     }
 
-    public void setPassword(String password) {
+    public final void setPassword(String password) {
         this.password = password;
     }
 
-    public void setAddress(Address address) {
+    public final void setAddress(Address address) {
         this.address = address;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public final void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 

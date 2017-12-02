@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 18.04.17.
  */
-public class OrderDto implements Serializable {
+public class OrderDto extends TimeStampDto implements Serializable {
 
     private static final long serialVersionUID = 4547295716691998643L;
 
@@ -18,9 +18,6 @@ public class OrderDto implements Serializable {
 
     private Integer account;
     private Set<OrderProductDto> orderProductDtos;
-
-    private Date created;
-    private Date updated;
 
     public Integer getId() {
         return id;
@@ -45,23 +42,6 @@ public class OrderDto implements Serializable {
     public void setOrderProductDtos(Set<OrderProductDto> orderProductDtos) {
         this.orderProductDtos = orderProductDtos;
     }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
 
     @Override
     public String toString()

@@ -1,6 +1,8 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import pl.allegier.controller.frontend.dto.TimeStampDto;
+import pl.allegier.model.timestamp.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +20,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "ORDER_PRODUCTS")
-public class OrderProduct implements Serializable {
+public class OrderProduct extends Timestamp implements Serializable {
 
     private static final long serialVersionUID = 1039726237347294105L;
 
@@ -31,47 +33,42 @@ public class OrderProduct implements Serializable {
 
     @Id
     @GeneratedValue
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
     @ManyToOne(targetEntity = Order.class)
     @JoinColumn(name="order_id",nullable = false)
-    public Order getOrder() {
+    public final Order getOrder() {
         return order;
     }
 
     @ManyToOne(targetEntity = Product.class, fetch = FetchType.EAGER)
     @JoinColumn(name="product_id",nullable = false)
-    public Product getProduct() {
+    public final Product getProduct() {
         return product;
     }
 
     @Column
-    public int getAmount() {
+    public final int getAmount() {
         return amount;
     }
 
-
-
-    public void setId(Integer id) {
+    public final void setId(Integer id) {
         this.id = id;
     }
 
-    public void setOrder(Order order) {
+    public final void setOrder(Order order) {
         this.order = order;
     }
 
-    public void setProduct(Product product) {
+    public final void setProduct(Product product) {
         this.product = product;
     }
 
-    public void setAmount(int amount) {
+    public final void setAmount(int amount) {
         this.amount = amount;
     }
-
-
-
 
     @Override
     public String toString()

@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.allegier.controller.frontend.service.AbstractFrontService;
 import pl.allegier.controller.frontend.service.FrontService;
-import pl.allegier.model.Identifable;
+import pl.allegier.model.id.IIdentifable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
-public abstract class AbstractRestController<DTO extends Identifable<ID>,ID> implements RestController<DTO> {
+public abstract class AbstractRestController<DTO extends IIdentifable<ID>,ID> implements RestController<DTO> {
 
     public abstract FrontService<DTO, ID> getFrontService( );
 

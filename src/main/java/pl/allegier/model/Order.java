@@ -1,12 +1,10 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import pl.allegier.model.id.IIdentifable;
+import pl.allegier.model.timestamp.Timestamp;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -25,7 +22,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order extends Timestamp implements Identifable<Integer>, Serializable {
+public class Order extends Timestamp implements IIdentifable<Integer>, Serializable {
 
     private static final long serialVersionUID = -4955525052994793695L;
 
@@ -35,11 +32,11 @@ public class Order extends Timestamp implements Identifable<Integer>, Serializab
     private Set<OrderProduct> orderProducts;
 
     public Order() {
-        this.setCreated( new Date() );
-        this.setUpdated( new Date() );
+        this.setCreated(new Date());
+        this.setUpdated(new Date());
     }
 
-    public Order(Account account, Set<OrderProduct> orderProducts) {
+    public Order(final Account account, final Set<OrderProduct> orderProducts) {
         this.account = account;
         this.orderProducts = orderProducts;
     }
@@ -65,15 +62,15 @@ public class Order extends Timestamp implements Identifable<Integer>, Serializab
         return orderProducts;
     }
 
-    public void setId(Integer id) {
+    public final void setId(Integer id) {
         this.id = id;
     }
 
-    public void setAccount(Account account) {
+    public final void setAccount(Account account) {
         this.account = account;
     }
 
-    public void setOrderProducts(Set<OrderProduct> orderProducts) {
+    public final void setOrderProducts(final Set<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
     }
 

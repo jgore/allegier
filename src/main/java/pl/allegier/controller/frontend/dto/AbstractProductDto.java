@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
-public class AbstractProductDto implements Serializable{
+public class AbstractProductDto extends TimeStampDto implements Serializable{
 
     private static final long serialVersionUID = 6534533311682850417L;
 
@@ -20,9 +20,6 @@ public class AbstractProductDto implements Serializable{
     private String description;
 
     private BigDecimal price;
-
-    private Date created;
-    private Date updated;
 
     public AbstractProductDto(String title, String description, BigDecimal price) {
         this.title = title;
@@ -71,22 +68,6 @@ public class AbstractProductDto implements Serializable{
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
     }
 
     @Override

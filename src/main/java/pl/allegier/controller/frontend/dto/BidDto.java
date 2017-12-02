@@ -1,6 +1,6 @@
 package pl.allegier.controller.frontend.dto;
 
-import pl.allegier.model.Identifable;
+import pl.allegier.model.id.IIdentifable;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
-public class BidDto implements Serializable,Identifable<Integer>{
+public class BidDto extends TimeStampDto implements Serializable, IIdentifable<Integer> {
 
     private static final long serialVersionUID = -2231985404824753846L;
 

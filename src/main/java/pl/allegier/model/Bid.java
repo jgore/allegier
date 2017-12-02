@@ -1,5 +1,7 @@
 package pl.allegier.model;
 
+import pl.allegier.model.timestamp.Timestamp;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Time;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
@@ -30,40 +31,40 @@ public class Bid extends Timestamp implements Serializable{
 
     @Id
     @GeneratedValue
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
     @ManyToOne(targetEntity = Account.class,cascade = CascadeType.ALL)
     @JoinColumn(name="account_id",nullable = false)
-    public Account getAccount() {
+    public final Account getAccount() {
         return account;
     }
 
     @ManyToOne(targetEntity = Auction.class)
     @JoinColumn(name="auction_id",nullable = false)
-    public Auction getAuction() {
+    public final Auction getAuction() {
         return auction;
     }
 
     @Column
-    public BigDecimal getPrice() {
+    public  final BigDecimal getPrice() {
         return price;
     }
 
-    public void setId(Integer id) {
+    public final void setId(Integer id) {
         this.id = id;
     }
 
-    public void setPrice(BigDecimal price) {
+    public final void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public void setAccount(Account account) {
+    public final void setAccount(Account account) {
         this.account = account;
     }
 
-    public void setAuction(Auction auction) {
+    public final void setAuction(Auction auction) {
         this.auction = auction;
     }
 

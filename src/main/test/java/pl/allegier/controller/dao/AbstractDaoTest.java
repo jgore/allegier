@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import pl.allegier.TestConfiguration;
-import pl.allegier.model.Identifable;
+import pl.allegier.model.id.IIdentifable;
 
 import java.util.List;
 
@@ -23,23 +23,21 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
-public abstract class AbstractDaoTest<E extends Identifable<ID>, ID> implements DaoTest<E, ID> {
+public abstract class AbstractDaoTest<E extends IIdentifable<ID>, ID> implements DaoTest<E, ID> {
 
-    private Dao<E,ID> repository;
+    private Dao<E, ID> repository;
 
     public abstract Dao<E, ID> getRepository();
 
     public abstract E createEntity();
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         repository = getRepository();
     }
 
     @After
-    public void cleanUp()
-    {
+    public void cleanUp() {
         repository.removeAll();
     }
 
@@ -50,7 +48,7 @@ public abstract class AbstractDaoTest<E extends Identifable<ID>, ID> implements 
         E saved = repository.save(entity);
 
         E persisted = repository.findById(saved.getId());
-        assertThat( saved.getId(), equalTo( persisted.getId() ));
+        assertThat(saved.getId(), equalTo(persisted.getId()));
     }
 
     @Override
@@ -81,7 +79,7 @@ public abstract class AbstractDaoTest<E extends Identifable<ID>, ID> implements 
         E saved = repository.save(entity);
         E persisted = repository.findById(saved.getId());
 
-        assertNotNull( persisted );
+        assertNotNull(persisted);
     }
 
     @Override
@@ -90,7 +88,7 @@ public abstract class AbstractDaoTest<E extends Identifable<ID>, ID> implements 
         E entity = createEntity();
         repository.save(entity);
         List<E> all = repository.findAll();
-        assertThat( all.size(), equalTo(1));
+        assertThat(all.size(), equalTo(1));
     }
 
     @Override
@@ -98,7 +96,7 @@ public abstract class AbstractDaoTest<E extends Identifable<ID>, ID> implements 
     public void countTest() {
         E entity = createEntity();
         repository.save(entity);
-        assertThat( repository.count() , equalTo(1L) );
+        assertThat(repository.count(), equalTo(1L));
     }
 
     @Override
@@ -108,6 +106,6 @@ public abstract class AbstractDaoTest<E extends Identifable<ID>, ID> implements 
         repository.save(entity);
         repository.removeAll();
 
-        assertThat( repository.count(),equalTo(0L));
+        assertThat(repository.count(), equalTo(0L));
     }
 }

@@ -10,7 +10,7 @@ import java.util.Objects;
  * Created by Pawel Szczepkowski | GoreIT on 13.04.17.
  */
 
-public class AccountDto implements Serializable {
+public class AccountDto extends TimeStampDto implements Serializable {
 
     private static final long serialVersionUID = 2163332914760385642L;
 
@@ -19,7 +19,7 @@ public class AccountDto implements Serializable {
     private String login;
     private String password;
 
-    public AccountDto(String login, String password) {
+    public AccountDto(final String login, final String password) {
         this.login = login;
         this.password = password;
     }
@@ -27,14 +27,11 @@ public class AccountDto implements Serializable {
     public AccountDto() {
     }
 
-    private Date created;
-    private Date updated;
-
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -43,7 +40,7 @@ public class AccountDto implements Serializable {
         return login;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(final String login) {
         this.login = login;
     }
 
@@ -51,26 +48,9 @@ public class AccountDto implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
 
     @Override
     public String toString()

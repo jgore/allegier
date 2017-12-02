@@ -21,12 +21,11 @@ public class Auction extends AbstractProduct {
 
     private static final long serialVersionUID = -8884372131412309419L;
 
-    public Auction(String title, String description, BigDecimal price) {
+    public Auction(final String title, final String description, final BigDecimal price) {
         super(title, description, price);
     }
 
-    public Auction() {
-    }
+    public Auction() { }
 
     private Set<Bid> bids ;
 
@@ -34,11 +33,11 @@ public class Auction extends AbstractProduct {
             CascadeType.ALL },
             mappedBy = "auction",fetch = FetchType.EAGER,
     orphanRemoval = true)
-    public Set<Bid> getBids() {
+    public final Set<Bid> getBids() {
         return  bids != null ? bids : Sets.newHashSet() ;
     }
 
-    public void setBids(Set<Bid> bids) {
+    public final void setBids(Set<Bid> bids) {
         this.bids = bids;
     }
 }

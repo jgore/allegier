@@ -2,8 +2,7 @@ package pl.allegier.controller.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import pl.allegier.model.Identifable;
+import pl.allegier.model.id.IIdentifable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +14,7 @@ import java.util.List;
  * Created by Pawel Szczepkowski | Java4you.pl  on 21.05.17.
  */
 @Repository
-public abstract class JpaDao<E extends Identifable<ID>, ID> implements Dao<E, ID> {
+public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, ID> {
 
     protected Class<E> entityClass;
 

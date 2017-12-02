@@ -1,15 +1,12 @@
 package pl.allegier.controller.frontend.dto;
 
-import pl.allegier.model.Order;
-import pl.allegier.model.Product;
-
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 27.10.17.
  */
-public class OrderProductDto implements Serializable {
+public class OrderProductDto extends TimeStampDto implements Serializable {
 
     private static final long serialVersionUID = 4547295416691998643L;
 
@@ -18,9 +15,6 @@ public class OrderProductDto implements Serializable {
     private Integer order;
     private Integer product;
     private int amount;
-
-    private Date created;
-    private Date updated;
 
     public Integer getId() {
         return id;
@@ -54,19 +48,4 @@ public class OrderProductDto implements Serializable {
         this.amount = amount;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }

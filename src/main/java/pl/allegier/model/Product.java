@@ -15,7 +15,7 @@ public class Product extends AbstractProduct {
 
     private static final long serialVersionUID = 6420253915164168565L;
 
-    public Product(String title, String description, BigDecimal price) {
+    public Product(final String title, final String description, final  BigDecimal price) {
         super(title, description, price);
     }
 

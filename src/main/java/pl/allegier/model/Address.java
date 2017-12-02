@@ -23,47 +23,47 @@ public class Address implements Serializable{
     private String city;
 
     @Column
-    public String getStreetName() {
+    public final String getStreetName() {
         return streetName;
     }
 
     @Column
-    public int getStreetNumber() {
+    public final int getStreetNumber() {
         return streetNumber;
     }
 
     @Column
-    public int getLocaleNumber() {
+    public final int getLocaleNumber() {
         return localeNumber;
     }
 
     @Column
-    public String getZipCode() {
+    public final String getZipCode() {
         return zipCode;
     }
 
     @Column
-    public String getCity() {
+    public final String getCity() {
         return city;
     }
 
-    public void setStreetName(String streetName) {
+    public final void setStreetName(String streetName) {
         this.streetName = streetName;
     }
 
-    public void setStreetNumber(int streetNumber) {
+    public final void setStreetNumber(int streetNumber) {
         this.streetNumber = streetNumber;
     }
 
-    public void setLocaleNumber(int localeNumber) {
+    public final void setLocaleNumber(int localeNumber) {
         this.localeNumber = localeNumber;
     }
 
-    public void setZipCode(String zipCode) {
+    public final void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
-    public void setCity(String city) {
+    public final void setCity(String city) {
         this.city = city;
     }
 
@@ -72,11 +72,11 @@ public class Address implements Serializable{
         if (this == o) return true;
         if (!(o instanceof Address)) return false;
         Address address = (Address) o;
-        return getStreetNumber() == address.getStreetNumber() &&
-                getLocaleNumber() == address.getLocaleNumber() &&
-                Objects.equals(getStreetName(), address.getStreetName()) &&
-                Objects.equals(getZipCode(), address.getZipCode()) &&
-                Objects.equals(getCity(), address.getCity());
+        return getStreetNumber() == address.getStreetNumber()
+                && getLocaleNumber() == address.getLocaleNumber()
+                && Objects.equals(getStreetName(), address.getStreetName())
+                && Objects.equals(getZipCode(), address.getZipCode())
+                && Objects.equals(getCity(), address.getCity());
     }
 
     @Override

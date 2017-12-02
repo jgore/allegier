@@ -1,8 +1,8 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import pl.allegier.model.id.IIdentifable;
+import pl.allegier.model.timestamp.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +12,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
@@ -24,7 +21,7 @@ import java.util.Date;
 
 @Entity
 @Inheritance(strategy  = InheritanceType.TABLE_PER_CLASS)
-public abstract class AbstractProduct extends Timestamp implements Serializable , Identifable<Integer>{
+public abstract class AbstractProduct extends Timestamp implements Serializable , IIdentifable<Integer> {
 
     private static final long serialVersionUID = 8879554901850384465L;
 
@@ -38,7 +35,7 @@ public abstract class AbstractProduct extends Timestamp implements Serializable 
     private BigDecimal price;
 
 
-    public AbstractProduct(String title, String description, BigDecimal price) {
+    public AbstractProduct(final String title, final String description, final BigDecimal price) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -49,49 +46,49 @@ public abstract class AbstractProduct extends Timestamp implements Serializable 
 
     @Id
     @GeneratedValue
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name="category_id",nullable = false)
-    public Category getCategory() {
+    public final Category getCategory() {
         return category;
     }
 
     @Column
-    public String getTitle() {
+    public final String getTitle() {
         return title;
     }
 
     @Column
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
     @Column
-    public BigDecimal getPrice() {
+    public final BigDecimal getPrice() {
         return price;
     }
 
 
-    public void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public void setCategory(Category category) {
+    public final void setCategory(final Category category) {
         this.category = category;
     }
 
-    public void setTitle(String title) {
+    public final void setTitle(final String title) {
         this.title = title;
     }
 
-    public void setDescription(String description) {
+    public final void setDescription(final String description) {
         this.description = description;
     }
 
-    public void setPrice(BigDecimal price) {
+    public final void setPrice(final BigDecimal price) {
         this.price = price;
     }
 
