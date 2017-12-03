@@ -21,7 +21,7 @@ public class AbstractProductDto extends TimeStampDto implements Serializable{
 
     private BigDecimal price;
 
-    public AbstractProductDto(String title, String description, BigDecimal price) {
+    public AbstractProductDto(final String title, final String description, final BigDecimal price) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -30,11 +30,11 @@ public class AbstractProductDto extends TimeStampDto implements Serializable{
     public AbstractProductDto() {
     }
 
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public final void setId(Integer id) {
         this.id = id;
     }
 

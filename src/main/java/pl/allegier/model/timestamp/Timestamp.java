@@ -13,7 +13,7 @@ import java.util.Date;
  */
 
 @MappedSuperclass
-public class Timestamp implements ITimestamp{
+public abstract class Timestamp implements ITimestamp{
 
     /**
     Field should be use us entity created timestamp
@@ -28,6 +28,11 @@ public class Timestamp implements ITimestamp{
     @Column(updatable = false)
     @Override
     public final Date getCreated() {
+        if (created == null)
+        {
+            return null;
+        }
+
         return  new Date(created.getTime());
     }
 
@@ -35,6 +40,10 @@ public class Timestamp implements ITimestamp{
     @Column
     @Override
     public final  Date getUpdated() {
+        if (updated == null)
+        {
+            return null;
+        }
         return new Date(updated.getTime());
     }
 
@@ -45,7 +54,7 @@ public class Timestamp implements ITimestamp{
 
     @Override
     public final void setUpdated(final Date updated) {
-        this.updated = updated ==null ? new Date() : updated;
+        this.updated = updated == null ? new Date() : updated;
     }
 
 }

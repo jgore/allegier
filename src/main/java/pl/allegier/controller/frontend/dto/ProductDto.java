@@ -8,14 +8,13 @@ import java.math.BigDecimal;
  */
 public class ProductDto extends AbstractProductDto implements Serializable {
 
-    public ProductDto(String title, String description, BigDecimal price) {
+    private static final long serialVersionUID = 7410956460083426518L;
+
+    public ProductDto(final String title, final String description, final BigDecimal price) {
         super(title, description, price);
     }
 
     public ProductDto() {
     }
-
-    private static final long serialVersionUID = 7410956460083426518L;
-
 }
 

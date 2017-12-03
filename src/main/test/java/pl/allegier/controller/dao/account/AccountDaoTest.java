@@ -30,9 +30,6 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     private OrderDaoTest orderDaoTest;
 
     @Autowired
-    private OrderDao orderDao;
-
-    @Autowired
     private AccountDao accountDao;
 
     @Override

@@ -43,12 +43,12 @@ public class Order extends Timestamp implements IIdentifable<Integer>, Serializa
 
     @Id
     @GeneratedValue
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
     @ManyToOne(targetEntity = Account.class)
-    public Account getAccount() {
+    public final Account getAccount() {
         return account;
     }
 
@@ -56,17 +56,17 @@ public class Order extends Timestamp implements IIdentifable<Integer>, Serializa
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REMOVE },
-            mappedBy = "order",fetch = FetchType.EAGER,
+            mappedBy = "order", fetch = FetchType.EAGER,
     orphanRemoval = true)
-    public Set<OrderProduct> getOrderProducts() {
+    public final Set<OrderProduct> getOrderProducts() {
         return orderProducts;
     }
 
-    public final void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public final void setAccount(Account account) {
+    public final void setAccount(final Account account) {
         this.account = account;
     }
 

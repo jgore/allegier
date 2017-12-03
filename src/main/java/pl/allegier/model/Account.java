@@ -23,7 +23,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ACCOUNTS")
-public class Account extends Timestamp implements IIdentifable<Integer>, Serializable  {
+public class Account extends Timestamp implements IIdentifable<Integer>, Serializable {
 
     private static final long serialVersionUID = 1538176138199455942L;
 
@@ -42,7 +42,8 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
         this.password = password;
     }
 
-    public Account() { }
+    public Account() {
+    }
 
     @Id
     @GeneratedValue
@@ -51,13 +52,8 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
         return id;
     }
 
-
-    @OneToMany(cascade = {
-            CascadeType.ALL,
-            CascadeType.MERGE,
-            CascadeType.REMOVE },
-            mappedBy = "account",fetch = FetchType.EAGER)
-    public Set<Bid> getBids() {
+    @OneToMany(cascade = { CascadeType.ALL, CascadeType.MERGE, CascadeType.REMOVE }, mappedBy = "account", fetch = FetchType.EAGER)
+    public final Set<Bid> getBids() {
         return bids;
     }
 
@@ -71,7 +67,7 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
         return password;
     }
 
-    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     public final Set<Order> getOrders() {
         return orders;
     }
@@ -81,54 +77,49 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
         return address;
     }
 
-
-    public final void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public final void setBids(Set<Bid> bids) {
+    public final void setBids(final Set<Bid> bids) {
         this.bids = bids;
     }
 
-    public final void setLogin(String login) {
+    public final void setLogin(final String login) {
         this.login = login;
     }
 
-    public final void setPassword(String password) {
+    public final void setPassword(final String password) {
         this.password = password;
     }
 
-    public final void setAddress(Address address) {
+    public final void setAddress(final Address address) {
         this.address = address;
     }
 
-    public final void setOrders(Set<Order> orders) {
+    public final void setOrders(final Set<Order> orders) {
         this.orders = orders;
     }
 
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Account)) return false;
+    public boolean equals(final Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Account))
+            return false;
         Account account = (Account) o;
-        return  Objects.equals(getLogin(), account.getLogin()) &&
-                Objects.equals(getPassword(), account.getPassword()) &&
-                Objects.equals(getOrders(), account.getOrders()) &&
-                Objects.equals(getBids(), account.getBids()) &&
-                Objects.equals(getAddress(), account.getAddress()) &&
-                Objects.equals(getCreated(), account.getCreated()) &&
-                Objects.equals(getUpdated(), account.getUpdated());
+        return Objects.equals(getLogin(), account.getLogin()) && Objects.equals(getPassword(), account.getPassword()) && Objects
+                .equals(getOrders(), account.getOrders()) && Objects.equals(getBids(), account.getBids()) && Objects.equals(getAddress(), account.getAddress())
+                && Objects.equals(getCreated(), account.getCreated()) && Objects.equals(getUpdated(), account.getUpdated());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( getLogin(), getPassword(), getOrders(), getBids(), getAddress(), getCreated(), getUpdated());
+        return Objects.hash(getLogin(), getPassword(), getOrders(), getBids(), getAddress(), getCreated(), getUpdated());
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
 }

@@ -1,6 +1,7 @@
 package pl.allegier.controller.frontend.mapper;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.AccountDto;
 import pl.allegier.model.Account;
@@ -12,12 +13,13 @@ import javax.transaction.Transactional;
  */
 
 @Component
-public class AccountMapper implements Mapper<AccountDto,Account>{
+public class AccountMapper implements Mapper<AccountDto, Account>{
 
-    private static final ModelMapper mapper = new ModelMapper();
+    @Autowired
+    private AllegierModelMapper mapper;
 
     @Transactional
-    public Account toDao(AccountDto dto) {
+    public Account toDao(final AccountDto dto) {
         if( dto == null)
         {
             throw new IllegalArgumentException("Account cannot be null");
@@ -25,7 +27,7 @@ public class AccountMapper implements Mapper<AccountDto,Account>{
         return mapper.map(dto, Account.class);
     }
 
-    public AccountDto toDto(Account dao) {
+    public AccountDto toDto(final Account dao) {
         if( dao == null)
         {
             throw new IllegalArgumentException("Account cannot be null");

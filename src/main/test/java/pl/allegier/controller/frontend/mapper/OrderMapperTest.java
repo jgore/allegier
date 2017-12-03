@@ -9,6 +9,8 @@ import pl.allegier.TestConfiguration;
 import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.model.Order;
 
+import java.util.Date;
+
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 
@@ -28,6 +30,8 @@ public class OrderMapperTest implements  MapperTest<OrderDto,Order>{
     public void toEntityTest()
     {
         OrderDto dto = new OrderDto();
+        dto.setCreated( new Date());
+        dto.setUpdated( new Date());
         Order dao = orderMapper.toDao(dto);
 
         assertThat( dto.getCreated(), equalTo( dao.getCreated()) );
@@ -38,11 +42,11 @@ public class OrderMapperTest implements  MapperTest<OrderDto,Order>{
     @Override
     public void toDtoTest()
     {
-        OrderDto dto = new OrderDto();
-        Order dao = orderMapper.toDao(dto);
+        Order entity = new Order();
+        OrderDto dto = orderMapper.toDto(entity);
 
-        assertThat( dto.getCreated(), equalTo( dao.getCreated()) );
-        assertThat( dto.getUpdated(), equalTo( dao.getUpdated()) );
+        assertThat( dto.getCreated(), equalTo( entity.getCreated()) );
+        assertThat( dto.getUpdated(), equalTo( entity.getUpdated()) );
     }
 
 }

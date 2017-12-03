@@ -42,7 +42,7 @@ public class Bid extends Timestamp implements Serializable{
     }
 
     @ManyToOne(targetEntity = Auction.class)
-    @JoinColumn(name="auction_id",nullable = false)
+    @JoinColumn(name="auction_id", nullable = false)
     public final Auction getAuction() {
         return auction;
     }
@@ -52,19 +52,19 @@ public class Bid extends Timestamp implements Serializable{
         return price;
     }
 
-    public final void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public final void setPrice(BigDecimal price) {
+    public final void setPrice(final BigDecimal price) {
         this.price = price;
     }
 
-    public final void setAccount(Account account) {
+    public final void setAccount(final Account account) {
         this.account = account;
     }
 
-    public final void setAuction(Auction auction) {
+    public final void setAuction(final Auction auction) {
         this.auction = auction;
     }
 

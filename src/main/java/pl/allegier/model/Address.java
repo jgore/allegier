@@ -47,28 +47,28 @@ public class Address implements Serializable{
         return city;
     }
 
-    public final void setStreetName(String streetName) {
+    public final void setStreetName(final String streetName) {
         this.streetName = streetName;
     }
 
-    public final void setStreetNumber(int streetNumber) {
+    public final void setStreetNumber(final int streetNumber) {
         this.streetNumber = streetNumber;
     }
 
-    public final void setLocaleNumber(int localeNumber) {
+    public final void setLocaleNumber(final int localeNumber) {
         this.localeNumber = localeNumber;
     }
 
-    public final void setZipCode(String zipCode) {
+    public final void setZipCode(final String zipCode) {
         this.zipCode = zipCode;
     }
 
-    public final void setCity(String city) {
+    public final void setCity(final String city) {
         this.city = city;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Address)) return false;
         Address address = (Address) o;

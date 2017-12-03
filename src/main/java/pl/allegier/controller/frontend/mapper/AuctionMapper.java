@@ -1,6 +1,6 @@
 package pl.allegier.controller.frontend.mapper;
 
-import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.AuctionDto;
 import pl.allegier.model.Auction;
@@ -17,23 +17,24 @@ import java.util.stream.Collectors;
 @Component
 public class AuctionMapper implements Mapper<AuctionDto, Auction> {
 
-    private  final ModelMapper mapper = new ModelMapper();
+    @Autowired
+    private AllegierModelMapper mapper;
 
     public AuctionMapper() {
     }
 
-    public Auction toDao(AuctionDto dto) {
+    public Auction toDao(final AuctionDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("Auction cannot be null");
         }
         Auction map = mapper.map(dto, Auction.class);
         setCategory(dto, map);
-        setBids(dto,map);
+        setBids(dto, map);
 
         return map;
     }
 
-    public AuctionDto toDto(Auction dao) {
+    public AuctionDto toDto(final Auction dao) {
         if (dao == null) {
             throw new IllegalArgumentException("Auction cannot be null");
         }
@@ -42,28 +43,27 @@ public class AuctionMapper implements Mapper<AuctionDto, Auction> {
         return setBids(dao, map);
     }
 
-    private Auction setBids(AuctionDto dto, Auction map) {
+    private Auction setBids(final AuctionDto dto, final Auction map) {
         Category category = new Category();
-        category.setId( dto.getCategory());
-        map.setCategory( category );
+        category.setId(dto.getCategory());
+        map.setCategory(category);
 
         return map;
     }
 
-    private Auction setCategory(AuctionDto dto, Auction map) {
+    private Auction setCategory(final AuctionDto dto, final Auction map) {
         Category category = new Category();
-        category.setId( dto.getCategory() );
-        map.setCategory( category );
+        category.setId(dto.getCategory());
+        map.setCategory(category);
 
         return map;
     }
 
-    private AuctionDto setBids(Auction dao, AuctionDto map) {
+    private AuctionDto setBids(final Auction dao, final AuctionDto map) {
         Set<Integer> bids = dao.getBids().stream().map(Bid::getId).collect(Collectors.toSet());
         map.setBids(bids);
 
         return map;
     }
-
 
 }

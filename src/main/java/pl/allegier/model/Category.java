@@ -22,21 +22,21 @@ public class Category extends Timestamp implements IIdentifable<String>, Seriali
     private Set<AbstractProduct> products;
 
     @Id
-    public String getId() {
+    public final String getId() {
         return id;
     }
 
     @OneToMany(mappedBy = "category")
-    public Set<AbstractProduct> getProducts() {
+    public final Set<AbstractProduct> getProducts() {
         return products;
     }
 
     @Override
-    public void setId(final String id) {
+    public final void setId(final String id) {
         this.id = id;
     }
 
-    public void setProducts(final Set<AbstractProduct> products) {
+    public final void setProducts(final Set<AbstractProduct> products) {
         this.products = products;
     }
 

@@ -1,7 +1,6 @@
 package pl.allegier.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import pl.allegier.controller.frontend.dto.TimeStampDto;
 import pl.allegier.model.timestamp.Timestamp;
 
 import javax.persistence.Column;
@@ -38,13 +37,13 @@ public class OrderProduct extends Timestamp implements Serializable {
     }
 
     @ManyToOne(targetEntity = Order.class)
-    @JoinColumn(name="order_id",nullable = false)
+    @JoinColumn(name="order_id", nullable = false)
     public final Order getOrder() {
         return order;
     }
 
     @ManyToOne(targetEntity = Product.class, fetch = FetchType.EAGER)
-    @JoinColumn(name="product_id",nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     public final Product getProduct() {
         return product;
     }
@@ -54,19 +53,19 @@ public class OrderProduct extends Timestamp implements Serializable {
         return amount;
     }
 
-    public final void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public final void setOrder(Order order) {
+    public final void setOrder(final Order order) {
         this.order = order;
     }
 
-    public final void setProduct(Product product) {
+    public final void setProduct(final Product product) {
         this.product = product;
     }
 
-    public final void setAmount(int amount) {
+    public final void setAmount(final int amount) {
         this.amount = amount;
     }
 

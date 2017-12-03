@@ -12,7 +12,7 @@ import pl.allegier.model.Bid;
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
 @Component
-public class BidMapper implements Mapper<BidDto,Bid> {
+public class BidMapper implements Mapper<BidDto, Bid> {
 
     @Autowired
     private AuctionService auctionService;
@@ -20,19 +20,20 @@ public class BidMapper implements Mapper<BidDto,Bid> {
     @Autowired
     private AccountService accountService;
 
-    private static final ModelMapper mapper = new ModelMapper();
+    @Autowired
+    private AllegierModelMapper mapper;
 
     @Override
-    public Bid toDao(BidDto bidDto) {
+    public Bid toDao(final BidDto bidDto) {
         Bid bid = mapper.map(bidDto, Bid.class);
-        bid.setAccount( accountService.findOne(bidDto.getAccount()));
-        bid.setAuction(auctionService.findOne( bidDto.getAuction()));
+        bid.setAccount(accountService.findOne(bidDto.getAccount()));
+        bid.setAuction(auctionService.findOne(bidDto.getAuction()));
 
         return bid;
     }
 
     @Override
-    public BidDto toDto(Bid bid) {
-        return mapper.map(bid,BidDto.class);
+    public BidDto toDto(final Bid bid) {
+        return mapper.map(bid, BidDto.class);
     }
 }

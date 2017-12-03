@@ -1,7 +1,5 @@
 package pl.allegier.controller.frontend.mapper;
 
-import com.google.common.collect.Sets;
-import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,24 +18,22 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMapper implements Mapper<OrderDto, Order> {
 
-    private static final ModelMapper mapper = new ModelMapper();
+    @Autowired
+    private AllegierModelMapper mapper;
 
     @Autowired
-    private OrderProductMapper orderProductMapper;
+    private Mapper<OrderProductDto, OrderProduct>  orderProductMapper;
 
     static {
-        mapper.addMappings(new OrderMap());
+    //    mapper.addMappings(new OrderMap());
     }
 
-    public OrderMapper() {
-    }
-
-    public Order toDao(final OrderDto dto) {
+    public final Order toDao(final OrderDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
         Order map = mapper.map(dto, Order.class);
-        if( dto.getOrderProductDtos() != null) {
+        if (dto.getOrderProductDtos() != null) {
             Set<OrderProduct> orderProducts = dto.getOrderProductDtos().stream().
                     map(orderProductDto -> orderProductMapper.toDao(orderProductDto))
                     .collect(Collectors.toSet());
@@ -47,7 +43,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
     }
 
 
-    public OrderDto toDto(final Order dao) {
+    public final OrderDto toDto(final Order dao) {
 
         if (dao == null) {
             throw new IllegalArgumentException("order cannot be null");
@@ -77,8 +73,8 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
 
         @Override
         protected void configure() {
-            map().setOrderProductDtos(Sets.newHashSet());
-            map().setAccount( null);
+        //    map().setOrderProductDtos(Sets.newHashSet());
+        //    map().setAccount(null);
         }
 
     }

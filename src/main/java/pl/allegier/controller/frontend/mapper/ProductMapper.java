@@ -1,37 +1,29 @@
 package pl.allegier.controller.frontend.mapper;
 
-import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.dao.category.CategoryDao;
-import pl.allegier.controller.frontend.dto.AuctionDto;
 import pl.allegier.controller.frontend.dto.ProductDto;
-import pl.allegier.model.Auction;
 import pl.allegier.model.Product;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 
 @Component
-public class ProductMapper implements Mapper<ProductDto,Product>
+public class ProductMapper implements Mapper<ProductDto, Product>
 {
-    private static final ModelMapper mapper = new ModelMapper();
+    @Autowired
+    private AllegierModelMapper mapper;
 
     @Autowired
     private CategoryDao categoryDao;
 
-    static {
-        mapper.addMappings(new ProductMap());
-    }
-
-
     @Transactional
-    public Product toDao(ProductDto dto) {
+    public Product toDao(final ProductDto dto) {
         if( dto == null)
         {
             throw new IllegalArgumentException("Product cannot be null");
@@ -41,7 +33,8 @@ public class ProductMapper implements Mapper<ProductDto,Product>
         return map;
     }
 
-    public ProductDto toDto(Product dao) {
+    @Override
+    public final ProductDto toDto(final Product dao) {
         if( dao == null)
         {
             throw new IllegalArgumentException("Product cannot be null");
