@@ -19,27 +19,27 @@ public class OrderDto extends TimeStampDto implements Serializable {
     private Integer account;
     private Set<OrderProductDto> orderProductDtos;
 
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public Integer getAccount() {
+    public final Integer getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) {
+    public final void setAccount(final Integer account) {
         this.account = account;
     }
 
-    public Set<OrderProductDto> getOrderProductDtos() {
+    public final Set<OrderProductDto> getOrderProductDtos() {
         return orderProductDtos;
     }
 
-    public void setOrderProductDtos(Set<OrderProductDto> orderProductDtos) {
+    public final void setOrderProductDtos(final Set<OrderProductDto> orderProductDtos) {
         this.orderProductDtos = orderProductDtos;
     }
 

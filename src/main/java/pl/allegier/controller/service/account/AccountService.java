@@ -7,6 +7,6 @@ import pl.allegier.model.Account;
  * Created by Pawel Szczepkowski | GoreIT on 03.04.17.
  */
 
-public interface AccountService extends Service<Account,Integer> {
+public interface AccountService extends Service<Account, Integer> {
 
 }

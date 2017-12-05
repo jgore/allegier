@@ -16,35 +16,35 @@ public class OrderProductDto extends TimeStampDto implements Serializable {
     private Integer product;
     private int amount;
 
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public Integer getOrder() {
+    public final Integer getOrder() {
         return order;
     }
 
-    public void setOrder(Integer order) {
+    public final void setOrder(final Integer order) {
         this.order = order;
     }
 
-    public Integer getProduct() {
+    public final Integer getProduct() {
         return product;
     }
 
-    public void setProduct(Integer product) {
+    public final void setProduct(final Integer product) {
         this.product = product;
     }
 
-    public int getAmount() {
+    public final int getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public final void setAmount(final int amount) {
         this.amount = amount;
     }
 

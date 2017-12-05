@@ -24,7 +24,7 @@ public class BidMapper implements Mapper<BidDto, Bid> {
     private AllegierModelMapper mapper;
 
     @Override
-    public Bid toDao(final BidDto bidDto) {
+    public final Bid toDao(final BidDto bidDto) {
         Bid bid = mapper.map(bidDto, Bid.class);
         bid.setAccount(accountService.findOne(bidDto.getAccount()));
         bid.setAuction(auctionService.findOne(bidDto.getAuction()));
@@ -33,7 +33,7 @@ public class BidMapper implements Mapper<BidDto, Bid> {
     }
 
     @Override
-    public BidDto toDto(final Bid bid) {
+    public final BidDto toDto(final Bid bid) {
         return mapper.map(bid, BidDto.class);
     }
 }

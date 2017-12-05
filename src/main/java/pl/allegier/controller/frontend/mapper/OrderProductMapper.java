@@ -24,7 +24,7 @@ public class OrderProductMapper implements Mapper<OrderProductDto, OrderProduct>
 
 
     @Override
-    public OrderProduct toDao(final OrderProductDto dto) {
+    public final OrderProduct toDao(final OrderProductDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("OrderProductDto cannot be null");
         }
@@ -36,13 +36,13 @@ public class OrderProductMapper implements Mapper<OrderProductDto, OrderProduct>
     }
 
     @Override
-    public OrderProductDto toDto(final OrderProduct entity) {
+    public final OrderProductDto toDto(final OrderProduct entity) {
         if (entity == null) {
             throw new IllegalArgumentException("OrderProduct cannot be null");
         }
         OrderProductDto dto = mapper.map(entity, OrderProductDto.class);
-        setOrder(entity,dto);
-        setProduct(entity,dto);
+        setOrder(entity, dto);
+        setProduct(entity, dto);
         return dto;
     }
 

@@ -11,20 +11,19 @@ import java.util.stream.Collectors;
  * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 
-public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<DTO,ID> {
+public abstract class AbstractFrontService<DTO, DAO, ID> implements FrontService<DTO, ID> {
 
-    protected final Mapper<DTO,DAO> mapper;
+    protected final Mapper<DTO, DAO> mapper;
 
-    protected final Service<DAO,ID> service;
+    protected final Service<DAO, ID> service;
 
-    public AbstractFrontService(Mapper<DTO, DAO> mapper, Service<DAO, ID> crudService) {
+    public AbstractFrontService(final Mapper<DTO, DAO> mapper, final Service<DAO, ID> crudService) {
         this.mapper = mapper;
         this.service = crudService;
     }
 
-
     @Override
-    public DTO save(DTO dto) {
+    public final DTO save(final DTO dto) {
         DAO dao = mapper.toDao(dto);
         DAO saved = service.save(dao);
 
@@ -32,47 +31,45 @@ public abstract class AbstractFrontService<DTO,DAO,ID> implements FrontService<D
     }
 
     @Override
-    public DTO update(DTO dto) {
+    public final DTO update(final DTO dto) {
         DAO update = service.update(mapper.toDao(dto));
-        return mapper.toDto( update);
+        return mapper.toDto(update);
     }
 
     @Override
-    public DTO findOne(ID id) {
+    public final DTO findOne(final ID id) {
         DAO dao = service.findOne(id);
 
         return mapper.toDto(dao);
     }
 
     @Override
-    public boolean exists(ID id) {
-        return service.exists( id);
+    public final boolean exists(final ID id) {
+        return service.exists(id);
     }
 
     @Override
-    public Iterable<DTO> findAll() {
+    public final Iterable<DTO> findAll() {
         Iterable<DAO> all = service.findAll();
         List<DAO> daos = Lists.newArrayList(all);
 
         return daos.
                 stream().
-                map(mapper::toDto)
-                .collect(Collectors.toList());
+                map(mapper::toDto).collect(Collectors.toList());
     }
 
-
     @Override
-    public long count() {
+    public final long count() {
         return service.count();
     }
 
     @Override
-    public void delete(ID id) {
-        service.delete( id );
+    public final void delete(final ID id) {
+        service.delete(id);
     }
 
     @Override
-    public void deleteAll() {
+    public final void deleteAll() {
         service.deleteAll();
     }
 }

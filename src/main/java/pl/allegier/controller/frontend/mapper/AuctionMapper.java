@@ -23,7 +23,8 @@ public class AuctionMapper implements Mapper<AuctionDto, Auction> {
     public AuctionMapper() {
     }
 
-    public Auction toDao(final AuctionDto dto) {
+    @Override
+    public final Auction toDao(final AuctionDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("Auction cannot be null");
         }
@@ -34,7 +35,8 @@ public class AuctionMapper implements Mapper<AuctionDto, Auction> {
         return map;
     }
 
-    public AuctionDto toDto(final Auction dao) {
+    @Override
+    public final  AuctionDto toDto(final Auction dao) {
         if (dao == null) {
             throw new IllegalArgumentException("Auction cannot be null");
         }

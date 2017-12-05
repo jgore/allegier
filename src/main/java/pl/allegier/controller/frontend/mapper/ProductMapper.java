@@ -14,8 +14,8 @@ import javax.transaction.Transactional;
  */
 
 @Component
-public class ProductMapper implements Mapper<ProductDto, Product>
-{
+public class ProductMapper implements Mapper<ProductDto, Product> {
+
     @Autowired
     private AllegierModelMapper mapper;
 
@@ -23,9 +23,9 @@ public class ProductMapper implements Mapper<ProductDto, Product>
     private CategoryDao categoryDao;
 
     @Transactional
+    @Override
     public Product toDao(final ProductDto dto) {
-        if( dto == null)
-        {
+        if (dto == null) {
             throw new IllegalArgumentException("Product cannot be null");
         }
         Product map = mapper.map(dto, Product.class);
@@ -35,8 +35,7 @@ public class ProductMapper implements Mapper<ProductDto, Product>
 
     @Override
     public final ProductDto toDto(final Product dao) {
-        if( dao == null)
-        {
+        if (dao == null) {
             throw new IllegalArgumentException("Product cannot be null");
         }
         ProductDto map = mapper.map(dao, ProductDto.class);
@@ -48,22 +47,21 @@ public class ProductMapper implements Mapper<ProductDto, Product>
     public static class ProductMap extends PropertyMap<Product, ProductDto> {
 
         @Override
-        protected void configure() {
+        protected final void configure() {
             map().setCategory(null);
         }
 
     }
 
-    private void setCategory(ProductDto dto, Product entity) {
-        if( dto.getCategory() != null) {
+    private void setCategory(final ProductDto dto, final Product entity) {
+        if (dto.getCategory() != null) {
             entity.setCategory(categoryDao.findById(dto.getCategory()));
         }
     }
 
-    private void setCategory(Product entity, ProductDto dto)
-    {
-        if( entity.getCategory() != null) {
-            dto.setCategory(entity.getCategory().getId()) ;
+    private void setCategory(final Product entity, final ProductDto dto) {
+        if (entity.getCategory() != null) {
+            dto.setCategory(entity.getCategory().getId());
         }
     }
 

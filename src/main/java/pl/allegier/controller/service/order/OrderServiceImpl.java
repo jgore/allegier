@@ -16,18 +16,18 @@ import java.util.List;
  */
 
 @Service
-public class OrderServiceImpl  extends AbstractService<Order,Integer> implements OrderService {
+public class OrderServiceImpl extends AbstractService<Order, Integer> implements OrderService {
 
     private final OrderDao orderDao;
 
     @Autowired
-    public OrderServiceImpl(@Qualifier("orderDao") OrderDao jpaDao) {
+    public OrderServiceImpl(@Qualifier("orderDao") final OrderDao jpaDao) {
         super(jpaDao);
         this.orderDao = jpaDao;
     }
 
     @Override
-    public List<Order> getByAccount(Integer accountId) {
-        return orderDao.getByAccount( accountId) ;
+    public final List<Order> getByAccount(final Integer accountId) {
+        return orderDao.getByAccount(accountId);
     }
 }

@@ -3,7 +3,7 @@ package pl.allegier.controller.frontend.service;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
-public interface FrontService<DTO,ID> {
+public interface FrontService<DTO, ID> {
 
     DTO save(DTO var1);
 

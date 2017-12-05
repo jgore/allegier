@@ -11,10 +11,10 @@ import pl.allegier.model.Product;
  * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 @Service
-public class ProductServiceImpl extends AbstractService<Product,Integer> implements ProductService{
+public class ProductServiceImpl extends AbstractService<Product, Integer> implements ProductService {
 
     @Autowired
-    public ProductServiceImpl( @Qualifier("productDao") Dao<Product, Integer> dao) {
+    public ProductServiceImpl(@Qualifier("productDao") final Dao<Product, Integer> dao) {
         super(dao);
     }
 }

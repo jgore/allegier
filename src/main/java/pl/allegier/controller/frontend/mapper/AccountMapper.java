@@ -19,6 +19,7 @@ public class AccountMapper implements Mapper<AccountDto, Account>{
     private AllegierModelMapper mapper;
 
     @Transactional
+    @Override
     public Account toDao(final AccountDto dto) {
         if( dto == null)
         {
@@ -27,7 +28,8 @@ public class AccountMapper implements Mapper<AccountDto, Account>{
         return mapper.map(dto, Account.class);
     }
 
-    public AccountDto toDto(final Account dao) {
+    @Override
+    public final AccountDto toDto(final Account dao) {
         if( dao == null)
         {
             throw new IllegalArgumentException("Account cannot be null");

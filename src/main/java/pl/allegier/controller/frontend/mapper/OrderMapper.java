@@ -28,6 +28,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
     //    mapper.addMappings(new OrderMap());
     }
 
+    @Override
     public final Order toDao(final OrderDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
@@ -42,7 +43,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
         return map;
     }
 
-
+    @Override
     public final OrderDto toDto(final Order dao) {
 
         if (dao == null) {

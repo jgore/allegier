@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
-public class AbstractProductDto extends TimeStampDto implements Serializable{
+public class AbstractProductDto extends TimeStampDto implements Serializable {
 
     private static final long serialVersionUID = 6534533311682850417L;
 
@@ -34,45 +34,44 @@ public class AbstractProductDto extends TimeStampDto implements Serializable{
         return id;
     }
 
-    public final void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public String getCategory() {
+    public final String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public final void setCategory(final String category) {
         this.category = category;
     }
 
-    public String getTitle() {
+    public final String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public final void setTitle(final String title) {
         this.title = title;
     }
 
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public final void setDescription(final String description) {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public final BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public final void setPrice(final BigDecimal price) {
         this.price = price;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
 }

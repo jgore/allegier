@@ -20,8 +20,8 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Inheritance(strategy  = InheritanceType.TABLE_PER_CLASS)
-public abstract class AbstractProduct extends Timestamp implements Serializable , IIdentifable<Integer> {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class AbstractProduct extends Timestamp implements Serializable, IIdentifable<Integer> {
 
     private static final long serialVersionUID = 8879554901850384465L;
 
@@ -33,7 +33,6 @@ public abstract class AbstractProduct extends Timestamp implements Serializable 
     private String description;
 
     private BigDecimal price;
-
 
     public AbstractProduct(final String title, final String description, final BigDecimal price) {
         this.title = title;
@@ -51,7 +50,7 @@ public abstract class AbstractProduct extends Timestamp implements Serializable 
     }
 
     @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name="category_id",nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     public final Category getCategory() {
         return category;
     }
@@ -70,7 +69,6 @@ public abstract class AbstractProduct extends Timestamp implements Serializable 
     public final BigDecimal getPrice() {
         return price;
     }
-
 
     public final void setId(final Integer id) {
         this.id = id;
@@ -93,8 +91,7 @@ public abstract class AbstractProduct extends Timestamp implements Serializable 
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
 }

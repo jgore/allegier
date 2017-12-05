@@ -27,28 +27,28 @@ public class AccountDto extends TimeStampDto implements Serializable {
     public AccountDto() {
     }
 
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
-    public void setId(final Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
 
-    public String getLogin() {
+    public final String getLogin() {
         return login;
     }
 
-    public void setLogin(final String login) {
+    public final void setLogin(final String login) {
         this.login = login;
     }
 
-    public String getPassword() {
+    public final String getPassword() {
         return password;
     }
 
-    public void setPassword(final String password) {
+    public final void setPassword(final String password) {
         this.password = password;
     }
 

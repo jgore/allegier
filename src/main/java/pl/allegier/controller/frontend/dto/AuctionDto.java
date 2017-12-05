@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
-public class AuctionDto extends AbstractProductDto implements Serializable,IIdentifable<Integer> {
+public class AuctionDto extends AbstractProductDto implements Serializable, IIdentifable<Integer> {
     private static final long serialVersionUID = 1552366802875767338L;
 
     private Set<Integer> bids;
@@ -21,11 +21,11 @@ public class AuctionDto extends AbstractProductDto implements Serializable,IIden
         super(title, description, price);
     }
 
-    public void setBids(Set<Integer> bids) {
+    public final void setBids(Set<Integer> bids) {
         this.bids = bids;
     }
 
-    public Set<Integer> getBids() {
+    public final Set<Integer> getBids() {
         return bids;
     }
 }

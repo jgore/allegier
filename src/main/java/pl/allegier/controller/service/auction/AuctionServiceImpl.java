@@ -15,23 +15,22 @@ import java.util.Set;
  */
 
 @Service
-public class AuctionServiceImpl extends AbstractService<Auction,Integer> implements AuctionService {
+public class AuctionServiceImpl extends AbstractService<Auction, Integer> implements AuctionService {
 
     @Autowired
-    public AuctionServiceImpl ( @Qualifier("auctionDao") Dao<Auction, Integer> dao) {
+    public AuctionServiceImpl(@Qualifier("auctionDao") final Dao<Auction, Integer> dao) {
         super(dao);
     }
 
-
     @Override
-    public void addBid(Integer auctionId, Bid bid) {
+    public final void addBid(final Integer auctionId, final Bid bid) {
 
         Auction auction = findOne(auctionId);
         Set<Bid> bids = auction.getBids();
 
-        bids.add( bid );
-        auction.setBids( bids );
+        bids.add(bid);
+        auction.setBids(bids);
 
-        save( auction);
+        save(auction);
     }
 }

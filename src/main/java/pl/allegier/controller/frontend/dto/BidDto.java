@@ -19,36 +19,36 @@ public class BidDto extends TimeStampDto implements Serializable, IIdentifable<I
     private Integer auction;
 
     @Override
-    public Integer getId() {
+    public final Integer getId() {
         return id;
     }
 
     @Override
-    public void setId(Integer id) {
+    public final void setId(final Integer id) {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
+    public final BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public final void setPrice(final BigDecimal price) {
         this.price = price;
     }
 
-    public Integer getAccount() {
+    public final Integer getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) {
+    public final void setAccount(final Integer account) {
         this.account = account;
     }
 
-    public Integer getAuction() {
+    public final Integer getAuction() {
         return auction;
     }
 
-    public void setAuction(Integer auction) {
+    public final void setAuction(final Integer auction) {
         this.auction = auction;
     }
 }
