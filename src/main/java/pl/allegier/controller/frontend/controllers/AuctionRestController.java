@@ -13,14 +13,17 @@ import pl.allegier.controller.frontend.service.auction.AuctionFrontService;
 
 @RestController
 @RequestMapping("rest/auctions")
-public class AuctionRestController extends AbstractRestController<AuctionDto,Integer> {
+public class AuctionRestController extends AbstractRestController<AuctionDto, Integer> {
 
-    @Autowired
     private AuctionFrontService auctionFrontService;
 
+    @Autowired
+    public AuctionRestController(final AuctionFrontService frontService) {
+        this.auctionFrontService = frontService;
+    }
 
     @Override
-    public FrontService<AuctionDto, Integer> getFrontService() {
+    public final FrontService<AuctionDto, Integer> getFrontService() {
         return auctionFrontService;
     }
 }

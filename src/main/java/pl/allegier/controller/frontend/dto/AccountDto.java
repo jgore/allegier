@@ -1,6 +1,7 @@
 package pl.allegier.controller.frontend.dto;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import pl.allegier.model.id.IIdentifable;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Objects;
  * Created by Pawel Szczepkowski | GoreIT on 13.04.17.
  */
 
-public class AccountDto extends TimeStampDto implements Serializable {
+public class AccountDto extends TimeStampDto implements Serializable, IIdentifable<Integer> {
 
     private static final long serialVersionUID = 2163332914760385642L;
 
@@ -35,7 +36,6 @@ public class AccountDto extends TimeStampDto implements Serializable {
         this.id = id;
     }
 
-
     public final String getLogin() {
         return login;
     }
@@ -53,8 +53,7 @@ public class AccountDto extends TimeStampDto implements Serializable {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
 }

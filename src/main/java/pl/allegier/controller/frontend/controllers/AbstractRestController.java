@@ -15,57 +15,67 @@ import pl.allegier.model.id.IIdentifable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
- */
-public abstract class AbstractRestController<DTO extends IIdentifable<ID>,ID> implements RestController<DTO> {
+        /*
+         * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
+         */
 
-    public abstract FrontService<DTO, ID> getFrontService( );
+/**
+ * Abstract Rest Controller with Basic used methods.
+ *
+ * @param <DTO>
+ * @param <ID>
+ */
+public abstract class AbstractRestController<DTO extends IIdentifable<ID>, ID> implements RestController<DTO> {
+
+    /**
+     * front service to be mainly used in controller
+     *
+     * @return
+     */
+    public abstract FrontService<DTO, ID> getFrontService();
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<DTO>> getAll() {
+    @Override
+    public final ResponseEntity<List<DTO>> getAll() {
 
         ArrayList<DTO> dtos = Lists.newArrayList(getFrontService().findAll());
-
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResponseEntity<DTO> getOne(@PathVariable("id") String id) {
+    @Override
+    public final ResponseEntity<DTO> getOne(@PathVariable("id") final String id) {
 
         DTO dto = getFrontService().findOne((ID) Integer.valueOf(id));
-
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<DTO> create(@RequestBody DTO dto) {
+    @Override
+    public final ResponseEntity<DTO> create(@RequestBody final DTO dto) {
 
         DTO saved = getFrontService().save(dto);
-
         return new ResponseEntity<>(saved, HttpStatus.OK);
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<DTO> update(@RequestBody DTO dto, @PathVariable("id") String id) {
+    @Override
+    public final ResponseEntity<DTO> update(@RequestBody final DTO dto, @PathVariable("id") final String id) {
 
         DTO update = getFrontService().update(dto);
-
         return new ResponseEntity<>(update, HttpStatus.OK);
-
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity delete( @PathVariable("id") String id) {
+    @Override
+    public final ResponseEntity delete(@PathVariable("id") final String id) {
 
         getFrontService().delete((ID) Integer.valueOf(id));
-
-        return new ResponseEntity<>( HttpStatus.OK);
-
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
