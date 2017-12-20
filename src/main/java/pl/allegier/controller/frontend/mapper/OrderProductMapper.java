@@ -1,6 +1,5 @@
 package pl.allegier.controller.frontend.mapper;
 
-import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,6 +39,9 @@ public class OrderProductMapper implements Mapper<OrderProductDto, OrderProduct>
         if (entity == null) {
             throw new IllegalArgumentException("OrderProduct cannot be null");
         }
+        mapper.createTypeMap(OrderProduct.class, OrderProductDto.class);
+        TypeMap<OrderProduct, OrderProductDto> typeMap = mapper.getTypeMap(OrderProduct.class, OrderProductDto.class);
+        typeMap.addMappings(mapper -> mapper.skip(OrderProductDto::setOrder));
         OrderProductDto dto = mapper.map(entity, OrderProductDto.class);
         setOrder(entity, dto);
         setProduct(entity, dto);

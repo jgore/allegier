@@ -49,6 +49,7 @@ public class OrderMapper implements Mapper<OrderDto, Order> {
         if (dao == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
+
         OrderDto orderDto = mapper.map(dao, OrderDto.class);
 
         if (dao.getOrderProducts() != null) {

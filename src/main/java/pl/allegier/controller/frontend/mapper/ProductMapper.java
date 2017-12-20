@@ -1,10 +1,13 @@
 package pl.allegier.controller.frontend.mapper;
 
 import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.dao.category.CategoryDao;
+import pl.allegier.controller.frontend.dto.OrderProductDto;
 import pl.allegier.controller.frontend.dto.ProductDto;
+import pl.allegier.model.OrderProduct;
 import pl.allegier.model.Product;
 
 import javax.transaction.Transactional;
@@ -38,20 +41,15 @@ public class ProductMapper implements Mapper<ProductDto, Product> {
         if (dao == null) {
             throw new IllegalArgumentException("Product cannot be null");
         }
+        mapper.createTypeMap(Product.class, ProductDto.class);
+        TypeMap<Product, ProductDto> typeMap = mapper.getTypeMap(Product.class, ProductDto.class);
+        typeMap.addMappings(mapper -> mapper.skip(ProductDto::setCategory));
         ProductDto map = mapper.map(dao, ProductDto.class);
         setCategory(dao, map);
         return map;
 
     }
 
-    public static class ProductMap extends PropertyMap<Product, ProductDto> {
-
-        @Override
-        protected final void configure() {
-            map().setCategory(null);
-        }
-
-    }
 
     private void setCategory(final ProductDto dto, final Product entity) {
         if (dto.getCategory() != null) {

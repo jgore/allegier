@@ -5,8 +5,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -35,28 +36,16 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
+
     @Bean(name = "transactionManager")
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) throws IOException {
+    public   PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
 
-    @Bean(name = "sessionFactory")
-    public SessionFactory getSessionFactory(DataSource dataSource) throws IOException {
-
-        LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
-
-        sessionBuilder.scanPackages("pl.model");
-        sessionBuilder.setProperty("hibernate.show_sql", "true");
-        sessionBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        sessionBuilder.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        //sessionBuilder.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        sessionBuilder.setProperty("hibernate.hbm2ddl.import_files", "initial_data.sql");
-        return sessionBuilder.buildSessionFactory();
-    }
-
     @Bean
+    @Primary
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
@@ -98,7 +87,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("resources/**")
                 .addResourceLocations("/WEB-INF/views/resources/");
