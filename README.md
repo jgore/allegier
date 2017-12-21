@@ -2,17 +2,20 @@
 
 Application for selling items through internet with Reactive way.
 
-Java 9 
+Java 9, 
 ReactJS
 
 Spring 5, 
-Spring MVC
-JPA
-JTA
+Spring MVC,
+JPA,
+JTA,
 
-Hibernate 5
-PostgreSQL
-SQL
+Hibernate 5,
+PostgreSQL,
+SQL,
+
+JUNIT, MOCKITO, SPRING-TEST
+MAVEN,
 
 INIT :
 
