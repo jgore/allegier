@@ -1,15 +1,16 @@
 # allegier
 
-Shop application.
+Application for selling items through internet with Reactive way.
 
-Java 8 
-AngularJS
+Java 9 
+ReactJS
 
-Spring, 
+Spring 5, 
 Spring MVC
 JPA
+JTA
 
-Hibernate
+Hibernate 5
 PostgreSQL
 SQL
 
