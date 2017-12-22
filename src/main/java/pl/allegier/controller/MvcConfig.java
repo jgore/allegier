@@ -57,15 +57,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return em;
     }
 
-    @Bean
-    public JpaVendorAdapter getJpaVendorAdapter() {
-        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-        hibernateJpaVendorAdapter.setShowSql(true);
-        hibernateJpaVendorAdapter.setGenerateDdl(true);
-        hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
-        return hibernateJpaVendorAdapter;
-    }
-
     @Bean(name = "dataSource")
     public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
@@ -75,6 +66,15 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         dataSource.setPassword("admin");
 
         return dataSource;
+    }
+
+    @Bean
+    public JpaVendorAdapter getJpaVendorAdapter() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        hibernateJpaVendorAdapter.setShowSql(true);
+        hibernateJpaVendorAdapter.setGenerateDdl(true);
+        hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
+        return hibernateJpaVendorAdapter;
     }
 
     @Bean
