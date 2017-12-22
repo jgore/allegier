@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.allegier.controller.frontend.service.FrontService;
 import pl.allegier.model.id.IIdentifable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-        /*
-         * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
-         */
 
 /**
  * Abstract Rest Controller with Basic used methods.
  *
+ * @author Pawel Szczepkowski | GoreIT
  * @param <DTO>
  * @param <ID>
  */
@@ -35,14 +32,16 @@ public abstract class AbstractRestController<DTO extends IIdentifable<ID>, ID> i
     public abstract FrontService<DTO, ID> getFrontService();
 
     @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
     @Override
     public final ResponseEntity<List<DTO>> getAll() {
 
-        ArrayList<DTO> dtos = Lists.newArrayList(getFrontService().findAll());
+        List<DTO> dtos = Lists.newArrayList(getFrontService().findAll());
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @ResponseBody
     @Override
     public final ResponseEntity<DTO> getOne(@PathVariable("id") final String id) {
 
