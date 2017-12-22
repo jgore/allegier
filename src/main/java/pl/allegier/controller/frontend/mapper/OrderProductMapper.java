@@ -1,10 +1,11 @@
 package pl.allegier.controller.frontend.mapper;
 
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.OrderProductDto;
+import pl.allegier.model.Order;
 import pl.allegier.model.OrderProduct;
+import pl.allegier.model.Product;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 27.10.17.
@@ -13,54 +14,44 @@ import pl.allegier.model.OrderProduct;
 @Component
 public class OrderProductMapper implements Mapper<OrderProductDto, OrderProduct> {
 
-    private AllegierModelMapper mapper;
-
     @Autowired
-    public OrderProductMapper(final AllegierModelMapper mapper) {
-        this.mapper = mapper;
-        TypeMap<OrderProduct, OrderProductDto> typeMap = mapper.getTypeMap(OrderProduct.class, OrderProductDto.class);
-    }
-
+    private TimestampMapper timestampMapper;
 
     @Override
     public final OrderProduct toDao(final OrderProductDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("OrderProductDto cannot be null");
         }
-        OrderProduct entity = mapper.map(dto, OrderProduct.class);
-        entity.getProduct().setId(dto.getProduct());
-        entity.getOrder().setId(dto.getOrder());
-        return entity;
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setId(dto.getId());
 
+        Order order = new Order();
+        order.setId(dto.getOrder());
+        orderProduct.setOrder(order);
+
+        Product product = new Product();
+        product.setId(dto.getProduct());
+        orderProduct.setProduct(product);
+
+        orderProduct.setAmount(dto.getAmount());
+        timestampMapper.toDao(orderProduct, dto);
+
+        return orderProduct;
     }
 
     @Override
-    public final OrderProductDto toDto(final OrderProduct entity) {
-        if (entity == null) {
+    public final OrderProductDto toDto(final OrderProduct orderProduct) {
+        if (orderProduct == null) {
             throw new IllegalArgumentException("OrderProduct cannot be null");
         }
-        mapper.createTypeMap(OrderProduct.class, OrderProductDto.class);
-        TypeMap<OrderProduct, OrderProductDto> typeMap = mapper.getTypeMap(OrderProduct.class, OrderProductDto.class);
-        typeMap.addMappings(mapper -> mapper.skip(OrderProductDto::setOrder));
-        OrderProductDto dto = mapper.map(entity, OrderProductDto.class);
-        setOrder(entity, dto);
-        setProduct(entity, dto);
+        OrderProductDto dto = new OrderProductDto();
+        dto.setId(orderProduct.getId());
+        dto.setOrder(orderProduct.getOrder().getId());
+        dto.setProduct(orderProduct.getProduct().getId());
+        dto.setAmount(orderProduct.getAmount());
+        timestampMapper.toDto(dto, orderProduct);
+
         return dto;
     }
-
-    private OrderProductDto setOrder(final OrderProduct entity, final OrderProductDto dto) {
-        if (entity.getOrder() != null) {
-            dto.setOrder(entity.getOrder().getId());
-        }
-        return dto;
-    }
-
-    private OrderProductDto setProduct(final OrderProduct entity, final OrderProductDto dto) {
-        if (entity.getProduct() != null) {
-            dto.setProduct(entity.getProduct().getId());
-        }
-        return dto;
-    }
-
 
 }

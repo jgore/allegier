@@ -1,10 +1,10 @@
 package pl.allegier.controller.frontend.mapper;
 
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.controller.frontend.dto.OrderProductDto;
+import pl.allegier.model.Account;
 import pl.allegier.model.Order;
 import pl.allegier.model.OrderProduct;
 
@@ -19,66 +19,54 @@ import java.util.stream.Collectors;
 public class OrderMapper implements Mapper<OrderDto, Order> {
 
     @Autowired
-    private AllegierModelMapper mapper;
+    private TimestampMapper timestampMapper;
 
     @Autowired
-    private Mapper<OrderProductDto, OrderProduct>  orderProductMapper;
-
-    static {
-    //    mapper.addMappings(new OrderMap());
-    }
+    private OrderProductMapper orderProductMapper;
 
     @Override
     public final Order toDao(final OrderDto dto) {
         if (dto == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
-        Order map = mapper.map(dto, Order.class);
+        Order order = new Order();
+        order.setId(dto.getId());
+        Account account = new Account();
+        account.setId(dto.getAccount());
+        order.setAccount(account);
+
         if (dto.getOrderProductDtos() != null) {
             Set<OrderProduct> orderProducts = dto.getOrderProductDtos().stream().
-                    map(orderProductDto -> orderProductMapper.toDao(orderProductDto))
-                    .collect(Collectors.toSet());
-            map.setOrderProducts(orderProducts);
+                    map(orderProductDto -> orderProductMapper.toDao(orderProductDto)).
+                    collect(Collectors.toSet());
+            order.setOrderProducts(orderProducts);
         }
-        return map;
+        timestampMapper.toDao(account, dto);
+
+        return order;
     }
 
     @Override
-    public final OrderDto toDto(final Order dao) {
-
-        if (dao == null) {
+    public final OrderDto toDto(final Order entity) {
+        if (entity == null) {
             throw new IllegalArgumentException("order cannot be null");
         }
+        OrderDto dto = new OrderDto();
+        dto.setId(entity.getId());
 
-        OrderDto orderDto = mapper.map(dao, OrderDto.class);
-
-        if (dao.getOrderProducts() != null) {
-
-            Set<OrderProductDto> orderProductDtos = dao.getOrderProducts().stream().
-                    map(orderProduct -> orderProductMapper.toDto(orderProduct)).collect(Collectors.toSet());
-
-            orderDto.setOrderProductDtos(orderProductDtos);
+        if (entity.getAccount() != null) {
+            dto.setAccount(entity.getAccount().getId());
         }
 
-        return setAccount(dao, orderDto);
-    }
-
-    private OrderDto setAccount(final Order dao, final OrderDto orderDto) {
-        if (dao.getAccount() != null) {
-            orderDto.setAccount(dao.getAccount().getId());
-        }
-        return orderDto;
-    }
-
-
-    public static class OrderMap extends PropertyMap<Order, OrderDto> {
-
-        @Override
-        protected void configure() {
-        //    map().setOrderProductDtos(Sets.newHashSet());
-        //    map().setAccount(null);
+        if (entity.getOrderProducts() != null) {
+            Set<OrderProductDto> orderProductDtos = entity.getOrderProducts().stream().
+                    map(orderProduct -> orderProductMapper.toDto(orderProduct)).
+                    collect(Collectors.toSet());
+            dto.setOrderProductDtos(orderProductDtos);
         }
 
+        timestampMapper.toDto(dto, entity);
+        return dto;
     }
 }
 

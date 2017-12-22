@@ -33,7 +33,6 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
     private String password;
 
     private Set<Order> orders;
-    private Set<Bid> bids;
     private Address address = new Address();
 
     public Account(final String login, final String password) {
@@ -50,11 +49,6 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
     @Override
     public final Integer getId() {
         return id;
-    }
-
-    @OneToMany(cascade = { CascadeType.ALL, CascadeType.MERGE, CascadeType.REMOVE }, mappedBy = "account", fetch = FetchType.EAGER)
-    public final Set<Bid> getBids() {
-        return bids;
     }
 
     @Column
@@ -81,10 +75,6 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
         this.id = id;
     }
 
-    public final void setBids(final Set<Bid> bids) {
-        this.bids = bids;
-    }
-
     public final void setLogin(final String login) {
         this.login = login;
     }
@@ -109,13 +99,13 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
             return false;
         Account account = (Account) o;
         return Objects.equals(getLogin(), account.getLogin()) && Objects.equals(getPassword(), account.getPassword()) && Objects
-                .equals(getOrders(), account.getOrders()) && Objects.equals(getBids(), account.getBids()) && Objects.equals(getAddress(), account.getAddress())
+                .equals(getOrders(), account.getOrders()) && Objects.equals(getAddress(), account.getAddress())
                 && Objects.equals(getCreated(), account.getCreated()) && Objects.equals(getUpdated(), account.getUpdated());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getLogin(), getPassword(), getOrders(), getBids(), getAddress(), getCreated(), getUpdated());
+        return Objects.hash(getLogin(), getPassword(), getOrders(), getAddress(), getCreated(), getUpdated());
     }
 
     @Override

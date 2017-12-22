@@ -13,7 +13,7 @@ import java.util.Date;
  */
 
 @MappedSuperclass
-public abstract class Timestamp implements ITimestamp{
+public  class Timestamp implements ITimestamp{
 
     /**
     Field should be use us entity created timestamp

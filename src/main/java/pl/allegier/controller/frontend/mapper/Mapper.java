@@ -6,23 +6,23 @@ package pl.allegier.controller.frontend.mapper;
  * Mapper should map DTO -> DO and DO -> DTO
  *
  * @param <DTO> DTO>Data Transfer object for mapping
- * @param <DO>  Data Object for mapping
+ * @param <ENTITY>  Data Object for mapping
  */
-public interface Mapper<DTO, DO> {
+public interface Mapper<DTO, ENTITY> {
 
     /**
      *
      * @param dto to be mapped
-     * @return mapped DO
+     * @return ENTITY mapped entity
      */
-    DO toDao(DTO dto);
+    ENTITY toDao(DTO dto);
 
     /**
      *
-     * @param dao to be mapped
+     * @param entity to be mapped
      * @return mapped DTO
      */
 
-    DTO toDto(DO dao);
+    DTO toDto(ENTITY entity);
 
 }

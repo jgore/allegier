@@ -1,40 +1,57 @@
 package pl.allegier.controller.frontend.mapper;
 
-import org.modelmapper.ModelMapper;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.allegier.controller.frontend.dto.AccountDto;
 import pl.allegier.model.Account;
-
-import javax.transaction.Transactional;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
 
 @Component
-public class AccountMapper implements Mapper<AccountDto, Account>{
+public class AccountMapper implements Mapper<AccountDto, Account> {
+
+    private static final Logger LOGGER = Logger.getLogger(AccountMapper.class);
 
     @Autowired
-    private AllegierModelMapper mapper;
+    private TimestampMapper timestampMapper;
 
-    @Transactional
+    private AddressMapper addressMapper = new AddressMapper();
+
     @Override
-    public Account toDao(final AccountDto dto) {
-        if( dto == null)
-        {
-            throw new IllegalArgumentException("Account cannot be null");
+    public final Account toDao(final AccountDto dto) {
+        if (dto == null) {
+            throw new IllegalArgumentException("AccountDto cannot be null");
         }
-        return mapper.map(dto, Account.class);
+
+        Account account = new Account();
+        account.setId(dto.getId());
+        account.setLogin(dto.getLogin());
+        account.setPassword(dto.getPassword());
+        account.setAddress(addressMapper.toDao(dto.getAddressDto()));
+
+        timestampMapper.toDao(account, dto);
+
+        return account;
     }
 
     @Override
-    public final AccountDto toDto(final Account dao) {
-        if( dao == null)
-        {
-            throw new IllegalArgumentException("Account cannot be null");
+    public final AccountDto toDto(final Account account) {
+        if (account == null) {
+            throw new IllegalArgumentException("account cannot be null");
         }
-        return mapper.map(dao, AccountDto.class);
+
+        AccountDto dto = new AccountDto();
+        dto.setId(account.getId());
+        dto.setLogin(account.getLogin());
+        dto.setPassword(account.getPassword());
+        dto.setAddressDto(addressMapper.toDto(account.getAddress()));
+
+        timestampMapper.toDto(dto, account);
+
+        return dto;
     }
 
 }

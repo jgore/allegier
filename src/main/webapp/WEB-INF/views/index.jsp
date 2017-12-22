@@ -21,7 +21,7 @@
             $.ajax({
                 url: "http://localhost:8080/allegier/rest/products"
             }).then(function (data) {
-                self.setState({employees: data._embedded.employees});
+                self.setState({products: data.products});
             });
         },
 
