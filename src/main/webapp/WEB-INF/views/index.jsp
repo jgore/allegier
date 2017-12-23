@@ -17,16 +17,17 @@
     let App = React.createClass({
 
         loadEmployeesFromServer: function () {
-            var self = this;
+            let self = this;
             $.ajax({
-                url: "http://localhost:8080/allegier/rest/products"
+                url: "http://localhost:8081/allegier/rest/products"
             }).then(function (data) {
-                self.setState({products: data.products});
+                self.setState({products: data});
+                console.log(data);
             });
         },
 
         getInitialState: function () {
-            return {employees: []};
+            return {products: []};
         },
 
         componentDidMount: function () {
@@ -34,41 +35,36 @@
         },
 
         render() {
-            return ( <EmployeeTable employees={this.state.employees}/> );
+            return ( <ProductsTable products={this.state.products}/> );
         }
+
     });
 
-    let Employee = React.createClass({
+    let Product = React.createClass({
         render: function() {
             return (
                 <tr>
-                    <td>{this.props.employee.name}</td>
-                    <td>{this.props.employee.age}</td>
-                    <td>{this.props.employee.years}</td>
+                    <td>{this.props.product.title}</td>
+                    <td>{this.props.product.price}</td>
+                    <td>{this.props.product.category}</td>
                 </tr>);
         }
     });
 
-    let EMPLOYEES = [
-        {name: 'Joe Biden', age: 45, years: 5},
-        {name: 'President Obama', age: 54, years: 8},
-        {name: 'Crystal Mac', age: 34, years: 12},
-        {name: 'James Henry', age: 33, years: 2}
-    ];
-    let EmployeeTable = React.createClass({
+    let ProductsTable = React.createClass({
         render: function() {
             let rows = [];
-            this.props.employees.forEach(function(employee) {
-                rows.push(<Employee employee={employee} />);
+            this.props.products.forEach(function(product) {
+                rows.push(<Product product={product} />);
             });
             return (
                 <div className="container">
                     <table className="table table-striped">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Years</th>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Category</th>
                         </tr>
                         </thead>
                         <tbody>{rows}</tbody>
@@ -79,7 +75,7 @@
     });
 
     ReactDOM.render(
-        <EmployeeTable employees={EMPLOYEES} />, document.getElementById('root')
+        <App/>, document.getElementById('root')
     );
 
 </script>
