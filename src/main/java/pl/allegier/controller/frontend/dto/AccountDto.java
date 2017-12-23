@@ -1,18 +1,15 @@
 package pl.allegier.controller.frontend.dto;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import pl.allegier.model.Address;
 import pl.allegier.model.id.IIdentifable;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 13.04.17.
  */
 
-public class AccountDto extends TimeStampDto implements Serializable, IIdentifable<Integer> {
+public class AccountDto extends BaseDto implements Serializable, IIdentifable<Integer> {
 
     private static final long serialVersionUID = 2163332914760385642L;
 

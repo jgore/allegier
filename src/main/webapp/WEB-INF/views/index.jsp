@@ -11,12 +11,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
 
 <script type="text/babel">
 
     let App = React.createClass({
 
-        loadEmployeesFromServer: function () {
+        loadProductsFromServer: function () {
             let self = this;
             $.ajax({
                 url: "http://localhost:8081/allegier/rest/products"
@@ -31,7 +33,7 @@
         },
 
         componentDidMount: function () {
-            this.loadEmployeesFromServer();
+            this.loadProductsFromServer();
         },
 
         render() {
@@ -41,13 +43,35 @@
     });
 
     let Product = React.createClass({
+
+        getInitialState: function() {
+            return {display: true };
+        },
+        handleDelete() {
+            var self = this;
+            $.ajax({
+                url: self.props.product.link+"/"+self.props.product.id,
+                type: 'DELETE',
+                success: function(result) {
+                    self.setState({display: false});
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    toastr.error(xhr.responseJSON.message);
+                }
+            });
+        },
         render: function() {
-            return (
+            if (this.state.display==false) return null;
+            else return (
                 <tr>
                     <td>{this.props.product.title}</td>
                     <td>{this.props.product.price}</td>
                     <td>{this.props.product.category}</td>
-                </tr>);
+                    <td>
+                        <button className="btn btn-info" onClick={this.handleDelete}>Delete</button>
+                    </td>
+                </tr>
+            );
         }
     });
 

@@ -1,12 +1,11 @@
 package pl.allegier.controller.frontend.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 27.10.17.
  */
-public class OrderProductDto extends TimeStampDto implements Serializable {
+public class OrderProductDto extends BaseDto implements Serializable {
 
     private static final long serialVersionUID = 4547295416691998643L;
 

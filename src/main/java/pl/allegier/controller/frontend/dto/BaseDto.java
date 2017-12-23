@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Generic for DTO's to be timestamped
  */
-public class TimeStampDto implements ITimestamp {
+public class BaseDto implements ITimestamp, Linked {
 
     /**
      * created timestamp
@@ -18,6 +18,24 @@ public class TimeStampDto implements ITimestamp {
      * updated timestamp
      */
     private Date updated;
+
+    /**
+     * String Return Source Link
+     *
+     * @return
+     */
+
+    private String link;
+
+    @Override
+    public final String getLink() {
+        return link;
+    }
+
+    @Override
+    public final void setLink(final String aLink) {
+        this.link = aLink;
+    }
 
     @Override
     public final Date getCreated() {

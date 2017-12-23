@@ -4,12 +4,11 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 10.08.17.
  */
-public class AbstractProductDto extends TimeStampDto implements Serializable {
+public class AbstractProductDto extends BaseDto implements Serializable {
 
     private static final long serialVersionUID = 6534533311682850417L;
 

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 /**
  * Created by Pawel Szczepkowski | GoreIT on 14.04.17.
  */
+
 public class ProductDto extends AbstractProductDto implements Serializable, IIdentifable<Integer> {
 
     private static final long serialVersionUID = 7410956460083426518L;
