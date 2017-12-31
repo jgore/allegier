@@ -87,6 +87,7 @@ public abstract class AbstractDaoTest<E extends IIdentifable<ID>, ID> implements
     public void findAllTest() {
         E entity = createEntity();
         repository.save(entity);
+        repository.remove( entity);
         List<E> all = repository.findAll();
         assertThat(all.size(), equalTo(1));
     }

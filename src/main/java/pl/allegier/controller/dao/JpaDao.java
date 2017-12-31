@@ -20,7 +20,7 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     /**
      * Class to be used by extending classes - here we have generic
      */
-    private Class<E> entityClass;
+    protected Class<E> entityClass;
 
     /**
      *  Peristancy to DB
@@ -40,7 +40,7 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     }
 
     @Override
-    public final List<E> findAll() {
+    public  List<E> findAll() {
         return em.createQuery("from " + entityClass.getSimpleName() + " order by created desc").getResultList();
     }
 
@@ -76,7 +76,7 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     @Override
     @Transactional
     public void removeAll() {
-        findAll().forEach(entity -> em.remove(entity));
+        findAll().forEach(this::remove);
     }
 
 }

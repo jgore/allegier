@@ -64,7 +64,7 @@ public abstract class AbstractFrontService<DTO, DAO, ID> implements FrontService
     }
 
     @Override
-    public final void delete(final ID id) {
+    public  void delete(final ID id) {
         service.delete(id);
     }
 

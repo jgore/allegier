@@ -29,10 +29,10 @@ import static org.junit.Assert.assertThat;
  */
 
 @Component
-public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoTest<Order,Integer> {
+public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements DaoTest<Order, Integer> {
 
-    public static final String TEST_PROD_TITLE= " TEST _ PROD _ TITLE 1";
-    public static final BigDecimal TEST_PROD_PRICE= BigDecimal.valueOf(99.99);
+    public static final String TEST_PROD_TITLE = " TEST _ PROD _ TITLE 1";
+    public static final BigDecimal TEST_PROD_PRICE = BigDecimal.valueOf(99.99);
 
     @Autowired
     private OrderDao orderDao;
@@ -53,16 +53,37 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
 
     @After
     @Override
-    public  void cleanUp()
-    {
+    public void cleanUp() {
         orderDao.removeAll();
         productDao.removeAll();
         accountDao.removeAll();
     }
 
     @Test
-    public void shouldReturnGetByAccount()
-    {
+    public void shouldGetOrdersByProduct() {
+        Order order = createEntity();
+        Account account = new Account();
+        account.setLogin("1234");
+        Account saved = accountDao.save(account);
+        order.setAccount(saved);
+
+        OrderProduct orderProduct = new OrderProduct();
+        Product product = saveProduct();
+
+        orderProduct.setProduct(product);
+        order.setOrderProducts(Sets.newHashSet(orderProduct));
+
+        orderProduct.setOrder( order);
+
+        orderDao.save(order);
+
+        List<Order> byProduct = orderDao.getOrdersByProduct(product.getId());
+
+        assertThat(byProduct.size(), equalTo(1));
+    }
+
+    @Test
+    public void shouldReturnGetByAccount() {
         Order order = createEntity();
         Account account = new Account();
         account.setLogin("1234");
@@ -72,20 +93,18 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
 
         List<Order> byAccount = orderDao.getByAccount(order.getAccount().getId());
 
-        assertThat( byAccount.size(), equalTo(1));
+        assertThat(byAccount.size(), equalTo(1));
     }
 
     @Test
-    public void shouldSaveOrderWithRelationToProducts()
-    {
+    public void shouldSaveOrderWithRelationToProducts() {
         Order order = createOrderWithProducts();
-        assertThat( order.getOrderProducts().size(), equalTo(2 ));
+        assertThat(order.getOrderProducts().size(), equalTo(2));
     }
 
-    public Order createOrderWithProducts()
-    {
-        Product product1 = createProduct();
-        Product product2 = createProduct();
+    public Order createOrderWithProducts() {
+        Product product1 = saveProduct();
+        Product product2 = saveProduct();
 
         product1 = productDao.findById(product1.getId());
         product2 = productDao.findById(product2.getId());
@@ -102,37 +121,34 @@ public class OrderDaoTest extends AbstractDaoTest<Order,Integer> implements DaoT
 
         Order save = orderDao.save(order);
 
-        return orderDao.findById( save.getId() );
+        return orderDao.findById(save.getId());
     }
-
 
     @Override
     public Order createEntity() {
         return new Order();
     }
 
-    public Product createProduct() {
+    public Product saveProduct() {
         Category category = createCategory();
-        Category saved= categoryDao.save(category);
+        Category saved = categoryDao.save(category);
         category = categoryDao.findById(saved.getId());
 
         Product product = new Product();
         product.setTitle(TEST_PROD_TITLE);
-        product.setPrice( TEST_PROD_PRICE);
+        product.setPrice(TEST_PROD_PRICE);
         product.setCategory(category);
         return productDao.save(product);
     }
 
-    public Category createCategory()
-    {
+    public Category createCategory() {
         Category category = new Category();
         category.setId("1234");
 
         return category;
     }
 
-    public OrderProduct createOrderProduct(Product product )
-    {
+    public OrderProduct createOrderProduct(Product product) {
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setAmount(1);
         orderProduct.setProduct(product);

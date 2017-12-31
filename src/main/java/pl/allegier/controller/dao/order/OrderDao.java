@@ -10,5 +10,18 @@ import java.util.List;
  */
 
 public interface OrderDao extends Dao<Order, Integer> {
-    List<Order> getByAccount(Integer AccountId);
+
+    /**
+     * get order by account
+     * @param accountId
+     * @return
+     */
+    List<Order> getByAccount(Integer accountId);
+
+    /**
+     * get orders containing product
+     * @param productId
+     * @return
+     */
+    List<Order> getOrdersByProduct(final Integer productId);
 }
