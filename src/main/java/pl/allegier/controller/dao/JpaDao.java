@@ -12,12 +12,19 @@ import java.util.List;
 
 /**
  * Created by Pawel Szczepkowski | Java4you.pl  on 21.05.17.
+ *
  */
 @Repository
 public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, ID> {
 
-    protected Class<E> entityClass;
+    /**
+     * Class to be used by extending classes - here we have generic
+     */
+    private Class<E> entityClass;
 
+    /**
+     *  Peristancy to DB
+     */
     @PersistenceContext
     protected EntityManager em;
 
@@ -28,17 +35,17 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     }
 
     @Override
-    public E findById(ID id) {
+    public final E findById(final ID id) {
         return em.find(entityClass, id);
     }
 
     @Override
-    public List<E> findAll() {
-        return em.createQuery("from " + entityClass.getSimpleName() +" order by created desc").getResultList();
+    public final List<E> findAll() {
+        return em.createQuery("from " + entityClass.getSimpleName() + " order by created desc").getResultList();
     }
 
     @Override
-    public Long count() {
+    public final Long count() {
         return (Long) em.
                 createQuery("select count(e) from " + entityClass.getSimpleName() + " e").getSingleResult();
     }
@@ -69,7 +76,7 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     @Override
     @Transactional
     public void removeAll() {
-        findAll().forEach( entity-> em.remove(entity));
+        findAll().forEach(entity -> em.remove(entity));
     }
 
 }

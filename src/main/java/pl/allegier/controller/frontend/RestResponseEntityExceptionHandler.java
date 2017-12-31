@@ -17,14 +17,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     /**
      * Base Handling exceptions
-     * @param ex
-     * @param request
-     * @return
+     * @param ex exception
+     * @param request request
+     * @return response
      */
     @ExceptionHandler(value = { Exception.class})
     protected final ResponseEntity<Object> handleConflict(final RuntimeException ex, final WebRequest request) {
-        String bodyOfResponse = "This should be application specific";
-        return handleExceptionInternal(ex, bodyOfResponse,
+        return handleExceptionInternal(ex, ex.getMessage(),
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 }

@@ -50,7 +50,7 @@ public abstract class AbstractService<E, ID> implements Service<E, ID> {
     }
 
     @Override
-    public void deleteAll() {
+    public final void deleteAll() {
         dao.removeAll();
     }
 }
