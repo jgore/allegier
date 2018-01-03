@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from "react-dom";
-
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom';
 
 class App extends React.Component {
 
@@ -72,7 +76,7 @@ class Product extends React.Component {
             .then(function (response) {
                 return response;
             })
-            .then( function (response) {
+            .then(function (response) {
                 console.log(response);
                 window.location.reload();
             })
@@ -94,6 +98,11 @@ class Product extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <App/>, document.getElementById('root')
+ReactDOM.render((
+    <Router>
+        <App />
+    </Router> ), document.getElementById('root')
 );
+
+
+
