@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface OrderService extends Service<Order, Integer> {
     List<Order> getByAccount(final Integer accountId);
+
+    Order saveByProduct(final Integer productId);
 }

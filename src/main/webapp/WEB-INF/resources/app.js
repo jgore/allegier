@@ -16,7 +16,7 @@ class App extends React.Component {
 
     loadProductsFromServer() {
         let self = this;
-        fetch('http://localhost:8081/allegier/rest/products')
+        fetch('rest/products')
             .then(function (response) {
                 console.log(response);
                 return response.json();
@@ -69,10 +69,22 @@ class Product extends React.Component {
         super(props);
         this.state = {display: true};
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleBuy = this.handleBuy.bind(this);
     }
 
     handleDelete() {
         fetch(this.props.product.link + "/" + this.props.product.id, {method: 'DELETE'})
+            .then(function (response) {
+                return response;
+            })
+            .then(function (response) {
+                console.log(response);
+                window.location.reload();
+            })
+    }
+
+    handleBuy() {
+        fetch("rest/orders"+"/"+this.props.product.id, {method: 'POST'})
             .then(function (response) {
                 return response;
             })
@@ -90,6 +102,9 @@ class Product extends React.Component {
                 <td>{this.props.product.title}</td>
                 <td>{this.props.product.price}</td>
                 <td>{this.props.product.category}</td>
+                <td>
+                    <button className="btn btn-info" onClick={this.handleBuy}>Buy</button>
+                </td>
                 <td>
                     <button className="btn btn-info" onClick={this.handleDelete}>Delete</button>
                 </td>
