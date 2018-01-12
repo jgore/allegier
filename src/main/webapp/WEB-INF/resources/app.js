@@ -3,9 +3,18 @@ import ReactDOM from "react-dom";
 import {
     BrowserRouter as Router,
     Route,
-    Link
+    Link,
+    Switch
 } from 'react-router-dom';
+
 import Pagination from 'react-paginate';
+
+import {Moto} from "./moto";
+import {Elektro} from "./elektro";
+import {Sport} from "./sport";
+import {Kontakt} from "./kontakt";
+import {Konto} from "./konto"
+
 
 class App extends React.Component {
 
@@ -187,9 +196,27 @@ class Product extends React.Component {
 }
 
 ReactDOM.render((
-    <Router>
-        <App/>
-    </Router>), document.getElementById('root')
-);
+        <Router>
+            <div>
+                <h2> Allegier.pl - Raj Profesjonalistów</h2>
+                <ul className="navi">
+                    <li className="navi"><Link to={'/'}>Home</Link></li>
+                    <li className="navi"><Link to={'moto'}>Moto</Link></li>
+                    <li className="navi"><Link to={'elektro'}>Elektro</Link></li>
+                    <li className="navi"><Link to={'sport'}>Sport</Link></li>
+                    <li className="navi"><Link to={'kontakt'}>Kontakt</Link></li>
+                    <li className="navi"><Link to={'konto'}>Konto</Link></li>
+                </ul>
+                <hr/>
 
+                    <Route exact path="/" component={App}/>
+                    <Route path="motoryzacja" component={Moto}/>
+                    <Route path="elektronika" component={Elektro}/>
+                    <Route path="sport" component={Sport}/>
+                    <Route path="kontakt" component={Kontakt}/>
+                    <Route path="konto" component={Konto}/>
+            </div>
+        </Router>
+    ), document.getElementById('root')
+);
 
