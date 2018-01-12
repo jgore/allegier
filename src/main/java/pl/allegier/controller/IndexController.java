@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by Pawel Szczepkowski | GoreIT on 03.04.17.
  */
 @Controller
-public class WelcomeController {
+public class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String welcome(Model model)
+    public final String welcome(final Model model)
     {
         return "index";
     }
+
 
 
 }

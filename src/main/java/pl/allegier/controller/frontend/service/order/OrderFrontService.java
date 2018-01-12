@@ -2,7 +2,6 @@ package pl.allegier.controller.frontend.service.order;
 
 import pl.allegier.controller.frontend.dto.OrderDto;
 import pl.allegier.controller.frontend.service.FrontService;
-import pl.allegier.model.Order;
 
 import java.util.List;
 
@@ -12,5 +11,5 @@ import java.util.List;
 public interface OrderFrontService extends FrontService<OrderDto, Integer> {
     List<OrderDto> getByAccount(Integer accountId);
 
-    OrderDto saveByProduct(Integer productId);
+    OrderDto saveByProduct(Integer productId, Integer accountId);
 }

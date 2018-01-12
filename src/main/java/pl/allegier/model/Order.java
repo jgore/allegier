@@ -47,7 +47,7 @@ public class Order extends Timestamp implements IIdentifable<Integer>, Serializa
         return id;
     }
 
-    @ManyToOne(targetEntity = Account.class)
+    @ManyToOne(targetEntity = Account.class, optional = false)
     public final Account getAccount() {
         return account;
     }

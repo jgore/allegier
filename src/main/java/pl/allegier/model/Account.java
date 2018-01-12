@@ -51,12 +51,12 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
         return id;
     }
 
-    @Column
+    @Column(nullable = false, unique = true)
     public final String getLogin() {
         return login;
     }
 
-    @Column
+    @Column(nullable = false)
     public final String getPassword() {
         return password;
     }

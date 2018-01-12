@@ -54,7 +54,7 @@ public abstract class AbstractRestController<DTO extends Linked, ID> implements 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     @Override
-    public  ResponseEntity<DTO> create(@RequestBody final DTO dto, final HttpServletRequest request) {
+    public final ResponseEntity<DTO> create(@RequestBody final DTO dto, final HttpServletRequest request) {
 
         DTO saved = getFrontService().save(dto);
         return new ResponseEntity<>(saved, HttpStatus.OK);

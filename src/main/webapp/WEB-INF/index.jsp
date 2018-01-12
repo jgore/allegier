@@ -13,6 +13,10 @@
 <div id='root'></div>
 <script src="<c:url value="resources/bundle.js" />"></script>
 
+<form action="logout" method="post">
+    <input class="btn btn-danger center-block" type="submit" value="Logout" />
+</form>
+
 
 </body>
 </html>

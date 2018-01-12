@@ -21,9 +21,9 @@ import static org.junit.Assert.assertThat;
  */
 public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements DaoTest<Account, Integer> {
 
-    public static final String TEST_ACCOUNT_LOGIN = " TEST _ PROD _ TITLE 1";
-    public static final String TEST_ACCOUNT_LOGIN_2 = " TEST _ PROD _ TITLE 2";
-    public static final String TEST_DESCRIPTION = " TEST _ PROD _ DESC ";
+    public static final String TEST_ACCOUNT_LOGIN = "TEST_PROD_TITLE_1";
+    public static final String TEST_ACCOUNT_LOGIN_2 = "TEST_PROD_TITLE_2";
+    public static final String TEST_DESCRIPTION = " TEST_PROD_DESC";
     public static final BigDecimal TEST_PRICE = BigDecimal.valueOf(123);
 
     @Autowired
@@ -87,11 +87,20 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
         assertThat(save.getId(), equalTo(byId.getId()));
     }
 
+    @Test
+    public void findByLoginTest() {
+        Account Account = createEntity();
+        Account save = accountDao.save(Account);
+        Account byLogin = accountDao.findByLogin(save.getLogin());
+
+        assertThat(save.getLogin(), equalTo(byLogin.getLogin()));
+    }
+
     @Override
     @Test
     public void findAllTest() {
         Account Account1 = createEntity();
-        Account Account2 = createEntity();
+        Account Account2 = new Account(TEST_ACCOUNT_LOGIN_2, TEST_DESCRIPTION);
         accountDao.save(Account1);
         accountDao.save(Account2);
 
@@ -105,7 +114,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Test
     public void countTest() {
         Account Account1 = createEntity();
-        Account Account2 = createEntity();
+        Account Account2 = new Account(TEST_ACCOUNT_LOGIN_2, TEST_DESCRIPTION);
 
         accountDao.save(Account1);
         accountDao.save(Account2);
@@ -120,7 +129,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
     @Test
     public void removeAllTest() {
         Account Account1 = createEntity();
-        Account Account2 = createEntity();
+        Account Account2 = new Account(TEST_ACCOUNT_LOGIN_2, TEST_DESCRIPTION);
         accountDao.save(Account1);
         accountDao.save(Account2);
 

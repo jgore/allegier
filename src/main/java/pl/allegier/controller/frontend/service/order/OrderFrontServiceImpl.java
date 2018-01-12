@@ -37,8 +37,8 @@ public class OrderFrontServiceImpl extends AbstractFrontService<OrderDto, Order,
                 map(mapper::toDto).collect(Collectors.toList());
     }
 
-    public OrderDto saveByProduct(final Integer productId) {
-        return mapper.toDto(orderService.saveByProduct(productId));
+    public OrderDto saveByProduct(final Integer productId, final Integer accountId) {
+        return mapper.toDto(orderService.saveByProduct(productId, accountId ));
     }
 
 }

@@ -8,5 +8,11 @@ import pl.allegier.model.Account;
  */
 
 public interface AccountService extends Service<Account, Integer> {
+    /**
+     * find in db by login
+     * @param login
+     * @return
+     */
+    Account findByLogin(String login);
 
 }

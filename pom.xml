@@ -11,7 +11,7 @@
 
     <properties>
         <spring.version>5.0.0.RELEASE</spring.version>
-        <spring.security.version>4.1.0.RELEASE</spring.security.version>
+        <spring.security.version>5.0.0.RELEASE</spring.security.version>
         <hibernate.version>5.2.11.Final</hibernate.version>
         <jstl.version>1.2</jstl.version>
         <project.build.finalName>allegier</project.build.finalName>
@@ -48,15 +48,15 @@
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
+            <artifactId>spring-security-web</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>

@@ -5,6 +5,7 @@ import {
     Route,
     Link
 } from 'react-router-dom';
+require("bootstrap/less/bootstrap.less");
 
 class App extends React.Component {
 
@@ -16,7 +17,13 @@ class App extends React.Component {
 
     loadProductsFromServer() {
         let self = this;
-        fetch('rest/products')
+        fetch('rest/products', {
+                headers: {
+                    'Authorization': 'Basic ' + btoa('admin:admin'),
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+            }
+        )
             .then(function (response) {
                 console.log(response);
                 return response.json();
@@ -84,7 +91,13 @@ class Product extends React.Component {
     }
 
     handleBuy() {
-        fetch("rest/orders"+"/"+this.props.product.id, {method: 'POST'})
+        fetch("user/orders" + "/" + this.props.product.id, {
+            headers: {
+                'Authorization': 'Basic ' + btoa('admin:admin'),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            method: 'POST'
+        })
             .then(function (response) {
                 return response;
             })
@@ -115,9 +128,8 @@ class Product extends React.Component {
 
 ReactDOM.render((
     <Router>
-        <App />
-    </Router> ), document.getElementById('root')
+        <App/>
+    </Router>), document.getElementById('root')
 );
-
 
 

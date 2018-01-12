@@ -18,6 +18,7 @@ import pl.allegier.model.OrderProduct;
 import pl.allegier.model.Product;
 
 import java.math.BigDecimal;
+import java.security.AccessControlContext;
 import java.util.List;
 import java.util.Set;
 
@@ -64,6 +65,7 @@ public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements Dao
         Order order = createEntity();
         Account account = new Account();
         account.setLogin("1234");
+        account.setPassword("1234");
         Account saved = accountDao.save(account);
         order.setAccount(saved);
 
@@ -87,6 +89,7 @@ public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements Dao
         Order order = createEntity();
         Account account = new Account();
         account.setLogin("1234");
+        account.setPassword("1234");
         Account saved = accountDao.save(account);
         order.setAccount(saved);
         orderDao.save(order);

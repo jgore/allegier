@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import pl.allegier.controller.dao.account.AccountDao;
 import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.controller.dao.order.OrderDaoImpl;
 import pl.allegier.controller.dao.product.ProductDao;
@@ -28,27 +29,28 @@ import static org.mockito.Mockito.when;
 public class OrderServiceImplTest {
 
     @Mock
-    private OrderDao orderDao = mock( OrderDaoImpl.class);
+    private OrderDao orderDao = mock(OrderDaoImpl.class);
     @Mock
-    private  ProductDao productDao = mock( ProductDaoImpl.class);
+    private ProductDao productDao = mock(ProductDaoImpl.class);
+    @Mock
+    private AccountDao accountDao = mock(AccountDao.class);
     @InjectMocks
-    private OrderServiceImpl orderService ;
+    private OrderServiceImpl orderService;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
-        orderService = new OrderServiceImpl(orderDao,productDao);
+        orderService = new OrderServiceImpl(orderDao, productDao,accountDao);
         Product testProduct = new Product();
-        when( productDao.findById(any()) ).thenReturn( testProduct )  ;
+        when(productDao.findById(any())).thenReturn(testProduct);
         Order order = new Order();
-        when( orderDao.save(any()) ).thenReturn( order )  ;
+        when(orderDao.save(any())).thenReturn(order);
     }
 
     @Test
     public void saveByProduct() {
-        orderService.saveByProduct(1);
-        verify(orderDao,times(1)).save(any()) ;
+        orderService.saveByProduct(1, 1);
+        verify(orderDao, times(1)).save(any());
     }
 
 }
