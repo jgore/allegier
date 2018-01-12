@@ -49,8 +49,8 @@ public abstract class AbstractFrontService<DTO, DAO, ID> implements FrontService
     }
 
     @Override
-    public final Iterable<DTO> findAll() {
-        Iterable<DAO> all = service.findAll();
+    public final Iterable<DTO> findAll(final int size, final int page) {
+        Iterable<DAO> all = service.findAll(size, page);
         List<DAO> daos = Lists.newArrayList(all);
 
         return daos.
@@ -64,7 +64,7 @@ public abstract class AbstractFrontService<DTO, DAO, ID> implements FrontService
     }
 
     @Override
-    public  void delete(final ID id) {
+    public void delete(final ID id) {
         service.delete(id);
     }
 

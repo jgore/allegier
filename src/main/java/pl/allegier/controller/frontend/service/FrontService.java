@@ -13,7 +13,7 @@ public interface FrontService<DTO, ID> {
 
     boolean exists(ID var1);
 
-    Iterable<DTO> findAll();
+    Iterable<DTO> findAll(int size, int page);
 
     long count();
 

@@ -1,0 +1,15 @@
+#pagination ul {
+    margin: auto;
+    text-align: center;
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#pagination li {
+
+}
+
+#pagination .break a {
+    cursor: default;
+}

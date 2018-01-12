@@ -64,8 +64,8 @@ public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements Dao
     public void shouldGetOrdersByProduct() {
         Order order = createEntity();
         Account account = new Account();
-        account.setLogin("1234");
-        account.setPassword("1234");
+        account.setLogin("12345");
+        account.setPassword("12345");
         Account saved = accountDao.save(account);
         order.setAccount(saved);
 
@@ -88,8 +88,8 @@ public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements Dao
     public void shouldReturnGetByAccount() {
         Order order = createEntity();
         Account account = new Account();
-        account.setLogin("1234");
-        account.setPassword("1234");
+        account.setLogin("12345");
+        account.setPassword("12345");
         Account saved = accountDao.save(account);
         order.setAccount(saved);
         orderDao.save(order);
@@ -116,11 +116,17 @@ public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements Dao
         OrderProduct orderProduct2 = createOrderProduct(product2);
 
         Order order = new Order();
+
+        Account account = createAccount();
+        Account savedAccount = accountDao.save(account);
+
         Set<OrderProduct> products = Sets.newHashSet(orderProduct1, orderProduct2);
+        order.setAccount(savedAccount);
         order.setOrderProducts(products);
 
         orderProduct1.setOrder(order);
         orderProduct2.setOrder(order);
+
 
         Order save = orderDao.save(order);
 
@@ -129,13 +135,18 @@ public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements Dao
 
     @Override
     public Order createEntity() {
-        return new Order();
+        Order order = new Order();
+        Account account = createAccount();
+        Account saved = accountDao.save(account);
+        order.setAccount(saved);
+        return order;
     }
 
     public Product saveProduct() {
         Category category = createCategory();
         Category saved = categoryDao.save(category);
         category = categoryDao.findById(saved.getId());
+
 
         Product product = new Product();
         product.setTitle(TEST_PROD_TITLE);
@@ -149,6 +160,15 @@ public class OrderDaoTest extends AbstractDaoTest<Order, Integer> implements Dao
         category.setId("1234");
 
         return category;
+    }
+
+    public Account createAccount()
+    {
+        Account account = new Account();
+        account.setLogin("1234");
+        account.setPassword("1234");
+
+        return account;
     }
 
     public OrderProduct createOrderProduct(Product product) {

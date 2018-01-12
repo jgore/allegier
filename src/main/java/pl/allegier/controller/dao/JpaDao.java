@@ -1,11 +1,16 @@
 package pl.allegier.controller.dao;
 
+import org.hibernate.query.criteria.internal.CriteriaQueryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.allegier.model.id.IIdentifable;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -13,6 +18,8 @@ import java.util.List;
 /**
  * Created by Pawel Szczepkowski | Java4you.pl  on 21.05.17.
  *
+ * @param <E>  entity to for generic*
+ * @param <ID> id for entity
  */
 @Repository
 public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, ID> {
@@ -23,10 +30,11 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     protected Class<E> entityClass;
 
     /**
-     *  Peristancy to DB
+     * Peristancy to DB
      */
     @PersistenceContext
     protected EntityManager em;
+
 
     @Autowired
     public JpaDao() {
@@ -40,7 +48,18 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     }
 
     @Override
-    public  List<E> findAll() {
+    public List<E> findAll(final int size, final int page) {
+        if (size == 0 && page == 0) {
+            return findAll();
+        }
+
+        Query query = em.createQuery("From " + entityClass.getSimpleName());
+        query.setFirstResult((page - 1) * size);
+        query.setMaxResults(size);
+        return query.getResultList();
+    }
+
+    private List<E> findAll() {
         return em.createQuery("from " + entityClass.getSimpleName() + " order by created desc").getResultList();
     }
 

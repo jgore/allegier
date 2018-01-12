@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
+<link rel="stylesheet" href=" <c:url value="resources/css/style.css" />">
 
 <div id='root'></div>
 <script src="<c:url value="resources/bundle.js" />"></script>

@@ -25,18 +25,18 @@ public abstract class AbstractService<E, ID> implements Service<E, ID> {
     }
 
     @Override
-    public final  E findOne(final ID id) {
+    public final E findOne(final ID id) {
         return dao.findById(id);
     }
 
     @Override
-    public final  boolean exists(final ID id) {
+    public final boolean exists(final ID id) {
         return findOne(id) == null;
     }
 
     @Override
-    public final Iterable<E> findAll() {
-        return dao.findAll();
+    public final Iterable<E> findAll(final int size, final int page) {
+        return dao.findAll(size, page);
     }
 
     @Override

@@ -14,7 +14,7 @@ public interface Dao<E, ID> {
 
     E findById(ID id);
 
-    List<E> findAll();
+    List<E> findAll(final int size, final int page);
 
     Long count();
 

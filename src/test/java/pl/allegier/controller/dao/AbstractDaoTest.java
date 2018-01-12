@@ -87,7 +87,17 @@ public abstract class AbstractDaoTest<E extends IIdentifable<ID>, ID> implements
     public void findAllTest() {
         E entity = createEntity();
         repository.save(entity);
-        List<E> all = repository.findAll();
+        List<E> all = repository.findAll(0,0);
+        assertThat(all.size(), equalTo(1));
+    }
+
+
+    @Override
+    @Test
+    public void findAllPaginatedTest() {
+        E entity = createEntity();
+        repository.save(entity);
+        List<E> all = repository.findAll(10,0);
         assertThat(all.size(), equalTo(1));
     }
 

@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.allegier.controller.frontend.dto.Linked;
 import pl.allegier.controller.frontend.service.FrontService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.Segment;
 import java.util.List;
 
 /**
@@ -23,6 +25,8 @@ import java.util.List;
  */
 public abstract class AbstractRestController<DTO extends Linked, ID> implements RestController<DTO> {
 
+    private static final int DEFAULT_PAGE_SIZE = 20;
+
     /**
      * front service to be mainly used in controller
      *
@@ -33,13 +37,27 @@ public abstract class AbstractRestController<DTO extends Linked, ID> implements 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     @Override
-    public final ResponseEntity<List<DTO>> getAll(final HttpServletRequest request) {
+    public final ResponseEntity<List<DTO>> getAll(final HttpServletRequest request,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size) {
 
-        List<DTO> dtos = Lists.newArrayList(getFrontService().findAll());
+        if (page == null && size == null) {
+            page = 0;
+            size = 0;
+        }
+
+        List<DTO> dtos = Lists.newArrayList(getFrontService().findAll(size, page));
         dtos.forEach(dto -> {
             dto.setLink(request.getRequestURL().toString());
         });
         return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(params = {"count"}, method = RequestMethod.GET)
+    @Override
+    public final ResponseEntity<Long> getCount(final HttpServletRequest request) {
+
+        return new ResponseEntity<>(  getFrontService().count(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)

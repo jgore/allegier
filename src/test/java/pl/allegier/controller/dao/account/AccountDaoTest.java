@@ -104,7 +104,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
         accountDao.save(Account1);
         accountDao.save(Account2);
 
-        List<Account> all = accountDao.findAll();
+        List<Account> all = accountDao.findAll(0,0);
 
         assertThat(all.size(), equalTo(2));
 
@@ -135,7 +135,7 @@ public class AccountDaoTest extends AbstractDaoTest<Account, Integer> implements
 
         accountDao.removeAll();
 
-        assertThat(accountDao.findAll().size(), equalTo(0));
+        assertThat(accountDao.findAll(0,0).size(), equalTo(0));
     }
 
     public Account createEntity() {

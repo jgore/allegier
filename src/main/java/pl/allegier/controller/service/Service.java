@@ -15,7 +15,7 @@ public interface Service<E, ID> {
 
     boolean exists(ID entity);
 
-    Iterable<E> findAll();
+    Iterable<E> findAll(int size, int page);
 
     long count();
 
