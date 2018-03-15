@@ -1,16 +1,12 @@
 package pl.allegier.controller.dao;
 
-import org.hibernate.query.criteria.internal.CriteriaQueryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.allegier.model.id.IIdentifable;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;

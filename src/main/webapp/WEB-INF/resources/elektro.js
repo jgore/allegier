@@ -2,7 +2,9 @@ import React from "react";
 
 class Elektro extends React.Component {
     render() {
-        return <div>ELEKTRO</div>
+        return <div><h1>ELEKTRO</h1>
+        Tutaj bede produkty z kategorii : Elektronika
+        </div>
     }
 }
 

@@ -2,7 +2,9 @@ import React from "react";
 
 class Moto extends React.Component {
     render() {
-        return <div>MOTO</div>
+        return <div><h1>MOTO</h1>
+            Tutaj bede produkty z kategorii : Motoryzacja
+        </div>
     }
 }
 

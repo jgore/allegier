@@ -26,7 +26,7 @@ class App extends React.Component {
             marginPagesDisplayed: 20,
             activePage: 0,
 
-            pageCount: 20,
+            pageCount: 7,
             productPerPage: 50,
             productCount: 100
         };
@@ -149,7 +149,12 @@ class Product extends React.Component {
     }
 
     handleDelete() {
-        fetch(this.props.product.link + "/" + this.props.product.id, {method: 'DELETE'})
+        fetch(this.props.product.link + "/" + this.props.product.id, {
+            headers: {
+                'Authorization': 'Basic ' + btoa('admin:admin'),
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            method: 'DELETE'})
             .then(function (response) {
                 return response;
             })

@@ -35,10 +35,10 @@ public class Account extends Timestamp implements IIdentifable<Integer>, Seriali
     private Set<Order> orders;
     private Address address = new Address();
 
-    public Account(final String login, final String password) {
+    public Account(final String log, final String pass) {
         super();
-        this.login = login;
-        this.password = password;
+        this.login = log;
+        this.password = pass;
     }
 
     public Account() {
