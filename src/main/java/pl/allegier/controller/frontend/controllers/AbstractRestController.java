@@ -3,17 +3,11 @@ package pl.allegier.controller.frontend.controllers;
 import com.google.common.collect.Lists;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pl.allegier.controller.frontend.dto.Linked;
 import pl.allegier.controller.frontend.service.FrontService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.Segment;
 import java.util.List;
 
 /**
@@ -37,7 +31,7 @@ public abstract class AbstractRestController<DTO extends Linked, ID> implements 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     @Override
-    public final ResponseEntity<List<DTO>> getAll(final HttpServletRequest request,
+    public  ResponseEntity<List<DTO>> getAll(final HttpServletRequest request,
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer size) {
 
@@ -53,7 +47,7 @@ public abstract class AbstractRestController<DTO extends Linked, ID> implements 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
-    @RequestMapping(params = {"count"}, method = RequestMethod.GET)
+    @RequestMapping(value = "count", method = RequestMethod.GET)
     @Override
     public final ResponseEntity<Long> getCount(final HttpServletRequest request) {
 

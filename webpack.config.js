@@ -1,6 +1,9 @@
 module.exports = {
 
     entry: "./src/main/webapp/WEB-INF/resources/app.js",
+    devtool: 'sourcemaps',
+    cache: true,
+    mode: 'development',
 
     output: {
         filename: "./src/main/webapp/WEB-INF/resources/bundle.js"
@@ -13,7 +16,7 @@ module.exports = {
                 loader: 'babel-loader',
                 query: {
                     cacheDirectory: true,
-                    presets: ['es2015', 'react']
+                    presets: ['es2016', 'react']
                 }
 
             }

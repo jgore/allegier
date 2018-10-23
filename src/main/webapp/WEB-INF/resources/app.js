@@ -43,7 +43,7 @@ class App extends React.Component {
 
     loadCountProducts() {
         let self = this;
-        fetch('rest/products?count=true', {
+        fetch('rest/products/count', {
                 headers: {
                     'Authorization': 'Basic ' + btoa('admin:admin'),
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -110,7 +110,6 @@ class App extends React.Component {
             </div>
         );
     }
-
 }
 
 
@@ -208,7 +207,6 @@ ReactDOM.render((
                     <li className="navi"><Link to={'/'}>Home</Link></li>
                     <li className="navi"><Link to={'moto'}>Moto</Link></li>
                     <li className="navi"><Link to={'elektro'}>Elektro</Link></li>
-                    <li className="navi"><Link to={'sport'}>Sport</Link></li>
                     <li className="navi"><Link to={'kontakt'}>Kontakt</Link></li>
                     <li className="navi"><Link to={'konto'}>Konto</Link></li>
                 </ul>
@@ -217,7 +215,6 @@ ReactDOM.render((
                     <Route exact path="/" component={App}/>
                     <Route path="motoryzacja" component={Moto}/>
                     <Route path="elektronika" component={Elektro}/>
-                    <Route path="sport" component={Sport}/>
                     <Route path="kontakt" component={Kontakt}/>
                     <Route path="konto" component={Konto}/>
             </div>

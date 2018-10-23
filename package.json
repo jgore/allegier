@@ -1,10 +1,8 @@
 {
   "name": "allegier",
   "version": "1.0.0",
+  "main": "./src/main/webapp/WEB-INF/resources/app.js",
   "description": "Application for selling items through internet with Reactive way.",
-  "scripts": {
-    "watch": "webpack --watch -d"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jgore/allegier.git"
