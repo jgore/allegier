@@ -1,6 +1,7 @@
 package pl.allegier.controller.dao;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -87,8 +88,17 @@ public abstract class AbstractDaoTest<E extends IIdentifable<ID>, ID> implements
     public void findAllTest() {
         E entity = createEntity();
         repository.save(entity);
-        List<E> all = repository.findAll(0,0);
+        List<E> all = repository.findAll(0, 0);
         assertThat(all.size(), equalTo(1));
+    }
+
+    @Override
+    @Test
+    public void findAllByField() {
+        E entity = createEntity();
+        E saved = repository.save(entity);
+        List<E> prodByTitle = repository.findByField(20, 0, "id", String.valueOf( saved.getId()));
+        Assert.assertThat(prodByTitle.size(), equalTo(1));
     }
 
 
@@ -97,7 +107,7 @@ public abstract class AbstractDaoTest<E extends IIdentifable<ID>, ID> implements
     public void findAllPaginatedTest() {
         E entity = createEntity();
         repository.save(entity);
-        List<E> all = repository.findAll(10,0);
+        List<E> all = repository.findAll(10, 0);
         assertThat(all.size(), equalTo(1));
     }
 

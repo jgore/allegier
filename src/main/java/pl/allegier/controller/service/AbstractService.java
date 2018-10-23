@@ -6,7 +6,7 @@ import pl.allegier.controller.dao.Dao;
  * Created by Pawel Szczepkowski | GoreIT  on 21.05.17.
  */
 
-public abstract class AbstractService<E, ID> implements Service<E, ID> {
+public class AbstractService<E, ID> implements Service<E, ID> {
 
     protected final Dao<E, ID> dao;
 
@@ -52,5 +52,10 @@ public abstract class AbstractService<E, ID> implements Service<E, ID> {
     @Override
     public final void deleteAll() {
         dao.removeAll();
+    }
+
+    @Override
+    public Iterable<E> findByField(int size, int page, String field, String value) {
+        return dao.findByField(size, page, field, value);
     }
 }

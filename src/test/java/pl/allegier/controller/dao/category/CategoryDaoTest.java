@@ -1,6 +1,7 @@
 package pl.allegier.controller.dao.category;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,8 @@ import pl.allegier.controller.dao.DaoTest;
 import pl.allegier.controller.dao.product.ProductDao;
 import pl.allegier.model.Category;
 import pl.allegier.model.Product;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -45,6 +48,16 @@ public class CategoryDaoTest  extends AbstractDaoTest<Category,String> implement
         Product save = productDao.save(product);
         Product persisted = productDao.findById(save.getId());
         assertThat(persisted.getTitle(), equalTo(save.getTitle()));
+    }
+
+
+    @Override
+    @Test
+    public void findAllByField() {
+        Category entity = createEntity();
+        Category saved = categoryDao.save(entity);
+        List<Category> prodByTitle = categoryDao.findByField(20, 0, "id",  saved.getId());
+        Assert.assertThat(prodByTitle.size(), equalTo(1));
     }
 
     public Product createProduct()

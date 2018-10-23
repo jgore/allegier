@@ -19,4 +19,6 @@ public interface Dao<E, ID> {
     Long count();
 
     void removeAll();
+
+    List<E> findByField(final int size, final int page, String field, String value);
 }

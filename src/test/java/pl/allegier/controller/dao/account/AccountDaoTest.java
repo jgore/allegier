@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.allegier.controller.dao.AbstractDaoTest;
 import pl.allegier.controller.dao.Dao;
 import pl.allegier.controller.dao.DaoTest;
-import pl.allegier.controller.dao.order.OrderDao;
 import pl.allegier.controller.dao.order.OrderDaoTest;
 import pl.allegier.model.Account;
 

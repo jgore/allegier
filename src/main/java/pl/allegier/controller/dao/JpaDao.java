@@ -1,5 +1,7 @@
 package pl.allegier.controller.dao;
 
+import com.google.common.base.CaseFormat;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.allegier.model.id.IIdentifable;
@@ -8,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -55,6 +58,31 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
         return query.getResultList();
     }
 
+    @Override
+    public List<E> findByField(int size, int page, String field, String value) {
+        Method metohdId = null;
+        Class<?> returnType = null;
+        try {
+            field = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, field);
+            metohdId = entityClass.getMethod("get"+field, null);
+            returnType = metohdId.getReturnType();
+            Query query = em.createQuery("from " + entityClass.getSimpleName() + " where " + field + "=:value order by created desc");
+            if (returnType.equals(Integer.class)) {
+                query.setParameter("value", Integer.valueOf(value));
+            } else if (returnType.equals(String.class)) {
+                query.setParameter("value", String.valueOf(value));
+            } else {
+                throw new IllegalArgumentException("only String or Integer are allowed to findByField");
+            }
+            return query.getResultList();
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        return Lists.newArrayList();
+    }
+
     private List<E> findAll() {
         return em.createQuery("from " + entityClass.getSimpleName() + " order by created desc").getResultList();
     }
@@ -93,5 +121,6 @@ public abstract class JpaDao<E extends IIdentifable<ID>, ID> implements Dao<E, I
     public void removeAll() {
         findAll().forEach(this::remove);
     }
+
 
 }

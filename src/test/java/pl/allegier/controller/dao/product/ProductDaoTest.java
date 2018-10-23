@@ -14,6 +14,10 @@ import pl.allegier.model.Category;
 import pl.allegier.model.Product;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by Pawel Szczepkowski | GoreIT on 15.06.17.
@@ -48,6 +52,7 @@ public class ProductDaoTest extends AbstractDaoTest<Product,Integer> implements 
         product.setCategory(save);
         return product;
     }
+
 
     public Category createCategory()
     {

@@ -15,6 +15,8 @@ public interface FrontService<DTO, ID> {
 
     Iterable<DTO> findAll(int size, int page);
 
+    Iterable<DTO> findByField(int size, int page, String field, String value);
+
     long count();
 
     void delete(ID var1);

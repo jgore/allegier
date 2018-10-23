@@ -13,4 +13,5 @@ public interface DaoTest<E,ID> {
     void countTest();
     void removeAllTest();
     void findAllPaginatedTest() ;
+    void findAllByField();
 }

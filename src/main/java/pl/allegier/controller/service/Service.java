@@ -1,7 +1,5 @@
 package pl.allegier.controller.service;
 
-import pl.allegier.controller.frontend.dto.OrderDto;
-
 /**
  * Created by Pawel Szczepkowski | GoreIT on 03.04.17.
  */
@@ -23,4 +21,5 @@ public interface Service<E, ID> {
 
     void deleteAll();
 
+    Iterable<E> findByField(int size, int page, String field, String value);
 }

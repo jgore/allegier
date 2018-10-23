@@ -59,6 +59,16 @@ public abstract class AbstractFrontService<DTO, DAO, ID> implements FrontService
     }
 
     @Override
+    public Iterable<DTO> findByField(int size, int page, String field, String value) {
+        Iterable<DAO> all = service.findByField(size, page, field,value);
+        List<DAO> daos = Lists.newArrayList(all);
+
+        return daos.
+                stream().
+                map(mapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     public final long count() {
         return service.count();
     }
