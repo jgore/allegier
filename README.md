@@ -1,8 +1,1 @@
-6
-759
-249
-12602
-1276
-79
-14292
-8454
+basic shop - java 8, spring , hibernate, REST, SQL
