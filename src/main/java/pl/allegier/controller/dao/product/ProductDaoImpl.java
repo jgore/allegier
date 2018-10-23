@@ -32,4 +32,10 @@ public class ProductDaoImpl extends JpaDao<Product, Integer> implements ProductD
         return em.createQuery("from " + entityClass.getSimpleName() + " where state = 'ACTIVE' order by created desc ").getResultList();
     }
 
+    @Override
+    public List<Product> findByCategory(int size, int page, String category) {
+        Query query = em.createQuery("from " + entityClass.getSimpleName() + " where category_id = :category order by created desc");
+        query.setParameter("category",category);
+        return query.getResultList();
+    }
 }

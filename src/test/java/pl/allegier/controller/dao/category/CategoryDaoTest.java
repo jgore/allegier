@@ -10,7 +10,12 @@ import pl.allegier.controller.dao.DaoTest;
 import pl.allegier.controller.dao.product.ProductDao;
 import pl.allegier.model.Category;
 import pl.allegier.model.Product;
+import pl.allegier.model.enums.MainCategoryName;
 
+import java.util.List;
+
+import static com.sun.javafx.fxml.expression.Expression.greaterThan;
+import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
