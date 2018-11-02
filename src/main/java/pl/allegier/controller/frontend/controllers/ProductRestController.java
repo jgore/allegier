@@ -35,10 +35,10 @@ public class ProductRestController extends AbstractRestController<ProductDto, In
 
     @RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<ProductDto>> getAll(final HttpServletRequest request,
-                                                   @RequestParam(required = false) Integer page,
-                                                   @RequestParam(required = false) Integer size,
-                                                   @PathVariable String category) {
+    public ResponseEntity<List<ProductDto>> getByCategory(final HttpServletRequest request,
+                                                          @RequestParam(required = false) Integer page,
+                                                          @RequestParam(required = false) Integer size,
+                                                          @PathVariable String category) {
         if (page == null && size == null) {
             page = 0;
             size = 0;
